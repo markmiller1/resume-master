@@ -1,0 +1,15 @@
+# 敏感 / 非站点文件，不推到公开仓库（GitHub Pages 会把这些一并发布）
+codes.txt
+generate_codes.js
+indexnow-log.txt
+indexnow-log2.txt
+indexnow-key.txt
+48f791ce3bad6052.txt
+
+# 运营 / 变现 / 宣传类文档：私有，不公开
+# （这类文件请放在并列的 resume-private/ 目录，那里不是 git 仓库）
+*.md
+!README.md
+
+# 临时调试文件
+_*

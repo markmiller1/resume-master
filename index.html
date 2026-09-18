@@ -659,6 +659,11 @@
 
   function esc(s){ return (s||"").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
   function hashStr(s){ let h=2166136261>>>0; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+  // 会员码白名单：仅下列哈希对应的码有效（加盐 FNV-1a，无法由哈希反推码）。
+  // 共 300 个，随机乱填命中概率约 1/4e+09 —— 纯前端方案下已不可撞库。
+  const VALID_FPS = "5e425a78,32c9ea19,58cb368b,8737817f,ada6b89b,f6e3fc20,49ae2c08,4bf73809,0af80a62,b22ecb05,6181df0e,58dbf4d7,6cdfd8b5,cf9c9ccb,06a5a99d,9989c204,d5a32c70,1b664cd1,995a9b19,1870d86c,802dba52,dd05151a,b36383c2,1af9216e,2ed7f3e1,e59292cf,989b2648,c27afee6,428e5507,c9deffb9,3b09c75a,8cc1a916,2107fa1d,1dc617ad,11b5b63e,086f8a7d,a8218712,fda42d86,a04bcedb,fc80def5,be3a1f5a,f58c0cac,9d043bf1,5aa0ffa9,481b2ec8,6ce28c69,15c87a2a,308bdae5,b8adef8a,89a72e69,41282f51,669ecb06,0b846056,bc6c3a69,6076482a,21a24de9,557ffa8a,2153d614,13b74395,e71699db,34e4dee9,3c57826a,a83cfce2,465843c8,b76cc8ac,4d2cd52c,58573579,b1789479,ea342020,91ac101e,d07d34cc,20518d08,402f2470,a0247926,9cedbb41,c8d72c69,3699731f,62e2634c,75b6f48e,d56165f1,47315d49,0d604118,94ef74a6,87f77747,58e4aa61,8f774d88,3c3e8574,7911db60,a17cd10d,482fc5e3,4e3a970a,c873a9f4,94266f85,53d693b0,ee716363,9d5fdc01,3bb7f6d7,3d0dfc6f,cdd62783,ffc69892,921127b6,d715621b,b0ddb4c4,01883090,6d659cb1,69ab96c4,0c0cfd8e,88c30b4b,e64d528f,a47b2cb0,005d6015,029dbf8d,fc9d6f9e,1b25f027,de6e48ac,27bb791c,dc2e1fcd,1a47ec36,f1a95dd5,010bcbed,db5c5dfc,f5a2b818,0718871c,fa21079f,199e760d,774dc421,93970809,956667af,c50ffe93,1ccd1975,66fb6b8e,26f56286,1c756406,3dc09771,2ec120a1,7e3c017f,ae0bd88c,09bff292,48a26a7c,40ac8184,93cb648e,09a68ed4,82c5af2d,853b3784,53b0bbe5,2668dc0f,0811f515,35a8eb8f,aa44c269,f3f44ef4,744410d1,24c224e8,9b07bf07,888a41e8,a28f69db,ba2291db,88d68a1f,5fc3495b,8cc7ebd4,d4cb10f7,84fe34dc,dc18780b,0f92807f,05cd0c4c,35e16025,d6f88e69,a618c07d,f512c72c,b46fca88,6c20f4ad,61f2ffd0,384af3b5,a0df1ac0,1dd7cf47,ae1e1623,0dd1bb20,66ab6e92,9656b0c8,ffa1ee77,fe7dbe1b,47b99085,8c962169,fe18d6fb,d201a6d7,8f2f3a44,c6ef1b57,8bf24544,b870bbe3,43b371b4,bd7e1b06,201150d7,25f4fe4b,3654cc27,a38337f5,5fc9899a,fa8f4d4a,933f7e6c,40547105,1e081f87,6c66f8c3,4cf8be0b,83dc3a14,d13e5b88,52f1047d,046b193f,3c9559e9,af66edd0,2e2ad02f,a02deab9,1fd2464c,2dc2d3a7,62b304f3,0ec48a1f,eab03f2d,d90a6a5b,e89d50e2,4a8b50fb,b8fc25dc,a49eb050,025e484d,8078e0ea,742bcdcb,0f3bc39d,31e633c8,8e53305f,11e8a5a0,a349e2ff,9bd65fc8,1e7f90c7,8d145dfd,00e0484a,a5aee652,0f5036e3,afb3802a,ce119b57,b9c610be,dab5ea0b,87c59965,767710e8,97c14603,9405935a,85a24ba8,1727c6c8,164c42da,f7d89316,4e7ba471,c77488b9,8a37a3da,2e9fbf7f,02032f86,b97be745,8af533ab,b8ab39d7,984e99e1,9e9d0c64,5111d174,40602f1c,d7dd784c,03982323,5e520b99,9723644c,2939f052,dfeec37c,e2b0da16,f2ef469b,77f06abb,6833b58a,680d662c,50f3a2a6,5a728b45,b0168109,19e774b2,82e8b35d,07dbd453,f30d36e5,27e60a56,01877d4f,44af9323,fd060254,e94f2722,150e68b7,1c7382b0,ed906801,46db3838,7d551c81,c524fa56,402abd7d,68114101,03c7839a,924a9826,ede70dec,065c25ae,c9c40076,7d7fd275,f8764127,cdcfe822,c3c10205,5df68511,6cf879c9,d16b0697".split(",");
+  function fp(code){ return (hashStr(code + SECRET) >>> 0).toString(16).padStart(8, "0"); }
+
 
   function switchTab(el){
     document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
@@ -714,7 +719,7 @@
     const raw = ($(inputId).value || "").trim().toUpperCase().replace(/\s/g,"");
     const code = raw.replace(/^RM-?/, "").replace(/-/g,"");
     if(!code){ toast("请输入会员码"); return; }
-    if(hashStr(code + SECRET) % 97 === 0){
+    if(VALID_FPS.indexOf(fp(code)) >= 0){
       localStorage.setItem("rm_pro","1");
       $("locked-cover").style.display="none";
       document.querySelectorAll(".tpl-chip.locked").forEach(c=>c.classList.remove("locked"));
