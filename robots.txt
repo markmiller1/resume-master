@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://resume-master.app.workbuddy.host/sitemap.xml
+Sitemap: https://markmiller1.github.io/resume-master/sitemap.xml
