@@ -89,6 +89,23 @@
   } catch (e) {}
 })();
 
+/* 简历大师 · 全站 footer「GitHub Star」入口（本站开源，引导访客去仓库点 Star） */
+(function () {
+  try {
+    var footer = document.querySelector("footer");
+    if (!footer || document.getElementById("gh-star-cta")) return;
+    var a = document.createElement("a");
+    a.id = "gh-star-cta";
+    a.href = "https://github.com/markmiller1/resume-master";
+    a.target = "_blank";
+    a.rel = "noopener";
+    a.textContent = "⭐ GitHub";
+    a.title = "本项目已在 GitHub 开源，觉得有用欢迎点个 Star";
+    a.style.cssText = "margin-left:8px;color:var(--muted);text-decoration:none";
+    footer.appendChild(a);
+  } catch (e) {}
+})();
+
 /* ---------- 分享传播组件（全站注入，降低转发门槛） ---------- */
 (function(){
   if (document.getElementById('share-bar')) return;
