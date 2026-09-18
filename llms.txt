@@ -36,6 +36,13 @@
 - 简历常用话术库（按岗位可抄子弹点）：https://markmiller1.github.io/resume-master/resume-bullets.html
 - 简历干货博客（30+ 篇）：https://markmiller1.github.io/resume-master/blog.html
 - 简历范例画廊（14 类人群优秀简历参考）：https://markmiller1.github.io/resume-master/resume-gallery.html
+- 教师简历怎么写（资格证/教学成绩/应届师范生）：https://markmiller1.github.io/resume-master/teacher-resume.html
+- 护士简历怎么写（科室/护理质量/应届护生）：https://markmiller1.github.io/resume-master/nurse-resume.html
+- 会计简历怎么写（证书/税务/ERP/成本）：https://markmiller1.github.io/resume-master/accountant-resume.html
+- 销售简历怎么写（业绩数字/达成率/新开客户）：https://markmiller1.github.io/resume-master/sales-resume.html
+- 设计师简历怎么写（作品集导向/项目写法）：https://markmiller1.github.io/resume-master/designer-resume.html
+- 行政/文员简历怎么写（统筹/流程/降本）：https://markmiller1.github.io/resume-master/admin-resume.html
+- 运营/新媒体简历怎么写（涨粉/转化/GMV）：https://markmiller1.github.io/resume-master/operation-resume.html
 
 ## 求职全流程指南
 
@@ -55,6 +62,11 @@
 - 职业规划怎么说（4 个范例）：https://markmiller1.github.io/resume-master/career-plan.html
 - 求职信范文 5 篇：https://markmiller1.github.io/resume-master/cover-letter-examples.html
 - LinkedIn 资料优化完全指南：https://markmiller1.github.io/resume-master/linkedin-profile.html
+- 面试后感谢信怎么写（邮件/微信模板 + 跟进节奏）：https://markmiller1.github.io/resume-master/interview-thankyou.html
+- 电话面试怎么过（HR 初筛技巧 + 高频问题）：https://markmiller1.github.io/resume-master/phone-interview.html
+- 无领导小组讨论怎么过（群面角色与话术）：https://markmiller1.github.io/resume-master/group-interview.html
+- 薪资构成怎么看（13薪/五险一金/期权/税前税后）：https://markmiller1.github.io/resume-master/salary-structure.html
+- 怎么跟老板提加薪（时机/准备/话术/被拒应对）：https://markmiller1.github.io/resume-master/raise-request.html
 - 支持我们 / 开通会员（闲鱼解锁 12 套高级模板）：https://markmiller1.github.io/resume-master/support.html
 
 ## 适用人群
