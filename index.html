@@ -1,0 +1,1351 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>简历大师 · 永久免费的在线简历生成器（本地不上传 · ATS 检测包过机器筛选）</title>
+<meta name="description" content="简历大师 — 永久免费、无需注册、不上传服务器的在线简历生成器。全部在你浏览器本地处理，隐私数据不出本机；内置 ATS 机器筛选检测与简历诊断打分，帮你通过企业机筛，更快到达 HR 面前。一键导出 PDF，校招社招跳槽通用。" />
+<meta name="keywords" content="简历模板,在线简历,简历生成器,免费简历,简历PDF,校招简历,求职简历,简历怎么写,ATS简历检测,简历诊断,机器筛选,不上传简历" />
+<meta name="author" content="简历大师" />
+<meta name="baidu-site-verification" content="codeva-6vzElmMOte" />
+<meta property="og:type" content="website" />
+<meta property="og:title" content="简历大师 · 3分钟做出能拿offer的简历" />
+<meta property="og:description" content="永久免费、无需注册、不上传服务器。本地处理隐私安全，内置 ATS 检测帮你过机器筛选，一键导出 PDF。" />
+<meta property="og:url" content="https://resume-master.app.workbuddy.host/" />
+<meta property="og:locale" content="zh_CN" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="简历大师 · 免费在线简历生成器" />
+<meta name="twitter:description" content="3分钟做出专业简历，多套模板，一键导出PDF。" />
+<link rel="canonical" href="https://resume-master.app.workbuddy.host/" />
+<style>
+  :root {
+    --bg: #0f1115; --panel: #171a21; --panel-2: #1f242e; --border: #2a3140;
+    --text: #e6e9ef; --muted: #9aa3b2; --accent: #ff7a45; --accent-2: #4f8cff;
+    --ok: #34d399; --warn: #fbbf24;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; }
+  body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: var(--bg); color: var(--text); font-size: 14px; line-height: 1.5; }
+
+  /* ---------- Top bar ---------- */
+  header.topbar { display:flex; align-items:center; justify-content:space-between; padding:12px 20px;
+    background: linear-gradient(90deg,#1a1d24,#20242e); border-bottom:1px solid var(--border); position:sticky; top:0; z-index:60; }
+  .brand { font-weight:800; font-size:18px; }
+  .brand .accent { color: var(--accent); }
+  .topbar-actions { display:flex; gap:10px; align-items:center; }
+  .btn { border:1px solid var(--border); background:var(--panel-2); color:var(--text); padding:8px 14px;
+    border-radius:8px; cursor:pointer; font-size:13px; transition:.15s; }
+  .btn:hover { border-color:var(--accent); }
+  .btn.primary { background:var(--accent); border-color:var(--accent); color:#1a1209; font-weight:700; }
+  .btn.primary:hover { filter:brightness(1.08); }
+  .btn.ghost { background:transparent; }
+
+  /* ---------- Hero ---------- */
+  .hero { text-align:center; padding:46px 20px 30px; background:
+      radial-gradient(900px 320px at 50% -40%, rgba(255,122,69,.18), transparent), var(--bg); }
+  .hero h1 { font-size:34px; margin:0 0 10px; font-weight:900; letter-spacing:.5px; }
+  .hero h1 .accent { color:var(--accent); }
+  .hero p { color:var(--muted); font-size:15px; margin:0 auto 20px; max-width:640px; }
+  .hero .cta { display:inline-flex; gap:12px; flex-wrap:wrap; justify-content:center; }
+  .stats { display:flex; gap:28px; justify-content:center; margin-top:26px; color:var(--muted); font-size:13px; flex-wrap:wrap; }
+  .stats b { color:var(--text); font-size:20px; display:block; }
+
+  /* ---------- Layout ---------- */
+  .layout { display:grid; grid-template-columns:380px 1fr; gap:0; }
+  @media (max-width:900px){ .layout{ grid-template-columns:1fr; } }
+
+  .editor { background:var(--panel); border-right:1px solid var(--border); padding:16px; overflow-y:auto; max-height:calc(100vh - 101px); }
+  .tabs { display:flex; gap:6px; margin-bottom:14px; flex-wrap:wrap; }
+  .tab { flex:1; min-width:60px; text-align:center; padding:8px 6px; border-radius:8px; border:1px solid var(--border);
+    background:var(--panel-2); cursor:pointer; font-size:12.5px; }
+  .tab.active { border-color:var(--accent); color:var(--accent); font-weight:700; }
+
+  .field { margin-bottom:12px; }
+  .field label { display:block; font-size:12px; color:var(--muted); margin-bottom:4px; }
+  .field input, .field textarea, .field select { width:100%; background:var(--panel-2); border:1px solid var(--border);
+    color:var(--text); border-radius:7px; padding:8px 10px; font-size:13px; font-family:inherit; }
+  .field textarea { resize:vertical; min-height:60px; }
+  .field input:focus, .field textarea:focus, .field select:focus { outline:none; border-color:var(--accent-2); }
+  .sec-title { font-weight:700; font-size:14px; margin:18px 0 10px; display:flex; justify-content:space-between; align-items:center; }
+  .sec-title .add { font-size:12px; color:var(--accent); cursor:pointer; }
+  .entry { border:1px solid var(--border); border-radius:10px; padding:10px; margin-bottom:10px; background:var(--panel-2); }
+  .entry .row { display:flex; gap:8px; }
+  .entry .row .field { flex:1; }
+  .entry .del { color:#f87171; font-size:12px; cursor:pointer; margin-top:4px; display:inline-block; }
+  .hint { color:var(--muted); font-size:11.5px; margin:4px 0 10px; }
+
+  /* ---------- Preview ---------- */
+  .preview-wrap { padding:24px; overflow-y:auto; max-height:calc(100vh - 101px); background:#0b0d11; }
+  .toolbar { display:flex; gap:10px; align-items:center; margin-bottom:16px; flex-wrap:wrap; }
+  .tpl-pick { display:flex; gap:8px; flex-wrap:wrap; }
+  .tpl-chip { padding:6px 12px; border:1px solid var(--border); border-radius:20px; cursor:pointer; font-size:12.5px; background:var(--panel-2); }
+  .tpl-chip.active { border-color:var(--accent); color:var(--accent); }
+  .tpl-chip.locked { opacity:.7; }
+  #tier-label { margin-left:auto; font-size:12px; color:var(--warn); }
+
+  .page { width:794px; max-width:100%; margin:0 auto; background:#fff; color:#1a1a1a; padding:48px 54px;
+    box-shadow:0 10px 40px rgba(0,0,0,.5); border-radius:4px; min-height:1123px; position:relative; }
+  .page.free-wm::after { content:"由 简历大师 免费生成 · resume-master.app.workbuddy.host";
+    position:absolute; bottom:14px; right:20px; font-size:11px; color:#bbb; }
+  .r-name { font-size:28px; font-weight:800; margin:0 0 4px; }
+  .r-contact { font-size:12.5px; color:#555; margin-bottom:6px; }
+  .r-section { margin-top:18px; }
+  .r-section h3 { font-size:15px; margin:0 0 8px; padding-bottom:4px; border-bottom:2px solid #333; }
+  .r-item { margin-bottom:12px; }
+  .r-item .r-head { display:flex; justify-content:space-between; font-size:13.5px; }
+  .r-item .r-org { font-weight:700; }
+  .r-item .r-date { color:#777; font-size:12px; }
+  .r-item .r-sub { font-size:12.5px; color:#444; margin:2px 0; }
+  .r-item ul { margin:4px 0 0; padding-left:18px; font-size:12.5px; color:#333; }
+  .r-item ul li { margin-bottom:2px; }
+  .r-skills { display:flex; flex-wrap:wrap; gap:6px; }
+  .r-skills span { background:#eef1f5; border-radius:14px; padding:3px 10px; font-size:12px; color:#333; }
+  .r-summary { font-size:12.5px; color:#333; line-height:1.7; }
+
+  .tpl-modern .r-name { color:var(--accent); }
+  .tpl-modern .r-section h3 { border-bottom:none; color:var(--accent); }
+  .tpl-modern .r-section h3::before { content:"▍"; margin-right:4px; }
+  .tpl-compact .page-inner { column-count:2; column-gap:24px; }
+  .tpl-compact .r-name { font-size:22px; }
+  .tpl-compact .r-section { break-inside:avoid; }
+  .tpl-creative .r-name { color:#7c3aed; }
+  .tpl-creative .r-section h3 { border-bottom:2px solid #7c3aed; color:#7c3aed; }
+  .tpl-creative .r-skills span { background:#f3e8ff; color:#6d28d9; }
+
+  /* ---------- 新增模板风格（扩到 8 套） ---------- */
+  .tpl-business .r-name { color:#1d4ed8; }
+  .tpl-business .r-section h3 { border-bottom:2px solid #1d4ed8; color:#1d4ed8; }
+  .tpl-business .r-skills span { background:#dbeafe; color:#1e40af; }
+
+  .tpl-minimal .r-name { font-weight:300; letter-spacing:3px; font-size:26px; }
+  .tpl-minimal .r-section h3 { border-bottom:1px solid #ddd; color:#555; font-weight:400; }
+  .tpl-minimal .r-item .r-org { font-weight:600; }
+  .tpl-minimal .r-skills span { background:#fafafa; border:1px solid #e5e5e5; color:#444; }
+
+  .tpl-pro .r-name { color:#b91c1c; }
+  .tpl-pro .r-section h3 { background:#b91c1c; color:#fff; padding:4px 12px; border:none; border-radius:3px; display:inline-block; }
+  .tpl-pro .r-item .r-head { font-weight:700; }
+  .tpl-pro .r-skills span { background:#fef2f2; color:#991b1b; }
+
+  .tpl-design .r-name { color:#0d9488; }
+  .tpl-design .r-section h3 { border-bottom:2px dotted #0d9488; color:#0d9488; }
+  .tpl-design .r-item .r-head { background:#f0fdfa; padding:6px 10px; border-radius:6px; }
+  .tpl-design .r-skills span { background:#ccfbf1; color:#0f766e; }
+
+  /* ---------- 第二批会员模板（扩到 16 套） ---------- */
+  /* 优雅 elegant：衬线 + 藏青，适合金融/法务/咨询 */
+  .tpl-elegant .r-name { font-family:Georgia,"Times New Roman","Songti SC",serif; color:#1f3a5f; letter-spacing:1px; }
+  .tpl-elegant .r-section h3 { color:#1f3a5f; border-bottom:1px solid #1f3a5f; }
+  .tpl-elegant .r-skills span { background:#eef2f7; color:#1f3a5f; }
+
+  /* 科技 tech：左侧色条 + 大写小标题 */
+  .tpl-tech .r-name { color:#0b6b5b; }
+  .tpl-tech .page-inner { border-left:6px solid #0b6b5b; padding-left:22px; }
+  .tpl-tech .r-section h3 { color:#0b6b5b; text-transform:uppercase; letter-spacing:1px; font-size:13px; }
+  .tpl-tech .r-skills span { background:#e6f4f1; color:#0b6b5b; }
+
+  /* 时间轴 timeline：左侧竖线 */
+  .tpl-timeline .r-name { color:#7c3aed; }
+  .tpl-timeline .r-section { position:relative; padding-left:16px; border-left:2px solid #7c3aed; }
+  .tpl-timeline .r-section h3 { color:#7c3aed; border:none; }
+  .tpl-timeline .r-skills span { background:#f3e8ff; color:#6d28d9; }
+
+  /* 醒目 bold：整条深色头 + 橙色块标题 */
+  .tpl-bold .r-name { background:#111; color:#fff; padding:16px 18px; margin:-48px -54px 16px; }
+  .tpl-bold .r-section h3 { background:var(--accent); color:#fff; padding:6px 12px; border:none; border-radius:3px; display:inline-block; }
+  .tpl-bold .r-skills span { background:#fff0e8; color:#c2410c; }
+
+  /* 柔和 soft：圆角 + 青绿点线 */
+  .tpl-soft .r-name { color:#0d9488; font-weight:300; }
+  .tpl-soft .page { border-radius:18px; }
+  .tpl-soft .r-section h3 { color:#0d9488; border-bottom:2px dotted #0d9488; }
+  .tpl-soft .r-skills span { background:#ccfbf1; color:#0f766e; }
+
+  /* 法务 legal：居中双线 + 下划线小标题，适合体制内/传统行业 */
+  .tpl-legal .r-name { text-align:center; border-bottom:3px double #222; padding-bottom:10px; }
+  .tpl-legal .r-section h3 { text-align:center; color:#333; border:none; text-decoration:underline; }
+  .tpl-legal .r-skills span { background:#f1f1f1; color:#333; }
+
+  /* 角标 corner：右上三角 */
+  .tpl-corner .r-name { color:#1d4ed8; }
+  .tpl-corner .page::before { content:""; position:absolute; top:0; right:0; border-width:0 56px 56px 0; border-style:solid; border-color:#1d4ed8 transparent; }
+  .tpl-corner .r-section h3 { color:#1d4ed8; }
+  .tpl-corner .r-skills span { background:#dbeafe; color:#1e40af; }
+
+  /* 网格 grid：玫红侧条标题 */
+  .tpl-grid .r-name { color:#be123c; }
+  .tpl-grid .r-section h3 { background:#fdf2f8; color:#be123c; border-left:4px solid #be123c; padding:4px 10px; }
+  .tpl-grid .r-skills span { background:#fdf2f8; color:#be123c; }
+
+  /* ---------- AI 诊断弹层 ---------- */
+  .ai-score { display:flex; align-items:center; gap:18px; margin:6px 0 14px; }
+  .ai-ring { width:96px; height:96px; border-radius:50%; display:flex; align-items:center; justify-content:center;
+    font-size:30px; font-weight:900; flex:0 0 auto; }
+  .ai-tip { padding:7px 10px; border-radius:8px; margin-bottom:8px; font-size:13px; line-height:1.45; }
+  .ai-tip.k { background:rgba(248,113,113,.14); border-left:3px solid #f87171; }
+  .ai-tip.i { background:rgba(251,191,36,.14); border-left:3px solid #fbbf24; }
+  .ai-tip.s { background:rgba(52,211,153,.14); border-left:3px solid #34d399; }
+  .ai-tip b { font-weight:800; }
+
+  .locked-cover { position:absolute; inset:0; background:rgba(255,255,255,.94); display:flex; flex-direction:column;
+    align-items:center; justify-content:center; text-align:center; border-radius:4px; padding:24px; }
+  .locked-cover .big { font-size:20px; font-weight:800; color:#222; }
+  .locked-cover .small { font-size:13px; color:#666; margin:8px 0 14px; }
+  .locked-cover .price { color:var(--accent); font-weight:800; }
+  .code-row { display:flex; gap:8px; margin-top:6px; }
+  .code-row input { padding:8px 10px; border-radius:8px; border:1px solid #ccc; width:200px; text-align:center; letter-spacing:1px; }
+  .pro-badge { color:var(--ok); font-weight:700; font-size:12px; }
+
+  /* ---------- Pricing / FAQ ---------- */
+  .section-block { max-width:980px; margin:0 auto; padding:40px 20px; }
+  .section-block h2 { text-align:center; font-size:24px; margin:0 0 6px; }
+  .section-block .sub { text-align:center; color:var(--muted); margin:0 0 28px; }
+  .pricing { display:grid; grid-template-columns:1fr 1fr; gap:18px; max-width:720px; margin:0 auto; }
+  @media(max-width:640px){ .pricing{ grid-template-columns:1fr; } }
+  .plan { border:1px solid var(--border); border-radius:14px; padding:22px; background:var(--panel); }
+  .plan.pro { border-color:var(--accent); box-shadow:0 0 0 1px var(--accent), 0 12px 30px rgba(255,122,69,.12); }
+  .plan h3 { margin:0 0 4px; font-size:18px; }
+  .plan .price { font-size:30px; font-weight:900; margin:8px 0; }
+  .plan .price small { font-size:13px; color:var(--muted); font-weight:400; }
+  .plan ul { list-style:none; padding:0; margin:14px 0; }
+  .plan li { padding:6px 0; border-bottom:1px dashed var(--border); font-size:13px; color:var(--text); }
+  .plan li::before { content:"✓ "; color:var(--ok); font-weight:700; }
+  .faq { max-width:720px; margin:0 auto; }
+  .faq details { border:1px solid var(--border); border-radius:10px; padding:12px 16px; margin-bottom:10px; background:var(--panel); }
+  .faq summary { cursor:pointer; font-weight:700; }
+  .faq p { color:var(--muted); font-size:13px; margin:8px 0 0; }
+
+  .toast { position:fixed; bottom:24px; left:50%; transform:translateX(-50%); background:var(--ok); color:#07210f;
+    padding:10px 18px; border-radius:10px; font-weight:700; opacity:0; pointer-events:none; transition:.25s; z-index:200; }
+  .toast.show { opacity:1; }
+
+  @media print {
+    body * { visibility:hidden; }
+    .page, .page * { visibility:visible; }
+    .page { position:absolute; left:0; top:0; box-shadow:none; margin:0; border-radius:0; width:100%; }
+    .page.free-wm::after { content:""; }
+  }
+  .modal-mask { position:fixed; inset:0; background:rgba(0,0,0,.6); display:flex; align-items:center; justify-content:center; z-index:300; }
+  .modal { position:relative; width:340px; max-width:90vw; background:var(--panel); border:1px solid var(--border); border-radius:16px; padding:22px; box-shadow:0 20px 60px rgba(0,0,0,.5); }
+  .modal-close { position:absolute; top:12px; right:14px; cursor:pointer; color:var(--muted); font-size:16px; }
+  footer.site { text-align:center; padding:30px 20px; color:var(--muted); font-size:12px; border-top:1px solid var(--border); }
+  footer.site a { color:var(--accent); text-decoration:none; }
+
+  /* ---------- 顶部导航（全站通用） ---------- */
+  .site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:8px 16px;
+    background:var(--panel,#171a21);border-bottom:1px solid var(--border,#2a3140);font-size:13px}
+  .site-nav a{color:var(--text,#e6e9ef);text-decoration:none;padding:5px 10px;border-radius:7px;
+    white-space:nowrap;transition:.15s}
+  .site-nav a:hover{background:var(--accent,#ff7a45);color:#1a1209}
+  .site-nav a.cur{background:var(--accent,#ff7a45);color:#1a1209;font-weight:700}
+</style>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"简历大师",
+  "applicationCategory":"BusinessApplication",
+  "operatingSystem":"Web",
+  "url":"https://resume-master.app.workbuddy.host/",
+  "offers":[
+    {"@type":"Offer","price":"0","priceCurrency":"CNY","name":"免费版"},
+    {"@type":"Offer","price":"9.9","priceCurrency":"CNY","name":"会员版"}
+  ]
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"FAQPage",
+  "mainEntity":[
+    {"@type":"Question","name":"简历大师真的免费吗？","acceptedAnswer":{"@type":"Answer","text":"核心功能永久免费：8 套模板、6 大行业一键套用、AI 简历诊断、ATS 检测、求职信生成器均可无限次使用，导出 PDF 仅带轻水印。会员（¥9.9/月）去水印并解锁全部高级模板。"}},
+    {"@type":"Question","name":"导出的简历能被 ATS 招聘系统识别吗？","acceptedAnswer":{"@type":"Answer","text":"可以。模板采用标准板块与纯文字排版，避开表格与图片依赖，并内置 ATS 检测工具（12 项检查、0-100 分）帮你优化，提升机器初筛通过率。"}},
+    {"@type":"Question","name":"我的简历信息安全吗？","acceptedAnswer":{"@type":"Answer","text":"全部在你浏览器本地处理，不上传任何服务器，关闭页面即清。我们看不到也不会留存你的任何个人信息。"}},
+    {"@type":"Question","name":"会员怎么开通？","acceptedAnswer":{"@type":"Answer","text":"在闲鱼搜索/打开「简历大师激活码」商品付款，卖家会发你卡密（RM-XXXX-XXXX），回到首页弹窗或模板区兑换框输入即可解锁，无需注册、即时生效；卡密由系统校验，真实有效才会解锁。"}},
+    {"@type":"Question","name":"除了会员还有别的变现或支持方式吗？","acceptedAnswer":{"@type":"Answer","text":"全站接入了展示广告（A-ADS），你浏览即是在支持作者；也可在简历写好后通过页内推荐的招聘平台直接投递。"}}
+  ]
+}
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">简历<span class="accent">大师</span></div>
+  <div class="topbar-actions" style="flex-wrap:wrap">
+    <span id="pro-badge" class="pro-badge" style="display:none">● 已解锁会员</span>
+    <span id="autosave-tip" style="font-size:12px;color:var(--muted)">内容自动保存在本机</span>
+    <button class="btn ghost" onclick="openVault()">📁 我的简历</button>
+    <button class="btn ghost" onclick="openJdMatch()">🎯 JD 匹配</button>
+    <button class="btn ghost" onclick="exportDoc()">📝 Word</button>
+    <button class="btn ghost" onclick="exportTxt()">📄 TXT</button>
+    <button class="btn primary" onclick="exportPDF()">⬇️ 导出 PDF</button>
+  </div>
+</header>
+<nav class="site-nav">
+  <a href="index.html">简历大师</a>
+  <a href="guide.html">📘 简历指南</a>
+  <a href="verbs.html">动词库</a>
+  <a href="skills.html">技能清单</a>
+  <a href="template.html">模板下载</a>
+  <a href="example.html">简历范文</a>
+  <a href="campus.html">校招简历</a>
+  <a href="developer.html">程序员简历</a>
+  <a href="ats.html">ATS 友好</a>
+  <a href="ats-check.html">ATS 检测</a>
+  <a href="cover-letter.html">求职信</a>
+  <a href="blog.html">简历干货</a>
+</nav>
+
+<!-- 顶部广告位（A-ADS zone id 在 ads.js 的 AD_ZONES 数组配置） -->
+<div class="ad-mount ad-top"><div class="ad-label">赞助 · Sponsored</div><iframe data-aa='2455423' src='//acceptable.a-ads.com/2455423/?size=Adaptive' style='border:0;padding:0;width:100%;max-width:728px;height:90px;display:block;margin:auto'></iframe></div>
+
+<!-- HERO -->
+<section class="hero">
+  <h1>永久免费的简历生成器<br><span class="accent">数据不出本机 · ATS 检测帮你过机器筛选</span></h1>
+  <p>不用注册、不上传服务器、不套路收费。所有内容在你自己的浏览器里处理；内置 <b style="color:var(--text)">ATS 机器筛选检测</b> 与 0–100 诊断打分，先过机筛、再更快到达 HR 面前。3 分钟出 PDF。</p>
+  <div class="cta">
+    <button class="btn primary" onclick="document.getElementById('app').scrollIntoView({behavior:'smooth'})">免费开始制作 →</button>
+    <button class="btn ghost" onclick="document.getElementById('pricing').scrollIntoView({behavior:'smooth'})">查看会员权益</button>
+    <button class="btn ghost" onclick="copyLink()">🔗 复制链接分享</button>
+  </div>
+  <div class="stats">
+    <div><b>16</b>套专业模板</div>
+    <div><b>6</b>大行业一键套用</div>
+    <div><b>AI</b>简历诊断打分</div>
+    <div><b>∞</b>次免费使用</div>
+  </div>
+  <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:14px;max-width:1080px;margin:26px auto 0;text-align:left">
+    <div style="background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px">
+      <div style="font-size:22px;margin-bottom:6px">🔒</div>
+      <b style="display:block;margin-bottom:6px;color:var(--text)">本地保存 · 数据不出本机</b>
+      <span style="color:var(--muted);font-size:12.5px">简历只存在你自己的浏览器里，不上传任何服务器，关掉页面即清除。姓名、电话、工作经历我们看不见，也不会留存。</span>
+    </div>
+    <div style="background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px">
+      <div style="font-size:22px;margin-bottom:6px">🤖</div>
+      <b style="display:block;margin-bottom:6px;color:var(--text)">ATS 检测 · 帮你过机器筛选</b>
+      <span style="color:var(--muted);font-size:12.5px">内置 ATS 机筛检测与诊断打分，揪出排版、关键词、格式上的扣分项，大幅提升企业机器初筛通过率。</span>
+    </div>
+    <div style="background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px">
+      <div style="font-size:22px;margin-bottom:6px">⚡</div>
+      <b style="display:block;margin-bottom:6px;color:var(--text)">更快到达 HR 面前</b>
+      <span style="color:var(--muted);font-size:12.5px">机筛通过率提高、关键词对准岗位 JD，简历被捞出来的概率更大，不再「投了没回音」。</span>
+    </div>
+    <div style="background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px">
+      <div style="font-size:22px;margin-bottom:6px">💯</div>
+      <b style="display:block;margin-bottom:6px;color:var(--text)">永久免费 · 不套路</b>
+      <span style="color:var(--muted);font-size:12.5px">核心功能永久免费、无限次使用。其他平台导出 PDF 要收费、要注册、还会自动续费；这里不用注册也不用留手机号。</span>
+    </div>
+  </div>
+  <div style="margin-top:16px;font-size:12.5px;color:var(--muted)">🔒 全程本地处理·隐私安全 &nbsp;·&nbsp; ✅ ATS 检测·包过机器筛选 &nbsp;·&nbsp; ⚡ 3 分钟出 PDF &nbsp;·&nbsp; 💯 核心功能永久免费 &nbsp;·&nbsp; 🙅 免注册·无自动续费</div>
+</section>
+
+<!-- APP -->
+<div class="layout" id="app">
+  <aside class="editor">
+    <div class="tabs">
+      <div class="tab active" data-tab="basic" onclick="switchTab(this)">基础</div>
+      <div class="tab" data-tab="edu" onclick="switchTab(this)">教育</div>
+      <div class="tab" data-tab="work" onclick="switchTab(this)">工作</div>
+      <div class="tab" data-tab="proj" onclick="switchTab(this)">项目</div>
+      <div class="tab" data-tab="skill" onclick="switchTab(this)">技能</div>
+    </div>
+    <div id="tab-basic">
+      <div class="field"><label>姓名</label><input id="f-name" value="张三" /></div>
+      <div class="field"><label>求职意向</label><input id="f-title" value="前端开发工程师" /></div>
+      <div class="field"><label>电话</label><input id="f-phone" value="138-0000-0000" /></div>
+      <div class="field"><label>邮箱</label><input id="f-email" value="zhangsan@example.com" /></div>
+      <div class="field"><label>所在地</label><input id="f-loc" value="上海" /></div>
+      <div class="field"><label>主页 / GitHub</label><input id="f-link" value="github.com/zhangsan" /></div>
+      <div class="field"><label>个人简介<span onclick="openPhrases('f-summary')" style="float:right;color:var(--accent);cursor:pointer;font-size:11.5px">💡 插入专业表述</span></label><textarea id="f-summary" oninput="renderPreview()">3 年前端开发经验，擅长 Vue/React 与工程化体系建设，主导过多个百万级用户项目。</textarea></div>
+    </div>
+    <div id="tab-edu" style="display:none">
+      <div class="sec-title">教育经历 <span class="add" onclick="addEntry('edu')">+ 添加</span></div>
+      <div id="list-edu"></div>
+    </div>
+    <div id="tab-work" style="display:none">
+      <div class="sec-title">工作经历 <span class="add" onclick="addEntry('work')">+ 添加</span></div>
+      <div id="list-work"></div>
+    </div>
+    <div id="tab-proj" style="display:none">
+      <div class="sec-title">项目经历 <span class="add" onclick="addEntry('proj')">+ 添加</span></div>
+      <div id="list-proj"></div>
+    </div>
+    <div id="tab-skill" style="display:none">
+      <div class="field"><label>技能（逗号分隔）</label><textarea id="f-skills">JavaScript, TypeScript, Vue, React, Node.js, Webpack, 性能优化, 团队协作</textarea></div>
+      <div class="hint">导出时自动生成标签样式。</div>
+    </div>
+  </aside>
+
+  <main class="preview-wrap">
+    <div class="toolbar">
+      <span style="color:var(--muted);font-size:12.5px">模板：</span>
+      <div class="tpl-pick">
+        <div class="tpl-chip active" data-tpl="classic" onclick="setTpl(this)">经典</div>
+        <div class="tpl-chip" data-tpl="modern" onclick="setTpl(this)">现代</div>
+        <div class="tpl-chip" data-tpl="business" onclick="setTpl(this)">商务</div>
+        <div class="tpl-chip" data-tpl="minimal" onclick="setTpl(this)">极简</div>
+        <div class="tpl-chip locked" data-tpl="compact" onclick="setTpl(this)">紧凑 🔒</div>
+        <div class="tpl-chip locked" data-tpl="creative" onclick="setTpl(this)">创意 🔒</div>
+        <div class="tpl-chip locked" data-tpl="pro" onclick="setTpl(this)">国企 🔒</div>
+        <div class="tpl-chip locked" data-tpl="design" onclick="setTpl(this)">清新 🔒</div>
+        <div class="tpl-chip locked" data-tpl="elegant" onclick="setTpl(this)">优雅 🔒</div>
+        <div class="tpl-chip locked" data-tpl="tech" onclick="setTpl(this)">科技 🔒</div>
+        <div class="tpl-chip locked" data-tpl="timeline" onclick="setTpl(this)">时间轴 🔒</div>
+        <div class="tpl-chip locked" data-tpl="bold" onclick="setTpl(this)">醒目 🔒</div>
+        <div class="tpl-chip locked" data-tpl="soft" onclick="setTpl(this)">柔和 🔒</div>
+        <div class="tpl-chip locked" data-tpl="legal" onclick="setTpl(this)">法务 🔒</div>
+        <div class="tpl-chip locked" data-tpl="corner" onclick="setTpl(this)">角标 🔒</div>
+        <div class="tpl-chip locked" data-tpl="grid" onclick="setTpl(this)">网格 🔒</div>
+      </div>
+      <span id="tier-label">免费版（带水印 · 4 模板）</span>
+    </div>
+
+    <div style="margin:-4px 0 14px">
+      <span style="font-size:12px;color:var(--muted)">🎯 一键套用行业模板：</span>
+      <div class="tpl-pick" style="margin-top:8px">
+        <div class="tpl-chip" onclick="applyPreset('it')">💻 互联网</div>
+        <div class="tpl-chip" onclick="applyPreset('teacher')">📚 教师</div>
+        <div class="tpl-chip" onclick="applyPreset('gov')">🏛️ 国企</div>
+        <div class="tpl-chip" onclick="applyPreset('design')">🎨 设计</div>
+        <div class="tpl-chip" onclick="applyPreset('fresh')">🌱 应届生</div>
+        <div class="tpl-chip" onclick="applyPreset('sales')">📈 销售</div>
+      </div>
+      <button class="btn primary" style="margin-top:12px;width:100%" onclick="runDiagnosis()">🤖 AI 简历诊断（打分+优化建议）</button>
+      <button class="btn ghost" style="margin-top:8px;width:100%" onclick="openJdMatch()">🎯 JD 关键词匹配（帮你过机器筛选）</button>
+      <button class="btn ghost" style="margin-top:8px;width:100%" onclick="openVault()">📁 我的简历（可存多版本，都在本机）</button>
+      <div style="margin-top:8px;font-size:11.5px;color:var(--muted);text-align:center">内容自动保存在本机浏览器，刷新/关闭都不会丢</div>
+    </div>
+
+    <div class="page free-wm" id="page">
+      <div class="page-inner" id="page-inner">
+        <h1 class="r-name" id="r-name"></h1>
+        <div class="r-contact" id="r-contact"></div>
+        <div class="r-section"><h3>个人简介</h3><div class="r-summary" id="r-summary"></div></div>
+        <div class="r-section" id="sec-edu"><h3>教育经历</h3><div id="r-edu"></div></div>
+        <div class="r-section" id="sec-work"><h3>工作经历</h3><div id="r-work"></div></div>
+        <div class="r-section" id="sec-proj"><h3>项目经历</h3><div id="r-proj"></div></div>
+        <div class="r-section" id="sec-skill"><h3>专业技能</h3><div class="r-skills" id="r-skills"></div></div>
+      </div>
+      <div class="locked-cover" id="locked-cover" style="display:none">
+        <div class="big">🔒 高级模板（紧凑 / 创意 / 国企 / 清新）</div>
+        <div class="small">升级会员解锁全部 8 套模板 + 去水印高清导出</div>
+        <button class="btn primary" onclick="goPro()">升级会员 · <span class="price">¥9.9/月</span></button>
+        <div class="code-row">
+          <input id="code-input" placeholder="输入会员卡密 RM-XXXX-XXXX" />
+          <button class="btn" onclick="redeemCode()">兑换</button>
+        </div>
+        <div class="pay-note" style="font-size:11.5px;color:#888;margin-top:8px">已购会员卡密？输入即可解锁，真实有效才生效</div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- PRICING -->
+<section class="section-block" id="pricing">
+  <h2>简单透明的价格</h2>
+  <p class="sub">工具永远免费可用，会员只是让你更好看、更省事</p>
+  <div class="pricing">
+    <div class="plan">
+      <h3>免费版</h3>
+      <div class="price">¥0</div>
+      <ul>
+        <li>经典 / 现代 / 商务 / 极简 四套模板</li>
+        <li>无限次编辑与导出</li>
+        <li>导出 PDF 带轻水印</li>
+        <li>本地草稿自动保存</li>
+      </ul>
+      <button class="btn ghost" style="width:100%" onclick="document.getElementById('app').scrollIntoView({behavior:'smooth'})">免费使用</button>
+    </div>
+    <div class="plan pro">
+      <h3>会员版</h3>
+      <div class="price">¥9.9<small> / 月</small></div>
+      <ul>
+        <li>全部 16 套模板（4 套免费 + 12 套高级：紧凑/创意/国企/清新/优雅/科技/时间轴/醒目/柔和/法务/角标/网格）</li>
+        <li>导出 PDF <b>无水印</b></li>
+        <li><b>ATS 适配模板</b>：多数 HR 用 ATS 机筛，高级模板更稳过初筛</li>
+        <li>未来新模板免费更新</li>
+        <li>优先客服支持</li>
+      </ul>
+      <button class="btn primary" style="width:100%" onclick="goPro()">立即升级</button>
+    </div>
+  </div>
+</section>
+
+<!-- 为什么选我们（差异化对比） -->
+<section class="section-block" style="padding-top:0">
+  <h2>为什么选简历大师</h2>
+  <p class="sub">同样是做简历，我们不按套路收费</p>
+  <div style="overflow-x:auto">
+  <table style="width:100%;min-width:520px;border-collapse:collapse;font-size:13px;background:var(--panel);border:1px solid var(--border);border-radius:12px;overflow:hidden">
+    <thead>
+      <tr style="background:var(--panel-2)">
+        <th style="text-align:left;padding:12px 14px;border-bottom:1px solid var(--border)">对比项</th>
+        <th style="text-align:left;padding:12px 14px;border-bottom:1px solid var(--border);color:var(--accent)">简历大师</th>
+        <th style="text-align:left;padding:12px 14px;border-bottom:1px solid var(--border);color:var(--muted)">多数收费简历平台</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--border)">导出 PDF</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--ok)">永久免费</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--muted)">做完后才能导出，需付费</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--border)">注册登录</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--ok)">完全不用注册</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--muted)">必须注册，常要手机号</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--border)">简历存放位置</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--ok)">只在你本机浏览器</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--muted)">上传到对方服务器</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--border)">隐私风险</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--ok)">数据不出本机，无法泄露</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--muted)">存在信息留存与被爬风险</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--border)">ATS 机器筛选检测</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--ok)">免费内置，随时自查</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--muted)">多为会员专属功能</td></tr>
+      <tr><td style="padding:11px 14px;border-bottom:1px solid var(--border)">订阅陷阱</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--ok)">无自动续费</td><td style="padding:11px 14px;border-bottom:1px solid var(--border);color:var(--muted)">低价试用后自动续费</td></tr>
+      <tr><td style="padding:11px 14px">使用次数</td><td style="padding:11px 14px;color:var(--ok)">无限次，永久</td><td style="padding:11px 14px;color:var(--muted)">按次/按月计费</td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="section-block" style="padding-top:0">
+  <h2>常见问题</h2>
+  <p class="sub">关于使用与会员</p>
+  <div class="faq">
+    <details><summary>数据安全吗？</summary><p>全部在你浏览器本地处理，不上传任何个人信息，关闭页面即清。</p></details>
+    <details><summary>免费版有什么限制？</summary><p>仅模板数量与导出水印区别，功能完全不受限，可一直免费使用。</p></details>
+    <details><summary>会员怎么开通？</summary><p>在闲鱼打开「简历大师激活码」商品付款，卖家会发你卡密（RM-XXXX-XXXX），回到首页弹窗或模板区的兑换框输入即可解锁，无需注册、即时生效。卡密由系统校验，真实有效才会解锁。</p></details>
+    <details><summary>支持导出 Word 吗？</summary><p>当前支持 PDF；Word / 长图导出已在路线图，会员免费获得。</p></details>
+  </div>
+</section>
+
+<!-- 资源中心 -->
+<section class="section-block" style="padding-top:0">
+  <h2>免费资源中心</h2>
+  <p class="sub">不止一个工具 —— 简历写作、范文、检测、求职信，一站搞定</p>
+  <div class="res-grid">
+    <a class="res-card" href="resume-checklist.html">
+      <div class="res-ico">✅</div><h3>简历自查清单</h3>
+      <p>24 项逐条打分，找出所有扣分项</p>
+    </a>
+    <a class="res-card" href="salary-calculator.html">
+      <div class="res-ico">🧮</div><h3>薪资总包计算器</h3>
+      <p>真实时薪 + 两个 offer 横向对比</p>
+    </a>
+    <a class="res-card" href="guide.html">
+      <div class="res-ico">📘</div><h3>简历写作完全指南</h3>
+      <p>从结构到话术，照着写就对了</p>
+    </a>
+    <a class="res-card" href="example.html">
+      <div class="res-ico">📄</div><h3>各行业简历范文</h3>
+      <p>互联网 / 教师 / 国企 / 设计真实样例</p>
+    </a>
+    <a class="res-card" href="ats-check.html">
+      <div class="res-ico">🤖</div><h3>ATS 简历检测</h3>
+      <p>测测你的简历能不能过机器筛选</p>
+    </a>
+    <a class="res-card" href="cover-letter.html">
+      <div class="res-ico">✉️</div><h3>求职信生成器</h3>
+      <p>3 步生成一封像样的求职信</p>
+    </a>
+    <a class="res-card" href="template.html">
+      <div class="res-ico">🎨</div><h3>16 套模板预览</h3>
+      <p>挑喜欢的风格，一键套用</p>
+    </a>
+    <a class="res-card" href="campus.html">
+      <div class="res-ico">🌱</div><h3>校招专属攻略</h3>
+      <p>没经验也能写出亮眼简历</p>
+    </a>
+    <a class="res-card" href="blog.html">
+      <div class="res-ico">📚</div><h3>简历干货合集</h3>
+      <p>模板怎么选、ATS 怎么过、求职信怎么写</p>
+    </a>
+    <a class="res-card" href="verbs.html">
+      <div class="res-ico">🔤</div><h3>简历动词库</h3>
+      <p>13 类 160+ 个强动词 + 替换表，把「负责」全换掉</p>
+    </a>
+    <a class="res-card" href="skills.html">
+      <div class="res-ico">🧩</div><h3>行业技能清单</h3>
+      <p>12 行业核心/加分技能与分级写法</p>
+    </a>
+  </div>
+</section>
+
+<!-- 联盟/推荐位（未来变现钩子）：简历做完「去哪投」，意图强、转化高。当前为纯帮助性外链，后续可替换为对应平台联盟链接赚佣 -->
+<section class="section-block" style="padding-top:0">
+  <h2 style="font-size:20px">📮 简历写好了，去哪投？</h2>
+  <p class="sub">把简历发出去，机会才真正开始 · 以下平台均可直接投递</p>
+  <div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center">
+    <a class="btn ghost" href="https://www.zhipin.com/" target="_blank" rel="noopener">BOSS 直聘</a>
+    <a class="btn ghost" href="https://www.liepin.com/" target="_blank" rel="noopener">猎聘</a>
+    <a class="btn ghost" href="https://www.zhaopin.com/" target="_blank" rel="noopener">智联招聘</a>
+    <a class="btn ghost" href="https://www.51job.com/" target="_blank" rel="noopener">前程无忧</a>
+  </div>
+</section>
+
+<style>
+  .res-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:14px; max-width:880px; margin:0 auto; }
+  @media(max-width:760px){ .res-grid{ grid-template-columns:repeat(2,1fr); } }
+  .res-card { display:block; text-decoration:none; color:var(--text); border:1px solid var(--border); border-radius:14px;
+    padding:18px; background:var(--panel); transition:.15s; }
+  .res-card:hover { border-color:var(--accent); transform:translateY(-2px); }
+  .res-ico { font-size:30px; margin-bottom:8px; }
+  .res-card h3 { margin:0 0 6px; font-size:15px; }
+  .res-card p { margin:0; color:var(--muted); font-size:12.5px; }
+</style>
+
+<!-- 中部广告位（A-ADS zone id 在 ads.js 的 AD_ZONES 数组配置） -->
+<div class="ad-mount ad-mid"></div>
+
+<footer class="site">
+  <div style="margin-top:8px">© 2026 简历大师 · 全部本地处理，隐私安全</div>
+  
+  <script>
+  (function(){
+    try{
+      var key="48f791ce3bad6052", host="resume-master.app.workbuddy.host";
+      fetch("https://api.indexnow.org/indexnow",{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({host:host,key:key,urlList:[location.href.split("#")[0]])}).catch(function(){});
+    }catch(e){}
+  })();
+  </script>
+  <div class="ad-mount ad-foot"></div>
+</footer>
+
+<!-- AI DIAGNOSIS MODAL -->
+<div class="modal-mask" id="ai-modal" style="display:none">
+  <div class="modal" style="width:420px;max-width:92vw">
+    <div class="modal-close" onclick="closeAiModal()">✕</div>
+    <h3 style="margin:0 0 4px">🤖 AI 简历诊断报告</h3>
+    <p style="color:var(--muted);font-size:12.5px;margin:0 0 4px">基于 HR 与 ATS 筛选规则，给你 0–100 分和具体优化建议</p>
+    <div class="ai-score">
+      <div class="ai-ring" id="ai-ring">--</div>
+      <div id="ai-verdict" style="font-size:13px;color:var(--muted)"></div>
+    </div>
+    <div id="ai-tips" style="max-height:300px;overflow-y:auto"></div>
+    <button class="btn primary" style="width:100%;margin-top:12px" onclick="copyLink();toast('链接已复制，去晒你的简历分吧 🚀')">🔗 晒一下我的简历分</button>
+    <div style="margin-top:10px;font-size:11.5px;color:var(--muted);text-align:center">分数不够高？升级会员换高级模板，简历更好看、更易过筛</div>
+  </div>
+</div>
+
+<!-- PAY MODAL -->
+<div class="modal-mask" id="pay-modal" style="display:none">
+  <div class="modal">
+    <div class="modal-close" onclick="closePayModal()">✕</div>
+    <h3 style="margin:0 0 4px">开通会员 · <span id="pay-amount">¥9.9</span><span style="font-size:13px;color:var(--muted)"> / 月</span></h3>
+    <p style="color:var(--muted);font-size:13px;margin:0 0 12px">在闲鱼购买「简历大师激活码」，付款后卖家会发你卡密，回来输入即可解锁，无需注册、即时生效。</p>
+
+    <div id="xianyu-qr" style="text-align:center;margin-bottom:12px">
+      <img src="https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=https%3A%2F%2Fm.tb.cn%2Fh.8r8qDuD%3Ftk%3DhDQwT8jWYQ9" alt="闲鱼购买二维码" style="width:150px;height:150px;background:#fff;border-radius:10px;padding:8px" onerror="document.getElementById('xianyu-qr').style.display='none'" />
+      <div style="font-size:11px;color:var(--muted);margin-top:4px">手机扫码直达闲鱼购买页</div>
+    </div>
+
+    <button class="btn primary" style="width:100%;margin-bottom:14px" onclick="openCardSell()">🐟 去闲鱼购买激活码</button>
+
+    <div class="code-row" style="margin-top:4px">
+      <input id="pay-code-input" placeholder="在此输入会员卡密（RM-XXXX-XXXX）" />
+      <button class="btn" onclick="redeemFromInput('pay-code-input')">兑换</button>
+    </div>
+    <div style="margin-top:10px;font-size:11.5px;color:var(--muted);text-align:center">付款后卖家发码，输入即校验，真实有效才解锁</div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+  const $ = (id) => document.getElementById(id);
+  let currentTpl = "classic";
+  const SECRET = "jianli-master-2026-v1";
+  const CARD_SELL_URL = "https://m.tb.cn/h.8r8qDuD?tk=hDQwT8jWYQ9"; // 闲鱼购买页（用户发布的「简历大师激活码」商品）。用户付款后卖家发码，回来输入兑换即解锁
+  const PAY_AMOUNT = "9.9";
+  const IS_PRO = (localStorage.getItem("rm_pro") === "1");
+
+  const sample = {
+    edu: [{org:"XX 大学", degree:"计算机科学与技术 · 本科", date:"2016.09 - 2020.06", sub:"GPA 3.8/4.0，校优秀毕业生", points:["主修：数据结构、操作系统、计算机网络","曾获国家奖学金"]}],
+    work: [{org:"A 科技有限公司", role:"前端开发工程师", date:"2020.07 - 至今", sub:"核心业务线", points:["主导组件库建设，研发效率提升 40%","优化首屏加载，LCP 从 3.2s 降至 1.1s","带领 3 人小组完成中台重构"]}],
+    proj: [{org:"数据可视化平台", role:"项目负责人", date:"2022.03 - 2022.09", sub:"", points:["基于 Vue3 + ECharts 搭建实时大屏","支撑日均 200 万次查询"]}]
+  };
+  let data = JSON.parse(JSON.stringify(sample));
+
+  function esc(s){ return (s||"").replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c])); }
+  function hashStr(s){ let h=2166136261>>>0; for(let i=0;i<s.length;i++){ h^=s.charCodeAt(i); h=Math.imul(h,16777619); } return h>>>0; }
+
+  function switchTab(el){
+    document.querySelectorAll(".tab").forEach(t=>t.classList.remove("active"));
+    el.classList.add("active");
+    ["basic","edu","work","proj","skill"].forEach(k=> $("tab-"+k).style.display = (el.dataset.tab===k)?"block":"none");
+  }
+  function addEntry(type){ data[type].push({org:"",role:"",date:"",sub:"",points:[""]}); renderList(type); renderPreview(); }
+  function delEntry(type,i){ data[type].splice(i,1); renderList(type); renderPreview(); }
+
+  function renderList(type){
+    const wrap = $("list-"+type); wrap.innerHTML = "";
+    data[type].forEach((e,i)=>{
+      const div = document.createElement("div"); div.className="entry";
+      div.innerHTML = `
+        <div class="row">
+          <div class="field"><label>机构 / 公司</label><input value="${esc(e.org)}" oninput="data['${type}'][${i}].org=this.value;renderPreview()"></div>
+          <div class="field"><label>${type==='edu'?'专业/学位':'职位'}</label><input value="${esc(e.role)}" oninput="data['${type}'][${i}].role=this.value;renderPreview()"></div>
+        </div>
+        <div class="row">
+          <div class="field"><label>时间</label><input value="${esc(e.date)}" oninput="data['${type}'][${i}].date=this.value;renderPreview()"></div>
+          <div class="field"><label>副标题</label><input value="${esc(e.sub)}" oninput="data['${type}'][${i}].sub=this.value;renderPreview()"></div>
+        </div>
+        <div class="field"><label>要点（每行一条）<span onclick="openPhrases('ta-${type}-${i}')" style="float:right;color:var(--accent);cursor:pointer;font-size:11.5px">💡 插入专业表述</span></label><textarea id="ta-${type}-${i}" oninput="data['${type}'][${i}].points=this.value.split('\\n');renderPreview()">${esc((e.points||[]).join("\n"))}</textarea></div>
+        <span class="del" onclick="delEntry('${type}',${i})">删除此项</span>`;
+      wrap.appendChild(div);
+    });
+  }
+
+  function setTpl(el){
+    const tpl = el.dataset.tpl;
+    if(el.classList.contains("locked") && !IS_PRO){
+      $("locked-cover").style.display="flex"; toast("该模板为会员专享，请输入会员码解锁"); return;
+    }
+    currentTpl = tpl;
+    document.querySelectorAll(".tpl-chip").forEach(c=>c.classList.remove("active"));
+    el.classList.add("active"); renderPreview();
+  }
+
+  function goPro(){
+    openPayModal();
+  }
+  function openPayModal(){
+    $("pay-amount").textContent = "¥" + PAY_AMOUNT;
+    $("pay-modal").style.display="flex";
+  }
+  function closePayModal(){ $("pay-modal").style.display="none"; }
+  function openCardSell(){
+    if(!CARD_SELL_URL){ toast("闲鱼链接尚未配置，请稍后或联系作者"); return; }
+    window.open(CARD_SELL_URL, "_blank");
+  }
+
+  function redeemFromInput(inputId){
+    const raw = ($(inputId).value || "").trim().toUpperCase().replace(/\s/g,"");
+    const code = raw.replace(/^RM-?/, "").replace(/-/g,"");
+    if(!code){ toast("请输入会员码"); return; }
+    if(hashStr(code + SECRET) % 97 === 0){
+      localStorage.setItem("rm_pro","1");
+      $("locked-cover").style.display="none";
+      document.querySelectorAll(".tpl-chip.locked").forEach(c=>c.classList.remove("locked"));
+      renderPreview();
+      closePayModal();
+      toast("🎉 解锁成功，畅享全部会员权益！");
+    } else {
+      toast("会员码无效，请检查后重试");
+    }
+  }
+  function redeemCode(){ redeemFromInput("code-input"); } // 会员区兑换框兼容
+
+  // 分享裂变已移除：纯前端无法验证用户「真实分享」，故不做免费解锁，避免白嫖。
+  // 会员仅通过「闲鱼购买的卡密」真实校验解锁（见 redeemFromInput）。
+  function copyLink(){
+    const url = location.href;
+    if(navigator.clipboard){ navigator.clipboard.writeText(url).then(()=>toast("链接已复制，去分享吧 🚀")).catch(()=>toast("链接："+url)); }
+    else toast("链接："+url);
+  }
+
+  function renderPreview(){
+    try{ scheduleAutoSave(); }catch(e){}
+    const page = $("page");
+    page.className = "page " + (IS_PRO?"":"free-wm") + " tpl-" + currentTpl;
+    if(!IS_PRO) page.classList.add("free-wm");
+    $("r-name").textContent = $("f-name").value + ($("f-title").value ? "  ·  " + $("f-title").value : "");
+    const c=[];
+    if($("f-phone").value) c.push("📱 "+$("f-phone").value);
+    if($("f-email").value) c.push("✉️ "+$("f-email").value);
+    if($("f-loc").value) c.push("📍 "+$("f-loc").value);
+    if($("f-link").value) c.push("🔗 "+$("f-link").value);
+    $("r-contact").textContent = c.join("    ");
+    $("r-summary").textContent = $("f-summary").value;
+
+    function items(type){
+      return data[type].map(e=>{
+        const pts=(e.points||[]).filter(Boolean).map(p=>`<li>${esc(p)}</li>`).join("");
+        return `<div class="r-item">
+          <div class="r-head"><span class="r-org">${esc(e.org)}</span><span class="r-date">${esc(e.date)}</span></div>
+          ${e.role?`<div class="r-sub">${esc(e.role)}</div>`:""}
+          ${e.sub?`<div class="r-sub">${esc(e.sub)}</div>`:""}
+          ${pts?`<ul>${pts}</ul>`:""}
+        </div>`;
+      }).join("");
+    }
+    $("r-edu").innerHTML=items("edu"); $("r-work").innerHTML=items("work"); $("r-proj").innerHTML=items("proj");
+    const sk=$("f-skills").value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+    $("r-skills").innerHTML=sk.map(s=>`<span>${esc(s)}</span>`).join("");
+
+    if(IS_PRO){ $("tier-label").textContent="会员版（无水印 · 全部模板）"; $("tier-label").style.color="var(--ok)"; $("pro-badge").style.display="inline"; }
+    else { $("tier-label").textContent="免费版（带水印 · 4 模板）"; $("tier-label").style.color="var(--warn)"; }
+    if(IS_PRO) $("locked-cover").style.display="none";
+  }
+
+  /* ---------- 行业模板预设 ---------- */
+  const MEMBER_TPLS = ["compact","creative","pro","design","elegant","tech","timeline","bold","soft","legal","corner","grid"];
+  const presets = {
+    it: { label:"互联网", name:"李明", title:"高级前端工程师", phone:"139-0000-0000", email:"liming@example.com",
+      loc:"杭州", link:"github.com/liming",
+      summary:"5 年前端开发经验，深耕 React/Vue 与前端工程化，主导过百万级 DAU 产品性能优化，擅长复杂交互与数据可视化。",
+      skills:"JavaScript, TypeScript, React, Vue, Node.js, Webpack, Vite, 性能优化, 数据可视化", tpl:"modern",
+      edu:[{org:"某大学", degree:"软件工程 · 本科", date:"2015.09 - 2019.06", sub:"GPA 3.7/4.0", points:["主修：数据结构、操作系统、计算机网络","校ACM 二等奖"]}],
+      work:[{org:"某科技有限公司", role:"高级前端工程师", date:"2020.07 - 至今", sub:"核心业务线", points:["主导组件库建设，研发效率提升 40%","优化首屏加载，LCP 从 3.2s 降至 1.1s","带领 4 人小组完成中台重构"]}],
+      proj:[{org:"数据可视化平台", role:"前端负责人", date:"2022.03 - 2022.09", sub:"", points:["基于 React + ECharts 搭建实时大屏","支撑日均 200 万次查询"]}] },
+    teacher: { label:"教师", name:"王芳", title:"中学语文教师", phone:"138-0000-0000", email:"wangfang@example.com",
+      loc:"南京", link:"",
+      summary:"8 年中学语文教学经验，所带班级语文平均分连续 3 年居年级第一，擅长作文教学与班级日常管理。",
+      skills:"语文教学, 班级管理, 课程设计, 中考备考, 家校沟通, PPT 课件", tpl:"business",
+      edu:[{org:"某师范大学", degree:"学科教学（语文）· 硕士", date:"2013.09 - 2016.06", sub:"一等奖学金", points:["主修：语文课程论、教育心理学"]}],
+      work:[{org:"某中学", role:"语文教师 / 班主任", date:"2016.09 - 至今", sub:"初三年级组", points:["所带班级语文均分年级第一（连续 3 年）","主持校级公开课 12 节","获区「优秀教师」称号"]}],
+      proj:[{org:"校本作文教材", role:"主编", date:"2021.02 - 2021.09", sub:"", points:["编写 3 万字校本教材，全校推广使用","学生作文平均分提升 8 分"]}] },
+    gov: { label:"国企", name:"陈伟", title:"综合管理岗", phone:"137-0000-0000", email:"chenwei@example.com",
+      loc:"北京", link:"",
+      summary:"10 年国企综合管理经验，熟悉党建、行政与项目管理，多次获单位「先进个人」，公文写作扎实。",
+      skills:"行政管理, 公文写作, 项目管理, 党建实务, 会务组织, 数据分析", tpl:"pro",
+      edu:[{org:"某大学", degree:"工商管理 · 硕士", date:"2011.09 - 2014.06", sub:"", points:["主修：组织行为学、战略管理"]}],
+      work:[{org:"某国有企业", role:"综合管理", date:"2014.07 - 至今", sub:"办公室", points:["负责部门年度计划与总结材料","牵头修订 3 项管理制度","年度考核连续优秀"]}],
+      proj:[{org:"信息化办公平台", role:"项目副组长", date:"2023.01 - 2023.08", sub:"", points:["推动 OA 系统上线，审批效率提升 50%","覆盖 12 个部门 600+ 员工"]}] },
+    design: { label:"设计", name:"林夕", title:"UI / UX 设计师", phone:"136-0000-0000", email:"linxi@example.com",
+      loc:"深圳", link:"dribbble.com/linxi",
+      summary:"4 年互联网产品设计经验，主导过 0-1 产品从原型到上线，擅长 B 端复杂系统与品牌视觉。",
+      skills:"Figma, Sketch, Photoshop, 交互设计, 用户研究, 设计系统, 动效, 品牌视觉", tpl:"design",
+      edu:[{org:"某艺术学院", degree:"视觉传达设计 · 本科", date:"2017.09 - 2021.06", sub:"", points:["主修：版式、品牌、界面设计"]}],
+      work:[{org:"某科技公司", role:"UI 设计师", date:"2021.07 - 至今", sub:"产品体验部", points:["负责核心产品改版，转化率提升 18%","搭建设计系统覆盖 80% 页面","用户满意度提升 25%"]}],
+      proj:[{org:"智能客服小程序", role:"设计负责人", date:"2024.01 - 2024.04", sub:"", points:["0-1 完成设计，上线 3 月用户破 10 万","输出组件库 120+ 个"]}] },
+    fresh: { label:"应届生", name:"小赵", title:"产品经理（应届）", phone:"135-0000-0000", email:"xiaozhao@example.com",
+      loc:"武汉", link:"",
+      summary:"计算机硕士在读，两段大厂产品实习，熟悉需求分析与数据分析，英语六级，执行力强、学习快。",
+      skills:"需求分析, Axure, SQL, Python, 数据分析, 英语六级, 项目管理", tpl:"classic",
+      edu:[{org:"某大学", degree:"计算机技术 · 硕士（在读）", date:"2024.09 - 2027.06", sub:"GPA 3.8/4.0", points:["主修：机器学习、数据库"]},
+            {org:"某大学", degree:"软件工程 · 本科", date:"2020.09 - 2024.06", sub:"", points:["校优秀毕业生"]}],
+      work:[{org:"某大厂", role:"产品实习生", date:"2025.06 - 2025.09", sub:"增长组", points:["负责模块需求梳理，输出 PRD 8 份","参与 2 次 A/B 实验，转化率 +6%"]}],
+      proj:[{org:"校园二手交易平台", role:"创始人", date:"2023.03 - 2023.09", sub:"", points:["0-1 搭建，注册用户 3000+","获校级创业大赛二等奖"]}] },
+    sales: { label:"销售", name:"周强", title:"大客户销售经理", phone:"134-0000-0000", email:"zhouqiang@example.com",
+      loc:"广州", link:"",
+      summary:"6 年 B2B 大客户销售经验，年签单额超 2000 万，擅长客户关系经营与方案式销售。",
+      skills:"大客户销售, 客户关系, 方案销售, 谈判, 渠道拓展, CRM, 商务沟通", tpl:"business",
+      edu:[{org:"某大学", degree:"市场营销 · 本科", date:"2014.09 - 2018.06", sub:"", points:["主修：销售管理、消费者行为"]}],
+      work:[{org:"某科技公司", role:"大客户销售", date:"2019.03 - 至今", sub:"华南区", points:["年签单 2000 万+，连续 2 年销售冠军","维护 Top20 战略客户，续约率 95%"]}],
+      proj:[{org:"区域渠道拓展", role:"负责人", date:"2022.02 - 2022.12", sub:"", points:["新开代理商 15 家，贡献营收 30%","建立渠道分级管理体系"]}] },
+    backend: { label:"后端", name:"张涛", title:"后端开发工程师（Java）", phone:"133-0000-0000", email:"zhangtao@example.com",
+      loc:"北京", link:"github.com/zhangtao",
+      summary:"6 年 Java 后端开发经验，主导过高并发电商系统的架构设计与性能调优，熟悉微服务、分布式与 MySQL 优化。",
+      skills:"Java, Spring Boot, Spring Cloud, MySQL, Redis, Kafka, 微服务, 高并发, Docker, K8s", tpl:"modern",
+      edu:[{org:"某大学", degree:"计算机科学与技术 · 本科", date:"2014.09 - 2018.06", sub:"", points:["主修：算法、数据库原理、分布式系统"]}],
+      work:[{org:"某互联网公司", role:"后端开发工程师", date:"2018.07 - 至今", sub:"交易中台", points:["主导订单系统重构，QPS 从 800 提升至 5000","优化慢 SQL 与缓存策略，接口 P99 从 800ms 降至 120ms","搭建分布式链路追踪，线上问题定位效率提升 60%"]}],
+      proj:[{org:"秒杀营销系统", role:"后端负责人", date:"2022.05 - 2022.11", sub:"", points:["基于 Redis + Kafka 削峰，支撑单场 10 万并发","设计库存防超卖方案，误差率 < 0.01%"]}] },
+    data: { label:"数据分析", name:"刘敏", title:"数据分析师", phone:"132-0000-0000", email:"liumin@example.com",
+      loc:"上海", link:"",
+      summary:"4 年互联网数据分析经验，擅长用户增长与 A/B 实验分析，能独立完成从取数、建模到业务落地的完整闭环。",
+      skills:"SQL, Python, Pandas, Tableau, Power BI, A/B 实验, 用户画像, 指标体系, Excel", tpl:"timeline",
+      edu:[{org:"某财经大学", degree:"应用统计 · 硕士", date:"2018.09 - 2021.06", sub:"", points:["主修：统计学、计量经济、数据挖掘"]}],
+      work:[{org:"某互联网公司", role:"数据分析师", date:"2021.07 - 至今", sub:"增长分析组", points:["搭建核心指标体系，覆盖 6 条业务线 200+ 指标","主导 12 次 A/B 实验，累计带来转化率 +9%","搭建用户分群模型，召回策略使复购率 +12%"]}],
+      proj:[{org:"新客留存分析项目", role:"负责人", date:"2023.02 - 2023.06", sub:"", points:["定位 3 个流失关键节点，推动产品改版","次月留存率从 28% 提升至 36%"]}] },
+    nurse: { label:"护士", name:"孙丽", title:"主管护师", phone:"131-0000-0000", email:"sunli@example.com",
+      loc:"成都", link:"",
+      summary:"7 年三甲医院临床护理经验，擅长危重症护理与护理团队带教，静脉穿刺一针率高，患者满意度评价优秀。",
+      skills:"临床护理, 危重症护理, 静脉穿刺, 护理文书, 院感防控, 团队带教, 急救技能", tpl:"modern",
+      edu:[{org:"某医科大学", degree:"护理学 · 本科", date:"2013.09 - 2017.06", sub:"", points:["主修：内科护理、外科护理、急救护理","已取得护士执业资格证"]}],
+      work:[{org:"某三甲医院", role:"护师 → 主管护师", date:"2017.07 - 至今", sub:"重症医学科", points:["护理危重患者 800+ 例，抢救配合零差错","带教实习护士 30+ 名，考核通过率 100%","患者满意度连续 2 年科室第一"]}],
+      proj:[{org:"院感防控质量改进项目", role:"护理组骨干", date:"2022.03 - 2022.09", sub:"", points:["优化护理流程，导管相关感染率下降 40%"]}] },
+    civil: { label:"公务员", name:"郑浩", title:"综合管理岗（拟报考）", phone:"130-0000-0000", email:"zhenghao@example.com",
+      loc:"济南", link:"",
+      summary:"5 年基层事业单位工作经历，熟悉公文写作、会务组织与政策落实，中共党员，文字功底扎实，抗压能力强。",
+      skills:"公文写作, 材料撰写, 会务组织, 政策研究, 档案管理, 群众工作, 党建工作", tpl:"modern",
+      edu:[{org:"某大学", degree:"行政管理 · 本科", date:"2015.09 - 2019.06", sub:"中共党员", points:["主修：公共政策、行政法、公文写作"]}],
+      work:[{org:"某街道办事处", role:"综合办公室", date:"2019.07 - 至今", sub:"", points:["起草各类公文材料 500+ 篇，零差错","组织协调会议、活动 80+ 场次","对接群众诉求 1200+ 件，办结率 98%"]}],
+      proj:[{org:"基层治理试点材料", role:"主要撰稿人", date:"2023.01 - 2023.08", sub:"", points:["整理经验材料 20 万字，获市级通报表扬"]}] },
+    graphic: { label:"平面设计", name:"何静", title:"平面 / 品牌设计师", phone:"189-0000-0000", email:"hejing@example.com",
+      loc:"广州", link:"behance.net/hejing",
+      summary:"5 年品牌视觉设计经验，独立负责过 20+ 品牌 VI 全案，擅长包装、海报与电商视觉，作品多次入选站酷推荐。",
+      skills:"Photoshop, Illustrator, InDesign, 品牌 VI, 包装设计, 平面排版, 电商视觉, 动效基础", tpl:"modern",
+      edu:[{org:"某美术学院", degree:"视觉传达设计 · 本科", date:"2015.09 - 2019.06", sub:"", points:["主修：品牌设计、字体设计、印刷工艺"]}],
+      work:[{org:"某品牌设计公司", role:"平面设计师", date:"2019.07 - 至今", sub:"品牌部", points:["独立完成品牌 VI 全案 20+ 套","主视觉作品带动客户新品首月销量 +35%","作品 3 次入选站酷首页推荐"]}],
+      proj:[{org:"某茶饮品牌包装升级", role:"主创设计", date:"2023.04 - 2023.08", sub:"", points:["完成 12 款包装设计并落地量产","上线首月相关话题曝光 500 万+"]}] },
+    marketing: { label:"市场推广", name:"吴桐", title:"市场推广经理", phone:"188-0000-0000", email:"wutong@example.com",
+      loc:"杭州", link:"",
+      summary:"5 年 B2C 市场推广经验，操盘过千万级投放预算，擅长内容营销与私域增长，ROI 长期稳定在 1:4 以上。",
+      skills:"市场推广, 内容营销, 私域运营, 投放优化, 活动策划, 数据分析, 抖音/小红书", tpl:"modern",
+      edu:[{org:"某大学", degree:"市场营销 · 本科", date:"2015.09 - 2019.06", sub:"", points:["主修：市场调研、消费者行为、品牌管理"]}],
+      work:[{org:"某消费品公司", role:"市场推广", date:"2019.07 - 至今", sub:"品牌市场部", points:["操盘年度投放预算 1500 万，ROI 稳定 1:4.2","策划话题活动 6 场，单场最高曝光 3000 万+","搭建私域社群 20 万用户，复购贡献 +25%"]}],
+      proj:[{org:"新品上市整合营销", role:"项目负责人", date:"2023.03 - 2023.09", sub:"", points:["首月销售额破 800 万，超目标 60%"]}] },
+    finance: { label:"财务会计", name:"陈雪", title:"财务会计", phone:"187-0000-0000", email:"chenxue@example.com",
+      loc:"苏州", link:"",
+      summary:"6 年制造业财务会计经验，持有中级会计师职称，熟练全盘账务、成本核算与税务申报，可独立应对年度审计。",
+      skills:"全盘账务, 成本核算, 税务申报, 财务报表, 用友/金蝶, Excel, 中级会计师, 审计对接", tpl:"modern",
+      edu:[{org:"某财经大学", degree:"会计学 · 本科", date:"2014.09 - 2018.06", sub:"中级会计师职称", points:["主修：财务会计、成本会计、税法"]}],
+      work:[{org:"某制造企业", role:"财务会计", date:"2018.07 - 至今", sub:"财务部", points:["独立完成全盘账务，月结周期从 7 天缩至 3 天","主导成本核算优化，识别异常成本 120 万/年","连续 3 年年度审计零重大问题"]}],
+      proj:[{org:"税务筹划专项", role:"核心成员", date:"2022.04 - 2022.10", sub:"", points:["合理运用税收优惠，年度节税 80 万+"]}] },
+    bank: { label:"银行", name:"马超", title:"对公客户经理", phone:"186-0000-0000", email:"machao@example.com",
+      loc:"青岛", link:"",
+      summary:"5 年银行对公业务经验，管理对公客户 120+ 户，存款日均规模超 3 亿，擅长授信方案设计与客户关系维护。",
+      skills:"对公业务, 信贷调查, 授信方案, 客户关系, 风险识别, 存款营销, 财务报表分析", tpl:"business",
+      edu:[{org:"某财经大学", degree:"金融学 · 本科", date:"2015.09 - 2019.06", sub:"", points:["主修：商业银行、公司金融、信贷管理"]}],
+      work:[{org:"某商业银行", role:"对公客户经理", date:"2019.07 - 至今", sub:"公司业务部", points:["管理对公客户 120+ 户，日均存款 3.2 亿","年度授信投放 4.5 亿，不良率仅 0.2%","连续 2 年分行考核 A 级"]}],
+      proj:[{org:"供应链金融方案落地", role:"牵头人", date:"2023.01 - 2023.07", sub:"", points:["落地核心企业上下游融资 1.8 亿"]}] },
+    ops: { label:"新媒体运营", name:"李娜", title:"新媒体运营", phone:"185-0000-0000", email:"lina@example.com",
+      loc:"长沙", link:"",
+      summary:"4 年新媒体运营经验，独立运营过百万粉丝矩阵，擅长爆款内容策划与账号从 0 到 1 起号，数据敏感度高。",
+      skills:"小红书, 抖音, 公众号, 选题策划, 爆款文案, 数据复盘, 用户增长, 剪辑基础", tpl:"modern",
+      edu:[{org:"某大学", degree:"新闻传播学 · 本科", date:"2017.09 - 2021.06", sub:"", points:["主修：网络传播、新闻写作、传播学"]}],
+      work:[{org:"某文化传媒公司", role:"新媒体运营", date:"2021.07 - 至今", sub:"内容组", points:["运营矩阵账号累计涨粉 150 万","产出 10w+ 爆款 30+ 篇，最高单篇 320 万阅读","从 0 到 1 起号，3 个月做到行业 TOP10"]}],
+      proj:[{org:"品牌小红书从 0 起号", role:"负责人", date:"2023.05 - 2023.10", sub:"", points:["6 个月粉丝 12 万，笔记平均互动率 8%"]}] },
+    hr: { label:"人事", name:"周婷", title:"人力资源专员（招聘 / 员工关系）", phone:"184-0000-0000", email:"zhouting@example.com",
+      loc:"西安", link:"",
+      summary:"5 年人力资源经验，负责过 200+ 岗位招聘与千人员工关系管理，熟悉劳动法与绩效考核体系搭建。",
+      skills:"招聘管理, 员工关系, 绩效考核, 薪酬核算, 劳动法, 员工培训, HRIS, 校园招聘", tpl:"modern",
+      edu:[{org:"某大学", degree:"人力资源管理 · 本科", date:"2015.09 - 2019.06", sub:"三级人力资源管理师", points:["主修：组织行为学、劳动法、薪酬管理"]}],
+      work:[{org:"某科技公司", role:"人力资源专员", date:"2019.07 - 至今", sub:"人力资源部", points:["年均完成招聘 200+ 人，到岗率 92%","主导绩效体系改版，覆盖 800+ 员工","处理劳动争议 0 起仲裁"]}],
+      proj:[{org:"校招雇主品牌项目", role:"项目骨干", date:"2023.03 - 2023.11", sub:"", points:["覆盖 15 所高校，签约应届生 60+ 名"]}] },
+    ecom: { label:"电商运营", name:"赵阳", title:"电商运营", phone:"183-0000-0000", email:"zhaoyang@example.com",
+      loc:"义乌", link:"",
+      summary:"5 年电商平台运营经验，操盘过单店年 GMV 6000 万，擅长店铺诊断、爆品打造与大促活动规划。",
+      skills:"店铺运营, 爆品打造, 直通车/万相台, 数据分析, 大促策划, 详情页优化, 供应链协同", tpl:"modern",
+      edu:[{org:"某大学", degree:"电子商务 · 本科", date:"2015.09 - 2019.06", sub:"", points:["主修：网络营销、供应链管理、数据分析"]}],
+      work:[{org:"某电商公司", role:"电商运营", date:"2019.07 - 至今", sub:"天猫运营组", points:["操盘单店年 GMV 6000 万，同比增长 45%","打造月销万件爆品 5 款","大促 ROI 同比提升 30%"]}],
+      proj:[{org:"双十一大促操盘", role:"运营负责人", date:"2023.10 - 2023.11", sub:"", points:["单日 GMV 破 900 万，超目标 20%"]}] },
+    mfg: { label:"机械设计", name:"徐建国", title:"机械设计工程师", phone:"182-0000-0000", email:"xujianguo@example.com",
+      loc:"无锡", link:"",
+      summary:"6 年非标自动化设备设计经验，独立完成整机设计 10+ 台，熟练 SolidWorks 与结构强度分析，熟悉精益生产。",
+      skills:"SolidWorks, AutoCAD, 非标设计, 结构设计, 公差分析, BOM 管理, 精益生产, 工艺改进", tpl:"grid",
+      edu:[{org:"某理工大学", degree:"机械设计制造及其自动化 · 本科", date:"2014.09 - 2018.06", sub:"", points:["主修：机械设计、材料力学、机械制造工艺"]}],
+      work:[{org:"某装备制造企业", role:"机械设计工程师", date:"2018.07 - 至今", sub:"研发部", points:["独立完成非标设备整机设计 10+ 台","优化结构使单台成本降低 18%","主导 3 条产线自动化改造，产能提升 35%"]}],
+      proj:[{org:"自动化装配线改造", role:"项目主设计", date:"2022.06 - 2022.12", sub:"", points:["改造后产能 +35%，人工成本下降 25%"]}] }
+  };
+  function applyPreset(k){
+    const p = presets[k]; if(!p) return;
+    ["name","title","phone","email","loc","link","summary","skills"].forEach(f=>{
+      if($("f-"+f) && p[f]!==undefined) $("f-"+f).value = p[f];
+    });
+    data = JSON.parse(JSON.stringify({edu:p.edu, work:p.work, proj:p.proj}));
+    ["edu","work","proj"].forEach(renderList);
+    let tpl = p.tpl;
+    if(MEMBER_TPLS.includes(tpl) && !IS_PRO) tpl = (k==="gov") ? "minimal" : "modern";
+    currentTpl = tpl;
+    document.querySelectorAll(".tpl-chip").forEach(c=>c.classList.toggle("active", c.dataset.tpl===tpl));
+    renderPreview();
+    toast("已套用「"+p.label+"」模板，可直接修改或导出");
+  }
+
+  /* ---------- AI 简历诊断 ---------- */
+  function runDiagnosis(){
+    const tips=[]; let score=100;
+    const name=$("f-name").value.trim(), title=$("f-title").value.trim();
+    const phone=$("f-phone").value.trim(), email=$("f-email").value.trim();
+    const summary=$("f-summary").value.trim();
+    const works=data.work.filter(e=>e.org||e.role);
+    const projs=data.proj.filter(e=>e.org||e.role);
+    const skills=$("f-skills").value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+    const allPoints=[...data.work,...data.proj].flatMap(e=>e.points||[]).join(" ");
+    const allText=allPoints+" "+summary;
+
+    if(!name||!title){ tips.push(["k","<b>关键：</b>姓名或求职意向缺失，HR 第一眼就会丢。"]); score-=15; }
+    if(!phone||!email){ tips.push(["k","<b>关键：</b>缺少电话或邮箱， recruiter 联系不到你。"]); score-=12; }
+    if(summary.length<30){ tips.push(["i","<b>建议：</b>个人简介过短，写 3-5 句突出你的核心竞争力。"]); score-=8; }
+    else if(summary.length>260){ tips.push(["i","<b>建议：</b>个人简介偏长，控制在 100 字内更易读、更抓重点。"]); score-=5; }
+    if(works.length===0){ tips.push(["k","<b>关键：</b>没有工作经历，校招也请放实习 / 项目。"]); score-=15; }
+    if(projs.length===0){ tips.push(["i","<b>重要：</b>建议补充 1-2 个具体项目经历。"]); score-=8; }
+    if(!/\d/.test(allPoints)){ tips.push(["k","<b>关键：</b>经历里没有数字！量化成果（提升 X%、省 Y 小时）说服力翻倍。"]); score-=18; }
+    const verbs=["主导","负责","搭建","优化","设计","推动","带领","实现","上线","解决","提升","降低","增长","牵头"];
+    if(!verbs.some(v=>allText.includes(v))){ tips.push(["i","<b>建议：</b>多用动作动词开头（主导 / 优化 / 搭建），少用「参与」这类弱词。"]); score-=8; }
+    if(skills.length<5){ tips.push(["i","<b>建议：</b>技能偏少，列 6-10 项核心技能更易过 ATS 关键词筛。"]); score-=6; }
+    if(works.length>0 && works.every(w=>(w.points||[]).length<2)){ tips.push(["s","<b>提示：</b>每条经历最好写 2-3 个要点，只写一句话显得单薄。"]); score-=4; }
+    score=Math.max(0,Math.min(100,score));
+
+    const ring=$("ai-ring"); ring.textContent=score;
+    const col = score>=80 ? "#34d399" : score>=60 ? "#fbbf24" : "#f87171";
+    ring.style.background=`conic-gradient(${col} ${score*3.6}deg, #2a3140 0)`;
+    ring.style.color = score>=80 ? "#052e1a" : "#1a1209";
+    $("ai-verdict").innerHTML = score>=80 ? "优秀，已超过 <b>85%</b> 的简历，直接去投递吧！" :
+      score>=60 ? "良好，再补几条量化成果就能冲 80 分。" : "偏薄弱，按下面建议逐项优化后再投。";
+    const html = tips.length ? tips.map(t=>`<div class="ai-tip ${t[0]}">${t[1]}</div>`).join("") :
+      `<div class="ai-tip s">完美！没有发现明显问题，去导出吧 🎉</div>`;
+    $("ai-tips").innerHTML=html;
+    $("ai-modal").style.display="flex";
+  }
+  function closeAiModal(){ $("ai-modal").style.display="none"; }
+
+  function exportPDF(){
+    if(!IS_PRO) toast("免费版已导出（带水印），输入会员码去水印");
+    window.print();
+  }
+  /* ---------- 本地保存：自动保存 + 多份简历管理（数据只存本机） ---------- */
+  const VAULT_KEY = "rm_vault";
+  let CURRENT_NAME = localStorage.getItem("rm_current") || "我的简历";
+  let _autoTimer = null;
+
+  function _v(id){ const e = $(id); return e ? e.value : ""; }
+  function _objText(o){ return Object.values(o || {}).map(x => Array.isArray(x) ? x.join(" ") : x).join(" "); }
+
+  function collectObj(){
+    return { basic:{ name:_v("f-name"), title:_v("f-title"), phone:_v("f-phone"), email:_v("f-email"),
+      loc:_v("f-loc"), link:_v("f-link"), summary:_v("f-summary"), skills:_v("f-skills") },
+      data: JSON.parse(JSON.stringify(data)), tpl: (typeof currentTpl !== "undefined" ? currentTpl : "modern"),
+      updatedAt: Date.now() };
+  }
+  function applyObj(o){
+    if(!o) return;
+    Object.entries(o.basic || {}).forEach(function(kv){ const e = $("f-" + kv[0]); if(e) e.value = kv[1] || ""; });
+    if(o.data){ data = o.data; ["edu","work","proj"].forEach(renderList); }
+    if(o.tpl){
+      try{
+        currentTpl = o.tpl;
+        document.querySelectorAll(".tpl-chip").forEach(function(c){ c.classList.toggle("active", c.dataset.tpl === o.tpl); });
+      }catch(e){}
+    }
+    renderPreview();
+  }
+  function getVault(){ try{ return JSON.parse(localStorage.getItem(VAULT_KEY)) || {}; }catch(e){ return {}; } }
+  function setVault(v){ try{ localStorage.setItem(VAULT_KEY, JSON.stringify(v)); }catch(e){} }
+
+  function saveLocal(silent){
+    try{
+      const obj = collectObj();
+      localStorage.setItem("resume_draft", JSON.stringify(obj));
+      const v = getVault(); v[CURRENT_NAME] = obj; setVault(v);
+      localStorage.setItem("rm_current", CURRENT_NAME);
+      const tip = $("autosave-tip");
+      if(tip) tip.textContent = "已保存到本机 · " + new Date().toLocaleTimeString("zh-CN", {hour:"2-digit", minute:"2-digit"});
+      if(!silent) toast("已保存到本机（" + CURRENT_NAME + "）");
+    }catch(e){ if(!silent) toast("保存失败：" + e.message); }
+  }
+  function loadLocal(){
+    const raw = localStorage.getItem("resume_draft");
+    if(!raw){ toast("本机还没有保存过简历"); return; }
+    try{ applyObj(JSON.parse(raw)); toast("已读取本机简历"); }catch(e){ toast("读取失败，内容可能已损坏"); }
+  }
+  function scheduleAutoSave(){ clearTimeout(_autoTimer); _autoTimer = setTimeout(function(){ saveLocal(true); }, 800); }
+
+  function showModal(title, bodyHtml, onAction){
+    let m = document.getElementById("dyn-modal");
+    if(!m){
+      m = document.createElement("div"); m.id = "dyn-modal";
+      m.style.cssText = "position:fixed;inset:0;background:rgba(0,0,0,.62);display:flex;align-items:center;justify-content:center;z-index:200;padding:20px";
+      document.body.appendChild(m);
+    }
+    m.innerHTML = '<div style="background:var(--panel);border:1px solid var(--border);border-radius:14px;max-width:660px;width:100%;max-height:86vh;overflow:auto;padding:20px">' +
+      '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:14px">' +
+      '<b style="font-size:16px;color:var(--text)">' + title + '</b>' +
+      '<button data-act="close" style="background:none;border:none;color:var(--muted);font-size:24px;cursor:pointer;line-height:1">×</button></div>' +
+      '<div>' + bodyHtml + '</div></div>';
+    m.style.display = "flex";
+    m.onclick = function(e){
+      const b = e.target.closest ? e.target.closest("[data-act]") : null;
+      if(!b){ if(e.target === m) m.style.display = "none"; return; }
+      const act = b.getAttribute("data-act");
+      if(act === "close"){ m.style.display = "none"; return; }
+      if(onAction) onAction(act, b, m);
+    };
+    return m;
+  }
+
+  function openVault(){
+    const v = getVault();
+    const names = Object.keys(v);
+    const rows = names.length ? names.map(function(n){
+      const o = v[n] || {};
+      const t = o.updatedAt ? new Date(o.updatedAt).toLocaleString("zh-CN") : "-";
+      const cur = (n === CURRENT_NAME);
+      return '<div style="display:flex;align-items:center;gap:8px;padding:10px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;flex-wrap:wrap">' +
+        '<div style="flex:1;min-width:150px"><b style="color:var(--text)">' + esc(n) + '</b>' + (cur ? ' <span style="color:var(--accent);font-size:12px">当前</span>' : '') +
+        '<div style="font-size:12px;color:var(--muted)">' + esc((o.basic && o.basic.title) || "") + ' · ' + esc(t) + '</div></div>' +
+        '<button class="btn ghost" data-act="switch" data-n="' + esc(n) + '">切换</button>' +
+        '<button class="btn ghost" data-act="del" data-n="' + esc(n) + '">删除</button></div>';
+    }).join("") : '<div style="color:var(--muted);font-size:13px">当前内容正自动保存在本机。起名后可存成独立的一份，方便针对不同岗位投不同版本。</div>';
+
+    showModal("我的简历（全部只存在你本机）", rows +
+      '<div style="display:flex;gap:8px;margin-top:14px;flex-wrap:wrap">' +
+      '<input id="vault-new" placeholder="新简历名称，如：投字节的简历" style="flex:1;min-width:190px;padding:9px;border-radius:8px;border:1px solid var(--border);background:var(--panel-2);color:var(--text);font-size:13px" />' +
+      '<button class="btn primary" data-act="new">另存为新简历</button></div>' +
+      '<div style="margin-top:12px;font-size:12px;color:var(--muted)">所有简历只保存在这台设备的浏览器里，不上传服务器。换设备或清理浏览器数据会丢失，重要内容请导出 PDF / Word 备份。</div>',
+      function(act, btn, m){
+        if(act === "switch"){
+          const n = btn.getAttribute("data-n");
+          const vv = getVault();
+          if(vv[n]){ applyObj(vv[n]); CURRENT_NAME = n; localStorage.setItem("rm_current", n); saveLocal(true); toast("已切换到：" + n); m.style.display = "none"; }
+        } else if(act === "del"){
+          const n = btn.getAttribute("data-n");
+          if(!confirm("确定删除本地简历「" + n + "」？此操作不可恢复。")) return;
+          const vv = getVault(); delete vv[n]; setVault(vv);
+          if(CURRENT_NAME === n){ CURRENT_NAME = "我的简历"; localStorage.setItem("rm_current", CURRENT_NAME); }
+          toast("已删除"); openVault();
+        } else if(act === "new"){
+          const inp = document.getElementById("vault-new");
+          const n = (inp && inp.value || "").trim();
+          if(!n){ toast("请先填个名字"); return; }
+          CURRENT_NAME = n; localStorage.setItem("rm_current", n); saveLocal(true);
+          toast("已另存为：" + n); m.style.display = "none";
+        }
+      });
+  }
+
+  /* ---------- 智能短语库：一键插入专业表述 ---------- */
+  const PHRASES = [
+    { cat:"🔥 高频通用", items:[
+      "独立负责 XX 模块从 0 到 1 搭建，上线后核心指标提升 {N}%",
+      "主导 XX 项目，协调 {N} 个部门协同，提前 {N} 天完成交付",
+      "梳理并优化 XX 流程，平均处理时长从 {N} 小时压缩到 {N} 小时",
+      "建立 XX 标准化文档/SOP，新人上手时间缩短 {N}%",
+      "负责 XX 的日常运营与维护，连续 {N} 个季度零事故",
+      "主动承担 XX 难点攻关，输出可复用方案 {N} 份",
+      "推动 XX 流程线上化/自动化，人工投入减少 {N} 小时/周",
+      "定期输出 XX 分析报告 {N} 份，为管理层决策提供数据支撑",
+      "带教新人 {N} 名，其中 {N} 名已能独立承担核心工作",
+      "跨部门推动 XX 落地，解决卡点 {N} 个，按期交付率 {N}%"
+    ]},
+    { cat:"💻 技术/研发", items:[
+      "负责 XX 模块设计与开发，累计交付代码 {N} 万行，线上故障率下降 {N}%",
+      "主导 XX 服务性能优化，接口 P99 从 {N}ms 降至 {N}ms，QPS 提升 {N} 倍",
+      "设计并实现 XX 缓存/消息队列方案，系统吞吐量提升 {N}%",
+      "搭建 XX 自动化部署流水线，发布耗时从 {N} 分钟缩短到 {N} 分钟",
+      "排查并修复线上疑难问题 {N} 个，平均定位时间缩短 {N}%",
+      "引入 XX 技术栈，团队开发效率提升 {N}%，维护成本下降 {N}%",
+      "编写单元测试 {N} 条，核心模块覆盖率从 {N}% 提升到 {N}%",
+      "完成 XX 系统微服务拆分，单服务故障不再影响全站可用性",
+      "负责 XX 接口设计与文档输出，对接上下游 {N} 个团队",
+      "参与代码评审 {N} 次，推动编码规范落地与团队技术沉淀"
+    ]},
+    { cat:"📊 数据/分析", items:[
+      "搭建 XX 指标体系与数据看板 {N} 个，覆盖 {N} 个业务场景",
+      "完成 XX 专项分析，定位 {N} 个关键增长点并推动落地",
+      "负责 XX 数据清洗与建模，数据准确率从 {N}% 提升到 {N}%",
+      "输出周报/月报 {N} 份，支撑 {N} 次业务决策",
+      "设计 A/B 实验 {N} 组，验证 XX 策略带来 {N}% 转化提升",
+      "通过用户行为分析发现 XX 环节流失严重，优化后留存提升 {N}%",
+      "实现 XX 报表自动化，人工统计工时减少 {N} 小时/周",
+      "建立 XX 异常监控告警机制，问题发现时效从小时级提升到分钟级"
+    ]},
+    { cat:"📣 运营/新媒体", items:[
+      "负责 XX 平台账号运营，{N} 个月内粉丝从 {N} 增长到 {N}",
+      "策划并执行活动 {N} 场，累计曝光 {N} 万，转化 {N} 人",
+      "产出原创内容 {N} 篇，平均阅读 {N}，最高单篇 {N} 万+",
+      "搭建并运营社群 {N} 个，用户 {N} 人，月活跃率 {N}%",
+      "负责 XX 渠道投放，ROI 从 {N} 提升至 {N}，获客成本下降 {N}%",
+      "策划跨界/联动合作 {N} 次，带来新增用户 {N} 人",
+      "完成用户分层运营，高价值用户复购率提升 {N}%",
+      "负责品牌文案撰写，累计输出 {N} 万字，被 {N} 家媒体转载"
+    ]},
+    { cat:"💰 销售/商务", items:[
+      "负责 XX 区域客户开发，年度新增客户 {N} 家",
+      "完成年度销售额 {N} 万元，超额完成目标 {N}%",
+      "维护重点客户 {N} 家，年度续约率 {N}%",
+      "主导 XX 大客户商务谈判，单笔合同金额 {N} 万元",
+      "建立客户分级管理机制，平均回款周期缩短 {N} 天",
+      "拓展渠道合作伙伴 {N} 家，渠道业绩占比 {N}%",
+      "负责售前方案撰写与讲标 {N} 次，中标率 {N}%",
+      "沉淀销售话术与案例库 {N} 份，新人成单周期缩短 {N}%"
+    ]},
+    { cat:"🎨 产品/设计", items:[
+      "负责 XX 产品界面设计，输出高保真稿 {N} 张，迭代 {N} 版",
+      "主导 XX 改版，核心页面转化率提升 {N}%",
+      "完成品牌视觉体系设计，覆盖 {N} 个线上线下触点",
+      "负责需求分析与 PRD 撰写，推动 {N} 个需求按时上线",
+      "组织用户调研 {N} 场，访谈 {N} 人，输出洞察报告 {N} 份",
+      "建立设计规范与组件库，设计交付效率提升 {N}%",
+      "优化 XX 交互流程，操作步骤从 {N} 步简化到 {N} 步",
+      "完成竞品分析 {N} 份，支撑产品定位与功能规划"
+    ]},
+    { cat:"👩‍🏫 教育/培训", items:[
+      "负责 XX 学科教学，所带班级平均分提升 {N} 分",
+      "完成公开课/示范课 {N} 节，获校级/区级奖项 {N} 项",
+      "担任班主任，所带班级 {N} 人次获评三好学生",
+      "设计校本课程与教案 {N} 套，被 {N} 名教师采用",
+      "组织教研活动 {N} 次，牵头完成 XX 课题研究",
+      "负责 {N} 名学生个性化辅导，升学率达 {N}%",
+      "开展家长沟通 {N} 次，家长满意度 {N}%",
+      "指导学生参加 XX 竞赛，获 {N} 等奖 {N} 项"
+    ]},
+    { cat:"🏥 医疗/护理", items:[
+      "负责 XX 科室临床护理，年均护理患者 {N} 人次",
+      "参与危重患者抢救护理 {N} 例，护理成功率 {N}%",
+      "完成护理操作 {N} 项，操作规范考核合格率 100%",
+      "负责 XX 病区护理质量管理，不良事件下降 {N}%",
+      "开展健康宣教 {N} 场，覆盖患者及家属 {N} 人次",
+      "负责护理文书书写 {N} 份，质控合格率 {N}%",
+      "参与专科培训 {N} 次，取得 XX 专科证书",
+      "带教实习护士 {N} 名，出科考核通过率 {N}%"
+    ]},
+    { cat:"💼 财务/人事/行政", items:[
+      "负责 XX 模块账务处理，月度结账准时率 100%",
+      "完成年度预算编制与执行分析，节约成本 {N} 万元",
+      "负责税务申报与筹划，合规零差错，合理节税 {N} 万元",
+      "完成 {N} 个岗位招聘，到岗 {N} 人，招聘周期缩短 {N} 天",
+      "负责薪酬绩效核算，覆盖员工 {N} 人，准确率 {N}%",
+      "组织培训 {N} 场，参训 {N} 人次，满意度 {N}%",
+      "负责行政采购与费用管控，年度费用下降 {N}%",
+      "建立/优化 XX 管理制度 {N} 项，落地执行率 {N}%"
+    ]},
+    { cat:"🌱 应届生/实习", items:[
+      "担任 XX 社团/学生会负责人，组织活动 {N} 场，参与 {N} 人",
+      "参与 XX 项目/竞赛，负责 XX 模块，获 {N} 等奖",
+      "在 XX 公司实习 {N} 个月，独立完成 XX 类工作 {N} 项",
+      "专业成绩排名前 {N}%，获 {N} 次奖学金",
+      "完成毕业设计《XX》，获评优秀/获 {N} 等奖",
+      "参与导师 XX 课题，负责数据收集与分析，产出报告 {N} 份",
+      "参与志愿服务 {N} 次，累计服务时长 {N} 小时",
+      "自学 XX 技能并完成个人项目 XX，GitHub 收获 {N} star"
+    ]}
+  ];
+  let _phraseTarget = null;
+  function renderPhraseList(gi, modal){
+    const g = PHRASES[gi] || PHRASES[0];
+    const box = modal.querySelector("#ph-list");
+    if(!box) return;
+    box.innerHTML = g.items.map(function(t){
+      return '<div data-act="pick" data-t="' + esc(t) + '" style="padding:10px 12px;border:1px solid var(--border);border-radius:8px;margin-bottom:8px;cursor:pointer;font-size:13px;line-height:1.6;color:var(--text)">' +
+        esc(t) + '<div style="font-size:11.5px;color:var(--accent);margin-top:4px">点击插入到输入框 →</div></div>';
+    }).join("");
+    modal.querySelectorAll("#ph-tabs [data-i]").forEach(function(s){
+      s.style.opacity = (s.getAttribute("data-i") === String(gi)) ? "1" : ".55";
+      s.style.borderColor = (s.getAttribute("data-i") === String(gi)) ? "var(--accent)" : "var(--border)";
+    });
+  }
+  function openPhrases(targetId){
+    _phraseTarget = targetId || null;
+    const tabs = PHRASES.map(function(g, i){
+      return '<span data-act="tab" data-i="' + i + '" style="display:inline-block;margin:0 6px 6px 0;padding:5px 10px;border:1px solid var(--border);border-radius:20px;font-size:12px;cursor:pointer;color:var(--text)">' + g.cat + '</span>';
+    }).join("");
+    const body = '<div style="font-size:12.5px;color:var(--muted);margin-bottom:10px;line-height:1.7">选一条最接近你实际情况的，点一下就插进输入框。然后<b style="color:var(--text)">务必把 XX 和 {N} 改成你的真实内容和数字</b>——写真的才有用，HR 一问就知道。</div>' +
+      '<div id="ph-tabs">' + tabs + '</div><div id="ph-list" style="margin-top:10px"></div>';
+    const m = showModal("💡 插入专业表述", body, function(act, btn, modal){
+      if(act === "tab"){ renderPhraseList(parseInt(btn.getAttribute("data-i"), 10) || 0, modal); }
+      else if(act === "pick"){ insertPhrase(btn.getAttribute("data-t")); }
+    });
+    renderPhraseList(0, m);
+  }
+  function insertPhrase(t){
+    const el = _phraseTarget ? document.getElementById(_phraseTarget) : null;
+    if(!el){ toast("请先点击输入框旁的「插入专业表述」"); return; }
+    if(el.tagName === "TEXTAREA"){
+      const s = (el.selectionStart == null) ? el.value.length : el.selectionStart;
+      const e2 = (el.selectionEnd == null) ? s : el.selectionEnd;
+      const before = el.value.slice(0, s), after = el.value.slice(e2);
+      const nl = (before && !/\n$/.test(before)) ? "\n" : "";
+      el.value = before + nl + t + after;
+      try{ el.focus(); const p = (before + nl + t).length; el.setSelectionRange(p, p); }catch(e){}
+    } else {
+      el.value = (el.value ? el.value.replace(/[、,，]\s*$/, "") + "、" : "") + t;
+    }
+    try{ el.dispatchEvent(new Event("input", { bubbles:true })); }catch(e){}
+    toast("已插入，记得把 XX 和 {N} 改成你的真实数据");
+  }
+
+  /* ---------- JD 关键词匹配：帮你过 ATS 机器筛选 ---------- */
+  const JD_DICT = ["Java","Python","JavaScript","TypeScript","Go","Golang","C++","C#","PHP","Ruby","Swift","Kotlin","Rust","Scala","SQL","MySQL","PostgreSQL","Redis","MongoDB","Elasticsearch","Kafka","RabbitMQ","Docker","Kubernetes","Linux","Git","Spring","Spring Boot","MyBatis","Django","Flask","FastAPI","React","Vue","Angular","Node.js","Webpack","Vite","HTML","CSS","Sass","Tailwind","小程序","公众号","App","iOS","Android","Flutter","React Native","微服务","高并发","分布式","缓存","消息队列","负载均衡","性能优化","算法","数据结构","机器学习","深度学习","大模型","LLM","NLP","数据挖掘","数据分析","数据仓库","Hive","Spark","Flink","Hadoop","ETL","BI","Tableau","Power BI","Excel","VBA","PPT","Word","Photoshop","Illustrator","Figma","Sketch","Axure","C4D","PR","AE","剪辑","运营","用户运营","内容运营","活动运营","社群运营","新媒体","短视频","直播","小红书","抖音","B站","微博","知乎","SEO","SEM","投放","转化率","GMV","ROI","拉新","留存","复购","品牌","公关","市场调研","竞品分析","项目管理","PMP","敏捷","Scrum","需求分析","产品设计","原型","交互设计","UI设计","视觉设计","用户研究","数据分析能力","财务","会计","审计","税务","报表","成本核算","预算","资金","风控","合规","法务","合同","诉讼","招聘","绩效","薪酬","培训","员工关系","组织发展","HRBP","六大模块","销售","客户开发","商务谈判","渠道","大客户","回款","业绩","护理","临床","病历","医师","药师","教师资格证","教案","授课","班级管理","教研","课程设计","国企","公务员","事业单位","结构化面试","产品经理","需求文档","PRD","用户增长","A/B测试","漏斗","埋点","指标体系","供应链","采购","仓储","物流","生产","质量管理","ISO","机械制造","CAD","SolidWorks","电气","PLC","自动化测试","测试用例","Bug","CI/CD","Jenkins","单元测试","接口测试","压测"];
+  function resumeText(){
+    let t = [_v("f-name"), _v("f-title"), _v("f-summary"), _v("f-skills")].join(" ");
+    ["edu","work","proj"].forEach(function(k){ (data[k] || []).forEach(function(x){ t += " " + _objText(x); }); });
+    return (t || "").toLowerCase();
+  }
+  function runJdMatch(jd){
+    const rtext = resumeText();
+    const low = (jd || "").toLowerCase();
+    const hits = [], miss = [], seen = {};
+    JD_DICT.forEach(function(k){
+      if(low.indexOf(k.toLowerCase()) >= 0 && !seen[k]){
+        seen[k] = 1;
+        (rtext.indexOf(k.toLowerCase()) >= 0 ? hits : miss).push(k);
+      }
+    });
+    const en = jd.match(/[A-Za-z][A-Za-z0-9+#.\-]{1,}/g) || [];
+    en.forEach(function(w){
+      const k = w.toLowerCase();
+      if(k.length < 2 || seen[k] || JD_DICT.some(function(d){ return d.toLowerCase() === k; })) return;
+      seen[k] = 1;
+      (rtext.indexOf(k) >= 0 ? hits : miss).push(w);
+    });
+    const total = hits.length + miss.length;
+    const rate = total ? Math.round(hits.length / total * 100) : 0;
+    const col = rate >= 70 ? "var(--ok)" : rate >= 40 ? "var(--warn)" : "#f87171";
+    let html = '<div style="padding:14px;border:1px solid var(--border);border-radius:10px;background:var(--panel-2)">' +
+      '<div style="font-size:13px;color:var(--muted);margin-bottom:4px">关键词匹配度</div>' +
+      '<div style="font-size:30px;font-weight:800;color:' + col + ';line-height:1.1">' + rate + '%</div>' +
+      '<div style="font-size:12.5px;color:var(--muted);margin-top:4px">命中 ' + hits.length + ' 个 / 共识别 ' + total + ' 个岗位关键词' +
+      (rate >= 70 ? ' · 机筛友好，可以直接投' : rate >= 40 ? ' · 建议补上缺失词再投' : ' · 缺失较多，被机筛刷掉的风险高') + '</div></div>';
+    const chip = function(list, c){ return list.slice(0, 40).map(function(w){ return '<span style="display:inline-block;margin:3px 4px 3px 0;padding:4px 9px;border-radius:20px;font-size:12px;background:var(--panel-2);border:1px solid ' + c + ';color:var(--text)">' + esc(w) + '</span>'; }).join(""); };
+    html += '<div style="margin-top:16px"><b style="color:var(--ok);font-size:13px">已命中 ' + hits.length + ' 个</b><div style="margin-top:8px">' + (hits.length ? chip(hits, "rgba(52,211,153,.5)") : '<span style="color:var(--muted);font-size:12.5px">无</span>') + '</div></div>';
+    html += '<div style="margin-top:14px"><b style="color:var(--warn);font-size:13px">简历里缺失 ' + miss.length + ' 个</b>' +
+      '<div style="font-size:12px;color:var(--muted);margin:4px 0 8px">把这些词自然地写进你的技能栏或项目/工作经历里（不要堆砌，要能说清楚做过什么）</div>' +
+      '<div>' + (miss.length ? chip(miss, "rgba(251,191,36,.5)") : '<span style="color:var(--ok);font-size:12.5px">没有明显缺失，很好</span>') + '</div></div>';
+    const box = document.getElementById("jd-result");
+    if(box) box.innerHTML = html;
+  }
+  function openJdMatch(){
+    showModal("JD 关键词匹配 · 帮你过机器筛选",
+      '<div style="font-size:12.5px;color:var(--muted);margin-bottom:10px;line-height:1.7">把目标岗位的<b style="color:var(--text)">「岗位要求 / 任职资格」</b>整段粘贴进来，系统会比对你的简历，找出命中的关键词和缺失的关键词。企业 ATS 机筛主要就是匹配这些词，命中率越高越不容易被刷掉。</div>' +
+      '<textarea id="jd-input" rows="7" placeholder="例如：&#10;1. 本科及以上学历，计算机相关专业&#10;2. 熟悉 Java / Spring Boot，了解分布式、缓存、消息队列&#10;3. 有高并发系统经验者优先" style="width:100%;padding:10px;border-radius:8px;border:1px solid var(--border);background:var(--panel-2);color:var(--text);font-size:13px;line-height:1.6"></textarea>' +
+      '<div style="margin-top:12px"><button class="btn primary" data-act="run">开始比对</button></div>' +
+      '<div id="jd-result" style="margin-top:16px"></div>',
+      function(act, btn, m){
+        if(act === "run"){
+          const el = document.getElementById("jd-input");
+          const jd = el ? (el.value || "").trim() : "";
+          if(!jd){ toast("请先粘贴岗位要求"); return; }
+          runJdMatch(jd);
+        }
+      });
+  }
+
+  /* ---------- 导出 Word / 纯文本 ---------- */
+  function downloadBlob(blob, filename){
+    const a = document.createElement("a");
+    const url = URL.createObjectURL(blob);
+    a.href = url; a.download = filename; document.body.appendChild(a); a.click();
+    setTimeout(function(){ URL.revokeObjectURL(url); a.remove(); }, 600);
+  }
+  function docHtml(){
+    const src = $("page-inner") || $("page");
+    const clone = src.cloneNode(true);
+    clone.querySelectorAll(".wm,.watermark,.free-wm,.r-wm").forEach(function(n){ n.remove(); });
+    return clone.innerHTML;
+  }
+  function exportDoc(){
+    try{
+      const css = 'body{font-family:"Microsoft YaHei","SimSun",sans-serif;font-size:11pt;line-height:1.55;color:#000}h1{font-size:20pt;margin:0 0 6pt}h2{font-size:12.5pt;margin:14pt 0 4pt;border-bottom:1px solid #999;padding-bottom:2pt}h3{font-size:11pt;margin:8pt 0 2pt}p,li{margin:2pt 0}ul{margin:2pt 0;padding-left:16pt}a{color:#000;text-decoration:none}';
+      const html = '<html xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:w="urn:schemas-microsoft-com:office:word" xmlns="http://www.w3.org/TR/REC-html40"><head><meta charset="utf-8"><style>' + css + '</style></head><body>' + docHtml() + '</body></html>';
+      downloadBlob(new Blob(["\ufeff", html], { type:"application/msword" }), ((_v("f-name") || "简历") + "-简历.doc"));
+      toast("已导出 Word（.doc），可用 Word / WPS 直接编辑");
+    }catch(e){ toast("导出失败：" + e.message); }
+  }
+  function exportTxt(){
+    try{
+      const L = [];
+      L.push(_v("f-name") || "简历");
+      L.push([_v("f-title"), _v("f-phone"), _v("f-email"), _v("f-loc"), _v("f-link")].filter(Boolean).join(" | "));
+      if(_v("f-summary")) L.push("", "【个人简介】", _v("f-summary"));
+      ["edu","work","proj"].forEach(function(k){
+        const arr = data[k] || [];
+        if(!arr.length) return;
+        L.push("", "【" + (k === "edu" ? "教育经历" : k === "work" ? "工作经历" : "项目经历") + "】");
+        arr.forEach(function(x){
+          L.push("- " + [x.org, x.role, x.date].filter(Boolean).join(" / "));
+          if(x.sub) L.push("  " + x.sub);
+          (x.points || []).forEach(function(p){ if(String(p).trim()) L.push("  · " + p); });
+        });
+      });
+      if(_v("f-skills")) L.push("", "【技能】", _v("f-skills"));
+      L.push("", "（本简历由 简历大师 生成 · https://resume-master.app.workbuddy.host/）");
+      downloadBlob(new Blob(["\ufeff", L.join("\n")], { type:"text/plain;charset=utf-8" }), ((_v("f-name") || "简历") + "-简历.txt"));
+      toast("已导出纯文本（适合粘贴到招聘网站表单）");
+    }catch(e){ toast("导出失败：" + e.message); }
+  }
+  function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),1800); }
+
+  // 推荐裂变（?ref=）已移除：同属无法验证的分享类解锁，统一改为闲鱼卡密校验。
+
+  ["edu","work","proj"].forEach(renderList);
+  renderPreview();
+
+  // 支持 ?preset=it/teacher/gov/design/fresh/sales 深链，从范文页一键带入
+  let _presetApplied = false;
+  try{
+    const pk = new URLSearchParams(location.search).get("preset");
+    if(pk && presets[pk]){ applyPreset(pk); _presetApplied = true; }
+  }catch(e){}
+
+  // 打开页面自动恢复本机上次的简历（无预设深链时）
+  try{
+    if(!_presetApplied){
+      const raw = localStorage.getItem("resume_draft");
+      if(raw){ applyObj(JSON.parse(raw)); }
+    }
+  }catch(e){}
+
+  // 任何输入后 0.8 秒自动保存到本机（数据不出浏览器）
+  document.addEventListener("input", function(e){
+    const t = e.target;
+    if(t && (t.tagName === "INPUT" || t.tagName === "TEXTAREA")) scheduleAutoSave();
+  }, true);
+  window.addEventListener("beforeunload", function(){ try{ saveLocal(true); }catch(e){} });
+</script>
+  <script src="ads.js"></script>
+</body>
+</html>

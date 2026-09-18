@@ -1,0 +1,66 @@
+# 简历大师
+
+> 永久免费、无需注册、不上传服务器的在线简历生成器。所有内容在用户浏览器本地处理，隐私数据不出本机；内置 ATS 机器筛选检测与简历诊断打分，帮助求职者通过企业机筛，更快到达 HR 面前。
+
+站点：https://resume-master.app.workbuddy.host/
+
+## 核心卖点
+
+- 永久免费：核心功能不限次使用，导出 PDF 不收费，无自动续费、无订阅陷阱
+- 本地处理：简历数据只存在用户自己的浏览器里，不上传任何服务器，关闭页面即清除
+- ATS 检测：内置 ATS 机器筛选检测与 0-100 诊断打分，找出排版、关键词、格式扣分项，提升机筛通过率
+- 免注册：不用注册、不用手机号，打开即用
+- 一键导出：3 分钟生成专业 PDF，校招、社招、跳槽通用
+- 16 套模板：4 套免费 + 12 套会员模板（覆盖互联网、教师、护士、国企、公务员、UI、平面、销售、市场、财务、银行、新媒体、HR、电商、机械等场景）
+
+## 免费在线工具
+
+- 在线简历生成器（首页）：https://resume-master.app.workbuddy.host/
+- ATS 简历检测（0-100 打分）：https://resume-master.app.workbuddy.host/ats-check.html
+- 简历自查清单（24 项逐条打分）：https://resume-master.app.workbuddy.host/resume-checklist.html
+- 薪资总包计算器（真实时薪 + 两个 offer 对比）：https://resume-master.app.workbuddy.host/salary-calculator.html
+- 求职信生成器：https://resume-master.app.workbuddy.host/cover-letter.html
+
+## 简历写作与范文
+
+- 简历范文库（18 个行业完整样例 + HR 点评）：https://resume-master.app.workbuddy.host/example.html
+- 简历模板下载：https://resume-master.app.workbuddy.host/template.html
+- 简历写作完全指南：https://resume-master.app.workbuddy.host/guide.html
+- 简历动作动词库（160+ 强动词）：https://resume-master.app.workbuddy.host/verbs.html
+- 行业技能清单（12 个行业）：https://resume-master.app.workbuddy.host/skills.html
+- 校招简历：https://resume-master.app.workbuddy.host/campus.html
+- 程序员简历：https://resume-master.app.workbuddy.host/developer.html
+- 实习简历怎么写：https://resume-master.app.workbuddy.host/intern.html
+- 求职意向怎么写：https://resume-master.app.workbuddy.host/resume-objective.html
+- 简历 20 个致命错误排查：https://resume-master.app.workbuddy.host/resume-mistakes.html
+- 简历常用话术库（按岗位可抄子弹点）：https://resume-master.app.workbuddy.host/resume-bullets.html
+- 简历干货博客（30+ 篇）：https://resume-master.app.workbuddy.host/blog.html
+- 简历范例画廊（14 类人群优秀简历参考）：https://resume-master.app.workbuddy.host/resume-gallery.html
+
+## 求职全流程指南
+
+- 辞职信怎么写（3 个模板）：https://resume-master.app.workbuddy.host/resignation.html
+- 空窗期简历怎么写：https://resume-master.app.workbuddy.host/gap-year.html
+- 宝妈重返职场简历：https://resume-master.app.workbuddy.host/mom-return.html
+- 谈薪怎么说（4 套话术）：https://resume-master.app.workbuddy.host/salary-negotiation.html
+- 面试自我介绍（公式 + 3 个范例）：https://resume-master.app.workbuddy.host/self-intro.html
+- 离职原因怎么说（10 雷区 vs 8 话术）：https://resume-master.app.workbuddy.host/leaving-reason.html
+- 面试高频 19 问怎么答：https://resume-master.app.workbuddy.host/interview-questions.html
+- 二面/终面怎么准备：https://resume-master.app.workbuddy.host/second-interview.html
+- 面试后怎么跟进（感谢信 + 追问时机）：https://resume-master.app.workbuddy.host/follow-up.html
+- 多个 offer 怎么选（7 维度打分）：https://resume-master.app.workbuddy.host/offer-compare.html
+- 背调查什么（包装与造假的边界）：https://resume-master.app.workbuddy.host/background-check.html
+- 投递简历邮件正文（3 个模板）：https://resume-master.app.workbuddy.host/email-body.html
+- Boss 直聘打招呼话术：https://resume-master.app.workbuddy.host/boss-zhipin.html
+- 职业规划怎么说（4 个范例）：https://resume-master.app.workbuddy.host/career-plan.html
+- 求职信范文 5 篇：https://resume-master.app.workbuddy.host/cover-letter-examples.html
+- LinkedIn 资料优化完全指南：https://resume-master.app.workbuddy.host/linkedin-profile.html
+- 支持我们 / 开通会员（闲鱼解锁 12 套高级模板）：https://resume-master.app.workbuddy.host/support.html
+
+## 适用人群
+
+应届生、校招求职者、社招跳槽者、转行者、程序员、设计师、教师、医护、国企/公务员考生、宝妈复出求职等。
+
+## 数据来源说明
+
+工具完全在前端运行，不采集、不上传、不存储任何用户简历内容。

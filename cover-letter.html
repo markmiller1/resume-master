@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>求职信生成器 · 3 步写出像样的求职信 | 简历大师</title>
+<meta name="description" content="免费求职信生成器：填写岗位、公司与 3 个亮点，一键生成一封结构清晰、HR 爱看的求职信，可复制可导出。配简历大师简历模板更好用。" />
+<meta name="keywords" content="求职信,求职信模板,求职信怎么写,cover letter,自荐信,简历大师" />
+<meta property="og:title" content="求职信生成器 · 免费在线生成" />
+<meta property="og:description" content="3 步生成一封像样的求职信，可复制可导出。" />
+<link rel="canonical" href="https://resume-master.app.workbuddy.host/cover-letter.html" />
+<style>
+  :root{ --bg:#0f1115; --panel:#171a21; --panel-2:#1f242e; --border:#2a3140; --text:#e6e9ef; --muted:#9aa3b2; --accent:#ff7a45; --accent-2:#4f8cff; --ok:#34d399; }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.6}
+  header.topbar{display:flex;align-items:center;justify-content:space-between;padding:12px 20px;background:linear-gradient(90deg,#1a1d24,#20242e);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:60}
+  .brand{font-weight:800;font-size:18px}.brand .accent{color:var(--accent)}
+  .btn{border:1px solid var(--border);background:var(--panel-2);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer;font-size:13px;transition:.15s}
+  .btn:hover{border-color:var(--accent)}.btn.primary{background:var(--accent);border-color:var(--accent);color:#1a1209;font-weight:700}.btn.primary:hover{filter:brightness(1.08)}
+  .hero{text-align:center;padding:40px 20px 24px;background:radial-gradient(900px 320px at 50% -40%,rgba(255,122,69,.18),transparent),var(--bg)}
+  .hero h1{font-size:30px;margin:0 0 8px;font-weight:900}.hero h1 .accent{color:var(--accent)}
+  .hero p{color:var(--muted);max-width:600px;margin:0 auto}
+  .wrap{max-width:920px;margin:0 auto;padding:24px 20px 10px;display:grid;grid-template-columns:360px 1fr;gap:20px}
+  @media(max-width:840px){.wrap{grid-template-columns:1fr}}
+  .field{margin-bottom:12px}.field label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+  .field input,.field textarea{width:100%;background:var(--panel-2);border:1px solid var(--border);color:var(--text);border-radius:7px;padding:9px 11px;font-size:13px;font-family:inherit}
+  .field textarea{resize:vertical;min-height:64px}.field input:focus,.field textarea:focus{outline:none;border-color:var(--accent-2)}
+  .hint{color:var(--muted);font-size:11.5px;margin:2px 0 10px}
+  .letter{background:#fff;color:#1a1a1a;border-radius:8px;padding:30px 34px;box-shadow:0 10px 40px rgba(0,0,0,.4);min-height:380px;white-space:pre-wrap;font-size:13.5px;line-height:1.85}
+  .letter.free-wm{position:relative}
+  .letter.free-wm::after{content:"由 简历大师 免费生成 · resume-master.app.workbuddy.host";position:absolute;bottom:10px;right:16px;font-size:11px;color:#bbb}
+  .toolbar{display:flex;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+  .section-block{max-width:880px;margin:0 auto;padding:30px 20px}
+  .section-block h2{text-align:center;font-size:22px;margin:0 0 6px}.section-block .sub{text-align:center;color:var(--muted);margin:0 0 22px}
+  .tips{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+  @media(max-width:640px){.tips{grid-template-columns:1fr}}
+  .tip{border:1px solid var(--border);border-radius:12px;padding:14px 16px;background:var(--panel);font-size:13px;color:var(--muted)}
+  .tip b{color:var(--text)}
+  footer.site{text-align:center;padding:30px 20px;color:var(--muted);font-size:12px;border-top:1px solid var(--border)}
+  footer.site a{color:var(--accent);text-decoration:none}
+  .toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--ok);color:#07210f;padding:10px 18px;border-radius:10px;font-weight:700;opacity:0;transition:.25s;z-index:200;pointer-events:none}
+  .toast.show{opacity:1}
+
+  /* ---------- 顶部导航（全站通用） ---------- */
+  .site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:8px 16px;
+    background:var(--panel,#171a21);border-bottom:1px solid var(--border,#2a3140);font-size:13px}
+  .site-nav a{color:var(--text,#e6e9ef);text-decoration:none;padding:5px 10px;border-radius:7px;
+    white-space:nowrap;transition:.15s}
+  .site-nav a:hover{background:var(--accent,#ff7a45);color:#1a1209}
+  .site-nav a.cur{background:var(--accent,#ff7a45);color:#1a1209;font-weight:700}
+</style>
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebApplication","name":"求职信生成器","url":"https://resume-master.app.workbuddy.host/cover-letter.html","applicationCategory":"BusinessApplication","operatingSystem":"Web"}
+</script>
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">简历<span class="accent">大师</span></div>
+  <a class="btn ghost" href="index.html">← 回到简历生成器</a>
+</header>
+<nav class="site-nav">
+  <a href="index.html">简历大师</a>
+  <a href="guide.html">📘 简历指南</a>
+  <a href="verbs.html">动词库</a>
+  <a href="skills.html">技能清单</a>
+  <a href="template.html">模板下载</a>
+  <a href="example.html">简历范文</a>
+  <a href="campus.html">校招简历</a>
+  <a href="developer.html">程序员简历</a>
+  <a href="ats.html">ATS 友好</a>
+  <a href="ats-check.html">ATS 检测</a>
+  <a href="cover-letter.html">求职信</a>
+  <a href="blog.html">简历干货</a>
+</nav>
+
+<!-- 顶部广告位 -->
+<div class="ad-mount ad-top"><div class="ad-label">赞助 · Sponsored</div><iframe data-aa='2455423' src='//acceptable.a-ads.com/2455423/?size=Adaptive' style='border:0;padding:0;width:100%;max-width:728px;height:90px;display:block;margin:auto'></iframe></div>
+
+
+<section class="hero">
+  <h1>3 步，写出一封<span class="accent">像样的求职信</span></h1>
+  <p>填岗位、公司、3 个亮点，一键生成结构清晰、HR 爱看的求职信。免费、无需注册、本地生成。</p>
+</section>
+
+<div class="wrap">
+  <div>
+    <div class="field"><label>你的姓名</label><input id="c-name" value="李明" /></div>
+    <div class="field"><label>应聘岗位</label><input id="c-job" value="前端开发工程师" /></div>
+    <div class="field"><label>目标公司</label><input id="c-company" value="某某科技有限公司" /></div>
+    <div class="field"><label>你的核心亮点 1</label><textarea id="c-h1">5 年前端经验，主导过百万级 DAU 产品性能优化，首屏 LCP 从 3.2s 降到 1.1s。</textarea></div>
+    <div class="field"><label>核心亮点 2</label><textarea id="c-h2">搭建团队组件库，研发效率提升 40%，并带过 4 人小组完成中台重构。</textarea></div>
+    <div class="field"><label>核心亮点 3（可选）</label><textarea id="c-h3">熟悉 React/Vue 全栈与数据可视化，能独立扛需求从设计到上线。</textarea></div>
+    <div class="field"><label>从哪里看到招聘（可选）</label><input id="c-source" value="贵司官网招聘页" /></div>
+    <button class="btn primary" style="width:100%" onclick="genLetter()">✨ 生成求职信</button>
+    <div class="hint">生成后可在右侧直接复制或导出。</div>
+  </div>
+  <div>
+    <div class="toolbar">
+      <button class="btn" onclick="copyLetter()">📋 复制全文</button>
+      <span id="ctip" style="color:var(--muted);font-size:12px;align-self:center">填写左侧并点「生成」</span>
+    </div>
+    <div class="letter free-wm" id="letter">（生成的求职信会显示在这里）</div>
+  </div>
+</div>
+
+<section class="section-block">
+  <h2>写好求职信的 4 个要点</h2>
+  <p class="sub">照着做，命中率明显更高</p>
+  <div class="tips">
+    <div class="tip"><b>① 开头点名公司与岗位</b><br/>让 HR 一眼知道你投的是哪个坑，不要发"通用模板"。</div>
+    <div class="tip"><b>② 用数字说话</b><br/>"效率提升 40%""用户破 10 万"比"认真负责"有力得多。</div>
+    <div class="tip"><b>③ 对应岗位要求</b><br/>把 JD 里的关键词写进求职信，机器筛选也能过。</div>
+    <div class="tip"><b>④ 简短收尾 + 行动号召</b><br/>"期待面试机会"比长篇道谢更专业。</div>
+  </div>
+</section>
+
+<footer class="site">
+  <a href="index.html">简历生成器</a> · <a href="example.html">简历范文</a> · <a href="ats-check.html">ATS 检测</a> · <a href="guide.html">写作指南</a> · <a href="https://resume-master.app.workbuddy.host/">简历大师</a>
+  <div style="margin-top:8px">© 2026 简历大师 · 全部本地处理，隐私安全</div>
+  
+  <div class="ad-mount ad-foot"></div>
+</footer>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const $ = id => document.getElementById(id);
+function esc(s){return (s||"").replace(/[&<>]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));}
+function toast(m){const t=$("toast");t.textContent=m;t.classList.add("show");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("show"),1800);}
+
+function genLetter(){
+  const name=$("c-name").value.trim()||"（你的姓名）";
+  const job=$("c-job").value.trim()||"（应聘岗位）";
+  const company=$("c-company").value.trim()||"贵公司";
+  const h1=$("c-h1").value.trim(), h2=$("c-h2").value.trim(), h3=$("c-h3").value.trim();
+  const source=$("c-source").value.trim();
+  const hi = [h1,h2,h3].filter(Boolean);
+  if(hi.length===0){ toast("至少写一条核心亮点"); return; }
+  const opening = source ? `我是${name}，从${source}看到贵司正在招聘「${job}」，` : `我是${name}，关注到贵司「${job}」的招聘，`;
+  let body = hi.map((h,i)=>`${i+1}、${h}`).join("\n");
+  const text =
+`${company} 招聘负责人：
+
+您好！
+
+${opening}十分契合我的背景，特此自荐。
+
+我在相关领域积累了几项可量化的成果：
+${body}
+
+我相信这些经验能快速迁移到${company}的${job}岗位上，为团队带来实际价值。附件是我的简历，期待能与您进一步沟通。
+
+此致
+敬礼
+
+${name}
+${job}`;
+  $("letter").textContent = text;
+  $("ctip").textContent = "已生成，可复制";
+  toast("求职信已生成 ✅");
+}
+function copyLetter(){
+  const t=$("letter").textContent;
+  if(!t || t.startsWith("（生成")){ toast("请先生成求职信"); return; }
+  if(navigator.clipboard){ navigator.clipboard.writeText(t).then(()=>toast("已复制到剪贴板 📋")).catch(()=>toast("复制失败，请手动选择")); }
+  else toast("请手动选择文本复制");
+}
+genLetter();
+</script>
+  <script src="ads.js"></script>
+</body>
+</html>

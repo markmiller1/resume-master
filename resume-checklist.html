@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>简历自查清单 · 24 项逐条打分（免费在线工具）| 简历大师</title>
+<meta name="description" content="免费的在线简历自查工具：24 项检查清单覆盖基本信息、内容质量、排版格式、ATS 机筛友好、投递细节，逐条勾选实时打分，帮你找出简历里所有会被 HR 扣分的地方。数据只在本机，不上传。" />
+<meta name="keywords" content="简历自查清单,简历检查,简历打分,简历改错,ATS检测,简历自查工具" />
+<link rel="canonical" href="https://resume-master.app.workbuddy.host/resume-checklist.html" />
+<meta property="og:title" content="简历自查清单 · 24 项逐条打分（免费在线工具）" />
+<meta property="og:description" content="24 项检查清单，逐条勾选实时打分，找出所有会被 HR 扣分的地方。数据只在本机，不上传。" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"简历自查清单","applicationCategory":"BusinessApplication","operatingSystem":"Web","description":"24 项简历自查清单，逐条勾选实时打分，覆盖基本信息、内容质量、排版格式、ATS 机筛友好与投递细节。","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"provider":{"@type":"Organization","name":"简历大师"}}</script>
+<style>:root{ --bg:#0f1115; --panel:#171a21; --border:#2a3140; --text:#e6e9ef; --muted:#9aa3b2; --accent:#ff7a45; --ok:#5fd39a; }
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;font-size:15px}
+  .wrap{max-width:820px;margin:0 auto;padding:28px 20px 60px}
+  header.top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:10}
+  .brand{font-weight:800}.brand .a{color:var(--accent)}
+  .btn{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer;text-decoration:none;font-size:13px;display:inline-block}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#1a1209;font-weight:700}
+  .site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:8px 16px;background:var(--panel);border-bottom:1px solid var(--border);font-size:13px}
+  .site-nav a{color:var(--text);text-decoration:none;padding:5px 10px;border-radius:7px;white-space:nowrap}
+  .site-nav a:hover{background:var(--accent);color:#1a1209}
+  .site-nav a.cur{background:var(--accent);color:#1a1209;font-weight:700}
+  h1{font-size:28px;line-height:1.35;margin:10px 0 10px}
+  h2{font-size:20px;margin:30px 0 10px;border-left:4px solid var(--accent);padding-left:12px}
+  p{color:#d4d9e2}
+  .lead{color:var(--muted);font-size:15.5px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:14px 0}
+  .ad-label{text-align:center;font-size:11px;color:var(--muted);margin-bottom:4px}
+  /* 打分面板 */
+  .score-box{background:linear-gradient(135deg,#1b1f27,#22262f);border:1px solid var(--border);border-radius:16px;padding:22px;text-align:center;margin:18px 0}
+  .score-num{font-size:52px;font-weight:900;color:var(--accent);line-height:1}
+  .score-num small{font-size:20px;color:var(--muted)}
+  .score-lv{font-size:16px;font-weight:700;margin-top:6px}
+  .score-tip{font-size:13px;color:var(--muted);margin-top:6px}
+  .bar{height:10px;border-radius:6px;background:#0b0d11;border:1px solid var(--border);overflow:hidden;margin:14px 0 4px}
+  .bar>i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff7a45,#5fd39a);transition:width .35s}
+  .grp{background:var(--panel);border:1px solid var(--border);border-radius:12px;margin:14px 0;overflow:hidden}
+  .grp-h{padding:12px 16px;font-weight:700;background:#141821;border-bottom:1px solid var(--border);display:flex;justify-content:space-between;align-items:center;font-size:15px}
+  .grp-h span.gs{font-size:12.5px;color:var(--muted);font-weight:400}
+  .item{border-bottom:1px solid #232a36}
+  .item:last-child{border-bottom:0}
+  .item label{display:flex;gap:12px;align-items:flex-start;padding:13px 16px;cursor:pointer;transition:.12s}
+  .item label:hover{background:#1a1e26}
+  .item input{margin-top:5px;width:17px;height:17px;accent-color:var(--accent);flex:none;cursor:pointer}
+  .item .t{font-size:14.5px}
+  .item .t.done{color:var(--muted);text-decoration:line-through}
+  .item .why{font-size:12.5px;color:var(--muted);margin-top:3px;line-height:1.6}
+  .cta{background:linear-gradient(90deg,#1a1d24,#20242e);border:1px solid var(--border);border-radius:14px;padding:22px;text-align:center;margin:30px 0}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:30px 20px;border-top:1px solid var(--border)}
+  footer a{color:var(--accent);text-decoration:none}
+  details{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin:10px 0}
+  summary{cursor:pointer}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">简历<span class="a">大师</span></div>
+  <a class="btn primary" href="index.html">免费做简历 &rarr;</a>
+</header>
+<nav class="site-nav">
+  <a href="index.html">简历大师</a>
+  <a href="guide.html">📘 简历指南</a>
+  <a href="verbs.html">动词库</a>
+  <a href="skills.html">技能清单</a>
+  <a href="template.html">模板下载</a>
+  <a href="example.html">简历范文</a>
+  <a href="campus.html">校招简历</a>
+  <a href="developer.html">程序员简历</a>
+  <a href="ats.html">ATS 友好</a>
+  <a href="ats-check.html">ATS 检测</a>
+  <a href="cover-letter.html">求职信</a>
+  <a href="blog.html">简历干货</a>
+</nav>
+
+<div class="ad-mount ad-top"><div class="ad-label">赞助 · Sponsored</div><iframe data-aa='2455423' src='//acceptable.a-ads.com/2455423/?size=Adaptive' style='border:0;padding:0;width:100%;max-width:728px;height:90px;display:block;margin:auto'></iframe></div>
+
+<div class="wrap">
+  <h1>简历自查清单：24 项逐条打分</h1>
+  <p class="lead">投出去之前，花 3 分钟过一遍这 24 条。每勾一项实时加分，帮你找出所有会被 HR 或机筛扣分的地方。<b>勾选状态只存在你自己的浏览器里，不上传任何数据。</b></p>
+
+  <div class="score-box">
+    <div class="score-num"><span id="sc">0</span><small> / 100</small></div>
+    <div class="score-lv" id="lv">开始逐项检查</div>
+    <div class="bar"><i id="bar"></i></div>
+    <div class="score-tip" id="tip">已完成 <b id="cnt">0</b> / 24 项</div>
+    <div style="margin-top:14px">
+      <button class="btn" onclick="resetAll()">🔄 重新检查</button>
+      <button class="btn" onclick="checkAll()">✅ 全部勾选（看看满分说明）</button>
+    </div>
+  </div>
+
+  <div id="list"></div>
+
+  <div class="cta">
+    <h3 style="margin-top:0">检查出问题？直接改，或用工具自动检测</h3>
+    <p style="color:var(--muted)">ATS 机筛检测自动打分并给出优化建议，编辑器支持一键导出 PDF / Word。</p>
+    <a class="btn primary" href="ats-check.html">🤖 免费 ATS 检测</a>
+    <a class="btn" href="index.html">✍️ 在线改简历</a>
+  </div>
+
+  <h2>关于这份清单</h2>
+  <p>这 24 项来自 HR 实际筛简历时的扣分项，分 5 组：<b>基本信息、内容质量、排版格式、ATS 机筛友好、投递细节</b>。前两组决定 HR 愿不愿意继续看，第三组决定第一印象，第四组决定你能不能过机器筛选——这一组最容易被忽略，也最容易在第一步就把你筛掉。</p>
+  <details><summary><b>90 分以上就一定能拿到面试吗？</b></summary>
+    <p style="color:var(--muted);margin:8px 0 0">不能。这份清单只保证你的简历<b>不因低级错误被淘汰</b>，也就是先做到"不被扣分"。能不能拿到面试，更取决于经历本身与岗位的匹配度、行业景气度和投递策略。但如果连 60 分都不到，你的简历很可能在第一步就被机筛或 HR 的 8 秒初筛淘汰了——所以这是必要条件，不是充分条件。</p>
+  </details>
+  <details><summary><b>为什么强调 ATS 机筛友好？</b></summary>
+    <p style="color:var(--muted);margin:8px 0 0">大企业和多数招聘平台会先用 ATS（申请人追踪系统）解析简历。表格、文本框、分栏、图片化文字都会导致解析失败，直接表现为"投了没回音"。用标准章节标题（工作经历 / 教育背景 / 技能）、不用表格排版、日期格式统一，能显著提升解析成功率。</p>
+  </details>
+
+  <h2>相关阅读</h2>
+  <p style="line-height:2.4">
+    <a href="ats-check.html" style="color:var(--accent);text-decoration:none;margin-right:14px">ATS 检测</a>
+    <a href="ats.html" style="color:var(--accent);text-decoration:none;margin-right:14px">ATS 友好排版</a>
+    <a href="guide.html" style="color:var(--accent);text-decoration:none;margin-right:14px">简历指南</a>
+    <a href="verbs.html" style="color:var(--accent);text-decoration:none;margin-right:14px">动作动词库</a>
+    <a href="resume-tips.html" style="color:var(--accent);text-decoration:none;margin-right:14px">简历避坑</a>
+    <a href="example.html" style="color:var(--accent);text-decoration:none;margin-right:14px">18 行业范文</a>
+    <a href="blog.html" style="color:var(--accent);text-decoration:none">简历干货库</a>
+  </p>
+</div>
+
+<footer>
+  <a href="index.html">简历大师</a> ·
+  <a href="blog.html">简历干货</a> ·
+  <a href="guide.html">简历指南</a> ·
+  <a href="ats-check.html">ATS 检测</a><br/>
+  免费在线简历生成器 · 全部本地处理，隐私安全
+  <div class="ad-mount ad-foot"></div>
+  &copy; 2026 简历大师
+</footer>
+  <script src="ads.js"></script>
+<script>
+var GROUPS = [
+  { g:"一、基本信息", items:[
+    { t:"姓名、电话、邮箱齐全且没有写错", w:"听起来很低级，但每年都有人手机号少一位。投完请自己拨一遍。" },
+    { t:"邮箱是专业的（姓名拼音/英文名，不是 QQ 昵称邮箱）", w:"hr@ 看到 “寂寞de狼@qq.com” 的第一印象，你自己想一下。" },
+    { t:"明确写了求职意向（一个具体岗位，不是“多个方向都可以”）", w:"写“均可”“面议”会被认为没方向，HR 无法归类。" },
+    { t:"没有无关的个人信息（婚育状况、身高体重、家庭住址）", w:"除国企/事业单位明确要求外，这些信息与岗位无关，还可能触发歧视风险。" },
+    { t:"照片是证件照（如放照片）", w:"自拍、生活照、艺术照都是减分项。不放照片在很多岗位也是可以接受的。" }
+  ]},
+  { g:"二、内容质量", items:[
+    { t:"每段经历都写了结果，且带数字", w:"“负责用户运营” vs “3 个月周活从 18% 提到 41%”——后者才有说服力。" },
+    { t:"用了强动作动词（主导/搭建/优化，而不是“负责”“参与”）", w:"用词的专业度直接影响观感，可参考动作动词库。" },
+    { t:"经历里的关键词和招聘 JD 对得上", w:"ATS 和 HR 都在找关键词。同一份简历投所有岗位，命中率必然低。" },
+    { t:"个人简介是针对这个岗位写的，不是通用模板", w:"3 行简介是 HR 最先看的，通用模板一眼就能看出来。" },
+    { t:"没有“吃苦耐劳、团结同事、热爱学习”这类空话", w:"没有证据支撑的形容词，等于什么都没说。" },
+    { t:"时间线连续，没有无法解释的断层", w:"有空窗期不可怕，可怕的是不解释。如实标注并说明这段时间做了什么。" }
+  ]},
+  { g:"三、排版格式", items:[
+    { t:"长度合适（应届/3 年内一页，资深不超过两页）", w:"76% 的 HR 认为超两页的简历是不合格的，尤其在初筛阶段。" },
+    { t:"字体统一，不超过 2 种", w:"多种字体会显得杂乱，也会影响 ATS 解析。" },
+    { t:"导出 PDF 后没有错版、断行、乱码", w:"在不同设备上打开看一遍，尤其是手机端预览。" },
+    { t:"文件名规范：姓名-应聘岗位-年限.pdf", w:"“简历最终版3.pdf” 是 HR 的经典槽点，也影响归档检索。" },
+    { t:"通读一遍，没有错别字和标点错误", w:"建议朗读一遍。错别字在 HR 眼里约等于“不认真”。" }
+  ]},
+  { g:"四、ATS 机筛友好", items:[
+    { t:"没有用表格、文本框、分栏排版", w:"这是 ATS 解析失败最常见的三个原因，会让你的内容变成一堆乱码。" },
+    { t:"没有把文字做成图片，也没有图标化的重要信息", w:"图片里的文字机器读不到，等于没写。" },
+    { t:"章节标题用了标准词：工作经历 / 教育背景 / 项目经历 / 技能", w:"ATS 靠标准标题定位内容，“那些年我做过的事”它识别不了。" },
+    { t:"日期格式统一（如统一用 2024.03 - 2025.06）", w:"格式混乱会让系统算错你的工作年限。" }
+  ]},
+  { g:"五、投递细节", items:[
+    { t:"针对这个岗位的 JD 改过关键词", w:"这是性价比最高的一步，通常 10 分钟就能改完，命中率提升明显。" },
+    { t:"投递的是 PDF，不是 Word", w:"Word 会错版，且在部分系统里被视为可编辑文件。" },
+    { t:"做过一次 ATS 机筛检测", w:"自动检测比人眼更可靠，能发现你意识不到的解析问题。" },
+    { t:"文件大小在 2MB 以内", w:"过大会被企业邮箱拦截，也可能被招聘系统拒收。" }
+  ]}
+];
+
+var KEY = "resume_checklist_v1";
+var state = {};
+try { state = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) { state = {}; }
+
+function render(){
+  var html = "";
+  GROUPS.forEach(function(grp, gi){
+    var ids = grp.items.map(function(_, ii){ return gi + "-" + ii; });
+    var done = ids.filter(function(id){ return state[id]; }).length;
+    html += "<div class='grp'><div class='grp-h'><span>" + grp.g + "</span><span class='gs'>" + done + " / " + grp.items.length + "</span></div>";
+    grp.items.forEach(function(it, ii){
+      var id = gi + "-" + ii;
+      var on = !!state[id];
+      html += "<div class='item'><label><input type='checkbox' data-id='" + id + "'" + (on ? " checked" : "") + ">" +
+              "<div><div class='t" + (on ? " done" : "") + "'>" + it.t + "</div>" +
+              "<div class='why'>" + it.w + "</div></div></label></div>";
+    });
+    html += "</div>";
+  });
+  document.getElementById("list").innerHTML = html;
+}
+
+function update(){
+  var total = 0, done = 0;
+  GROUPS.forEach(function(g){ total += g.items.length; });
+  Object.keys(state).forEach(function(k){ if (state[k]) done++; });
+  var score = Math.round(done / total * 100);
+  document.getElementById("sc").textContent = score;
+  document.getElementById("cnt").textContent = done;
+  document.getElementById("bar").style.width = score + "%";
+  var lv, tip;
+  if (done === 0) { lv = "开始逐项检查"; tip = "逐条对照你的简历，做到的就勾上"; }
+  else if (score >= 90) { lv = "🏆 优秀 · 可以放心投递"; tip = "这份简历已经避开了绝大多数扣分项"; }
+  else if (score >= 75) { lv = "👍 良好 · 还有优化空间"; tip = "把没勾的几项补上，效果会明显更好"; }
+  else if (score >= 60) { lv = "⚠️ 及格 · 建议先改再投"; tip = "至少把「内容质量」和「ATS 友好」两组补全"; }
+  else { lv = "🚫 风险较高 · 建议重写"; tip = "未达标的项可能让你在初筛阶段就被淘汰"; }
+  document.getElementById("lv").textContent = lv;
+  document.getElementById("tip").innerHTML = tip + "　·　已完成 <b>" + done + "</b> / " + total + " 项";
+  try { localStorage.setItem(KEY, JSON.stringify(state)); } catch (e) {}
+}
+
+document.getElementById("list").addEventListener("change", function(e){
+  var cb = e.target;
+  if (!cb || !cb.getAttribute("data-id")) return;
+  var id = cb.getAttribute("data-id");
+  state[id] = cb.checked;
+  var box = cb.parentNode.querySelector(".t");
+  if (box) box.className = "t" + (cb.checked ? " done" : "");
+  var gi = parseInt(id.split("-")[0], 10);
+  var grpEl = document.querySelectorAll(".grp")[gi];
+  if (grpEl){
+    var n = GROUPS[gi].items.filter(function(_, ii){ return state[gi + "-" + ii]; }).length;
+    grpEl.querySelector(".gs").textContent = n + " / " + GROUPS[gi].items.length;
+  }
+  update();
+});
+
+function resetAll(){
+  state = {};
+  try { localStorage.removeItem(KEY); } catch (e) {}
+  render(); update();
+}
+function checkAll(){
+  GROUPS.forEach(function(g, gi){ g.items.forEach(function(_, ii){ state[gi + "-" + ii] = true; }); });
+  render(); update();
+}
+
+render(); update();
+</script>
+</body>
+</html>

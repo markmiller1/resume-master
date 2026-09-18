@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>薪资总包计算器 · 真实时薪 + 两个 offer 对比（免费）| 简历大师</title>
+<meta name="description" content="免费在线薪资总包计算器：输入月薪、发薪月数、年终奖、补贴、公积金基数与比例，自动算出年度总包与真实时薪（含加班与通勤），并支持两个 offer 横向对比。数据只在本机计算，不上传。" />
+<meta name="keywords" content="薪资总包计算器,年薪计算器,时薪计算,offer对比,公积金计算,跳槽涨薪计算" />
+<link rel="canonical" href="https://resume-master.app.workbuddy.host/salary-calculator.html" />
+<meta property="og:title" content="薪资总包计算器 · 真实时薪 + 两个 offer 对比" />
+<meta property="og:description" content="算清年度总包与真实时薪（含加班与通勤），支持两个 offer 横向对比。数据只在本机，不上传。" />
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"薪资总包计算器","applicationCategory":"FinanceApplication","operatingSystem":"Web","description":"输入月薪、发薪月数、年终奖、补贴、公积金基数与比例，计算年度总包与真实时薪，支持两个 offer 横向对比。","offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},"provider":{"@type":"Organization","name":"简历大师"}}</script>
+<style>:root{ --bg:#0f1115; --panel:#171a21; --border:#2a3140; --text:#e6e9ef; --muted:#9aa3b2; --accent:#ff7a45; --ok:#5fd39a; }
+  *{box-sizing:border-box} body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.75;font-size:15px}
+  .wrap{max-width:900px;margin:0 auto;padding:28px 20px 60px}
+  header.top{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;border-bottom:1px solid var(--border);position:sticky;top:0;background:var(--bg);z-index:10}
+  .brand{font-weight:800}.brand .a{color:var(--accent)}
+  .btn{border:1px solid var(--border);background:var(--panel);color:var(--text);padding:8px 14px;border-radius:8px;cursor:pointer;text-decoration:none;font-size:13px;display:inline-block}
+  .btn.primary{background:var(--accent);border-color:var(--accent);color:#1a1209;font-weight:700}
+  .site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:8px 16px;background:var(--panel);border-bottom:1px solid var(--border);font-size:13px}
+  .site-nav a{color:var(--text);text-decoration:none;padding:5px 10px;border-radius:7px;white-space:nowrap}
+  .site-nav a:hover{background:var(--accent);color:#1a1209}
+  h1{font-size:28px;line-height:1.35;margin:10px 0 10px}
+  h2{font-size:20px;margin:30px 0 10px;border-left:4px solid var(--accent);padding-left:12px}
+  p{color:#d4d9e2} .lead{color:var(--muted);font-size:15.5px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:12px;padding:16px 18px;margin:14px 0}
+  .ad-label{text-align:center;font-size:11px;color:var(--muted);margin-bottom:4px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+  @media(max-width:720px){ .grid2{grid-template-columns:1fr} }
+  .plan{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:16px 18px}
+  .plan h3{margin:0 0 12px;font-size:16px}
+  .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0}
+  .row label{font-size:13.5px;color:var(--muted);flex:1}
+  .row input{width:110px;background:#0b0d11;border:1px solid var(--border);color:var(--text);border-radius:8px;padding:7px 9px;font-size:14px;text-align:right}
+  .row input:focus{outline:none;border-color:var(--accent)}
+  .out{background:#0b0d11;border:1px solid var(--border);border-radius:12px;padding:14px 16px;margin-top:12px}
+  .out .big{font-size:26px;font-weight:900;color:var(--accent)}
+  .out .line{display:flex;justify-content:space-between;font-size:13px;color:var(--muted);margin:5px 0}
+  .out .line b{color:var(--text);font-weight:600}
+  .cmp{background:linear-gradient(135deg,#1b1f27,#22262f);border:1px solid var(--border);border-radius:16px;padding:20px;text-align:center;margin:18px 0}
+  .cmp .v{font-size:30px;font-weight:900}
+  .up{color:#ff7a45}.down{color:#5fd39a}
+  .hint{font-size:12.5px;color:var(--muted)}
+  .cta{background:linear-gradient(90deg,#1a1d24,#20242e);border:1px solid var(--border);border-radius:14px;padding:22px;text-align:center;margin:30px 0}
+  footer{text-align:center;color:var(--muted);font-size:12px;padding:30px 20px;border-top:1px solid var(--border)}
+  footer a{color:var(--accent);text-decoration:none}
+  details{background:var(--panel);border:1px solid var(--border);border-radius:10px;padding:12px 16px;margin:10px 0}
+  summary{cursor:pointer}
+</style>
+</head>
+<body>
+<header class="top">
+  <div class="brand">简历<span class="a">大师</span></div>
+  <a class="btn primary" href="index.html">免费做简历 &rarr;</a>
+</header>
+<nav class="site-nav">
+  <a href="index.html">简历大师</a>
+  <a href="guide.html">📘 简历指南</a>
+  <a href="verbs.html">动词库</a>
+  <a href="skills.html">技能清单</a>
+  <a href="template.html">模板下载</a>
+  <a href="example.html">简历范文</a>
+  <a href="campus.html">校招简历</a>
+  <a href="developer.html">程序员简历</a>
+  <a href="ats.html">ATS 友好</a>
+  <a href="ats-check.html">ATS 检测</a>
+  <a href="cover-letter.html">求职信</a>
+  <a href="blog.html">简历干货</a>
+</nav>
+
+<div class="ad-mount ad-top"><div class="ad-label">赞助 · Sponsored</div><iframe data-aa='2455423' src='//acceptable.a-ads.com/2455423/?size=Adaptive' style='border:0;padding:0;width:100%;max-width:728px;height:90px;display:block;margin:auto'></iframe></div>
+
+<div class="wrap">
+  <h1>薪资总包计算器：算清真实年收入与时薪</h1>
+  <p class="lead">月薪差 2000 看起来不多，但把年终、补贴、公积金、加班和通勤摊进去，真实年收入可能差出好几万。<b>填两个方案可以直接对比</b>——所有计算都在你自己的浏览器里完成，数据不上传。</p>
+
+  <div class="grid2">
+    <div class="plan">
+      <h3>方案 A（如：当前工作）</h3>
+      <div class="row"><label>月薪（元）</label><input type="number" id="a1" value="15000"></div>
+      <div class="row"><label>一年发几个月</label><input type="number" id="a2" value="13"></div>
+      <div class="row"><label>年终奖（月数）</label><input type="number" id="a3" value="1"></div>
+      <div class="row"><label>月补贴（餐补交通等）</label><input type="number" id="a4" value="500"></div>
+      <div class="row"><label>公积金基数（元）</label><input type="number" id="a5" value="15000"></div>
+      <div class="row"><label>公积金比例（%）</label><input type="number" id="a6" value="12"></div>
+      <div class="row"><label>每周加班（小时）</label><input type="number" id="a7" value="5"></div>
+      <div class="row"><label>每天通勤（分钟）</label><input type="number" id="a8" value="60"></div>
+      <div class="out" id="oa"></div>
+    </div>
+
+    <div class="plan">
+      <h3>方案 B（如：新 offer）</h3>
+      <div class="row"><label>月薪（元）</label><input type="number" id="b1" value="18000"></div>
+      <div class="row"><label>一年发几个月</label><input type="number" id="b2" value="12"></div>
+      <div class="row"><label>年终奖（月数）</label><input type="number" id="b3" value="3"></div>
+      <div class="row"><label>月补贴（餐补交通等）</label><input type="number" id="b4" value="800"></div>
+      <div class="row"><label>公积金基数（元）</label><input type="number" id="b5" value="18000"></div>
+      <div class="row"><label>公积金比例（%）</label><input type="number" id="b6" value="12"></div>
+      <div class="row"><label>每周加班（小时）</label><input type="number" id="b7" value="15"></div>
+      <div class="row"><label>每天通勤（分钟）</label><input type="number" id="b8" value="90"></div>
+      <div class="out" id="ob"></div>
+    </div>
+  </div>
+
+  <div class="cmp" id="cmp"></div>
+
+  <div style="text-align:center;margin:6px 0 0">
+    <button class="btn" onclick="resetAll()">🔄 恢复默认</button>
+    <span class="hint" style="margin-left:10px">输入会自动保存在本机，下次打开还在</span>
+  </div>
+
+  <h2>怎么算的</h2>
+  <div class="card">
+    <b>年度现金</b> = 月薪 × 发薪月数 + 月薪 × 年终奖月数 + 月补贴 × 12<br/>
+    <b>公积金年额</b> = 缴纳基数 × 比例 × 2（个人 + 公司）× 12<br/>
+    <b>年度总包</b> = 年度现金 + 公积金年额<br/>
+    <b>真实时薪</b> = 年度现金 ÷ 全年实际投入小时数（含加班与通勤）
+  </div>
+  <p class="hint">说明：全年按 12 个月、每月 21.75 个工作日、每天 8 小时计算；加班按每周小时数 × 4.33 周折算到每月；通勤按每天分钟折算后 × 21.75 天。公积金按"基数 × 比例 × 2"计入，因为公司缴纳的部分同样是你的实际收入，只是进了账户。</p>
+
+  <h2>为什么"真实时薪"比月薪更值得看</h2>
+  <p>月薪高 3000 的工作，如果每周多加班 10 小时、每天多通勤 30 分钟，一年多投入约 <b>600 小时</b>——折算下来时薪反而可能更低。这就是为什么很多人跳槽后"钱多了，但更累了，算下来没赚"。</p>
+  <p>把加班和通勤折算进去，你才是在比较同一件事：<b>你每小时的人生值多少钱</b>。</p>
+
+  <h2>三个容易被忽略的钱</h2>
+  <div class="card">
+    🏠 <b>公积金基数</b>：按全额工资缴还是按当地最低基数缴，一年能差出好几万。面试时一定要问。<br/>
+    🏆 <b>年终奖是否固定</b>：写进 offer 的"13 薪"和"视绩效发放 0~6 个月"，是两件完全不同的事。<br/>
+    🪙 <b>期权</b>：本计算器未计入期权。多数公司期权需要打折看待，除非已上市或明确回购机制。
+  </div>
+
+  <details><summary><b>公积金比例怎么填？</b></summary>
+    <p style="color:var(--muted);margin:8px 0 0">国内公积金缴存比例一般在 5%~12% 之间，由单位在规定范围内确定。多数正规企业按 12% 缴纳，但也有企业按 5% 甚至按最低基数缴纳。可以在工资条或当地公积金中心 App 里查到你实际的基数和比例。</p>
+  </details>
+  <details><summary><b>跳槽涨薪多少算合理？</b></summary>
+    <p style="color:var(--muted);margin:8px 0 0">同城同岗位跳槽普遍在 20%~30%，跨城市、跨行业或职级提升幅度会更大。可以用本计算器把两个方案的总包算出来对比，比只比较月薪准确得多。更多谈薪技巧见<a href="salary-negotiation.html" style="color:var(--accent)">谈薪怎么说</a>。</p>
+  </details>
+
+  <div class="cta">
+    <h3 style="margin-top:0">正在准备跳槽？先把简历准备好</h3>
+    <p style="color:var(--muted)">永久免费 · 数据只存在你自己的浏览器，不上传服务器 · 内置 ATS 机筛检测与 JD 关键词匹配</p>
+    <a class="btn primary" href="index.html">免费制作简历 &rarr;</a>
+  </div>
+
+  <h2>相关阅读</h2>
+  <p style="line-height:2.4"><a href='salary-negotiation.html' style='color:var(--accent);text-decoration:none;margin-right:14px;white-space:nowrap'>谈薪话术</a><a href='offer-compare.html' style='color:var(--accent);text-decoration:none;margin-right:14px;white-space:nowrap'>offer 怎么选</a><a href='background-check.html' style='color:var(--accent);text-decoration:none;margin-right:14px;white-space:nowrap'>入职背调</a>
+    <a href="salary-negotiation.html" style="color:var(--accent);text-decoration:none;margin-right:14px">谈薪怎么说（4 套话术）</a>
+    <a href="offer-compare.html" style="color:var(--accent);text-decoration:none;margin-right:14px">多个 offer 怎么选</a>
+    <a href="leaving-reason.html" style="color:var(--accent);text-decoration:none;margin-right:14px">离职原因怎么说</a>
+    <a href="background-check.html" style="color:var(--accent);text-decoration:none;margin-right:14px">入职背调查什么</a>
+    <a href="resume-checklist.html" style="color:var(--accent);text-decoration:none;margin-right:14px">简历自查清单</a>
+    <a href="blog.html" style="color:var(--accent);text-decoration:none">简历干货库</a>
+  </p>
+</div>
+
+<footer>
+  <a href="index.html">简历大师</a> ·
+  <a href="blog.html">简历干货</a> ·
+  <a href="guide.html">简历指南</a> ·
+  <a href="salary-negotiation.html">谈薪话术</a><br/>
+  免费在线简历生成器 · 全部本地处理，隐私安全
+  <div class="ad-mount ad-foot"></div>
+  &copy; 2026 简历大师
+</footer>
+  <script src="ads.js"></script>
+<script>
+var IDS = ["a1","a2","a3","a4","a5","a6","a7","a8","b1","b2","b3","b4","b5","b6","b7","b8"];
+var KEY = "salary_calc_v1";
+var DEF = {"a1":15000,"a2":13,"a3":1,"a4":500,"a5":15000,"a6":12,"a7":5,"a8":60,
+           "b1":18000,"b2":12,"b3":3,"b4":800,"b5":18000,"b6":12,"b7":15,"b8":90};
+
+function num(id){ var v = parseFloat(document.getElementById(id).value); return isNaN(v) ? 0 : v; }
+function fmt(n){ return Math.round(n).toLocaleString("zh-CN"); }
+
+function calc(p){
+  var months = num(p+"2");           // 一年发几个月
+  var bonusM = num(p+"3");           // 年终奖月数
+  var cash = num(p+"1") * months + num(p+"1") * bonusM + num(p+"4") * 12;
+  var fund  = num(p+"5") * (num(p+"6") / 100) * 2 * 12;
+  var total = cash + fund;
+  var monthHours = 21.75 * 8 + num(p+"7") * 4.33 + (num(p+"8") / 60) * 21.75;
+  var yearHours = monthHours * 12;
+  var hourly = yearHours > 0 ? cash / yearHours : 0;
+  return { cash: cash, fund: fund, total: total, hours: yearHours, hourly: hourly,
+           monthly: total / 12 };
+}
+
+function render(){
+  var A = calc("a"), B = calc("b");
+  document.getElementById("oa").innerHTML =
+    '<div class="line"><span>年度总包</span></div><div class="big">' + fmt(A.total) + ' 元</div>' +
+    '<div class="line"><span>年度现金</span><b>' + fmt(A.cash) + '</b></div>' +
+    '<div class="line"><span>公积金（个人+公司）</span><b>' + fmt(A.fund) + '</b></div>' +
+    '<div class="line"><span>月均总包</span><b>' + fmt(A.monthly) + '</b></div>' +
+    '<div class="line"><span>全年投入小时</span><b>' + fmt(A.hours) + ' h</b></div>' +
+    '<div class="line"><span>真实时薪</span><b style="color:var(--accent)">' + fmt(A.hourly) + ' 元/h</b></div>';
+  document.getElementById("ob").innerHTML =
+    '<div class="line"><span>年度总包</span></div><div class="big">' + fmt(B.total) + ' 元</div>' +
+    '<div class="line"><span>年度现金</span><b>' + fmt(B.cash) + '</b></div>' +
+    '<div class="line"><span>公积金（个人+公司）</span><b>' + fmt(B.fund) + '</b></div>' +
+    '<div class="line"><span>月均总包</span><b>' + fmt(B.monthly) + '</b></div>' +
+    '<div class="line"><span>全年投入小时</span><b>' + fmt(B.hours) + ' h</b></div>' +
+    '<div class="line"><span>真实时薪</span><b style="color:var(--accent)">' + fmt(B.hourly) + ' 元/h</b></div>';
+
+  var d = B.total - A.total;
+  var pct = A.total > 0 ? (d / A.total * 100) : 0;
+  var dh = B.hourly - A.hourly;
+  var cls = d >= 0 ? "up" : "down";
+  var sign = d >= 0 ? "+" : "";
+  var verdict;
+  if (Math.abs(pct) < 3) verdict = "两个方案的总包基本持平，可以重点比较成长空间与工作强度。";
+  else if (d > 0 && dh >= 0) verdict = "B 无论总包还是时薪都更高，是比较明确的选择。";
+  else if (d > 0 && dh < 0) verdict = "⚠️ B 总包更高，但真实时薪更低——多出来的钱是用加班和通勤换的。";
+  else verdict = "B 的总包低于 A，除非有非金钱的强理由（成长、转型、稳定性），否则需要谨慎。";
+
+  document.getElementById("cmp").innerHTML =
+    '<div style="font-size:13px;color:var(--muted)">方案 B 相对方案 A</div>' +
+    '<div class="v ' + cls + '">' + sign + fmt(d) + ' 元/年（' + sign + pct.toFixed(1) + '%）</div>' +
+    '<div style="font-size:14px;margin-top:8px">真实时薪：' +
+      '<b class="' + (dh >= 0 ? "up" : "down") + '">' + (dh >= 0 ? "+" : "") + fmt(dh) + ' 元/小时</b></div>' +
+    '<div class="hint" style="margin-top:10px">' + verdict + '</div>';
+
+  try {
+    var s = {};
+    IDS.forEach(function(id){ s[id] = document.getElementById(id).value; });
+    localStorage.setItem(KEY, JSON.stringify(s));
+  } catch(e){}
+}
+
+function resetAll(){
+  IDS.forEach(function(id){ document.getElementById(id).value = DEF[id]; });
+  try { localStorage.removeItem(KEY); } catch(e){}
+  render();
+}
+
+try {
+  var saved = JSON.parse(localStorage.getItem(KEY) || "null");
+  if (saved) IDS.forEach(function(id){ if (saved[id] !== undefined) document.getElementById(id).value = saved[id]; });
+} catch(e){}
+
+IDS.forEach(function(id){
+  document.getElementById(id).addEventListener("input", render);
+});
+render();
+</script>
+</body>
+</html>

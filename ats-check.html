@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ATS 简历检测 · 免费测你的简历能否被招聘系统筛过 | 简历大师</title>
+<meta name="description" content="免费 ATS 简历检测工具：粘贴你的简历内容，30 秒算出招聘系统（ applicant tracking system）通过分数，并给出 12 项可优化清单。让 HR 的系统先「看上」你。" />
+<meta name="keywords" content="ATS 检测,简历能通过ATS吗,ATS友好简历,招聘系统筛选,简历评分,简历优化,简历大师" />
+<meta property="og:title" content="ATS 简历检测 · 免费测你的简历能否被招聘系统筛过" />
+<meta property="og:description" content="粘贴简历内容，30 秒算出 ATS 通过分数 + 12 项优化清单。" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://resume-master.app.workbuddy.host/ats-check.html" />
+<meta name="twitter:card" content="summary_large_image" />
+<link rel="canonical" href="https://resume-master.app.workbuddy.host/ats-check.html" />
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"SoftwareApplication",
+  "name":"ATS 简历检测工具",
+  "applicationCategory":"BusinessApplication",
+  "operatingSystem":"Web",
+  "offers":{"@type":"Offer","price":"0","priceCurrency":"CNY"},
+  "description":"免费检测简历能否被招聘系统（ATS）筛过，给出通过分数与优化建议。"
+}
+</script>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel-2:#1f242e; --border:#2a3140;
+    --text:#e7ecf3; --muted:#9aa6b8; --accent:#4f8cff; --accent-2:#22c55e;
+    --warn:#f59e0b; --bad:#ef4444;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang SC","Microsoft YaHei",sans-serif;line-height:1.6}
+  a{color:var(--accent);text-decoration:none}
+  .wrap{max-width:860px;margin:0 auto;padding:24px 18px 60px}
+  header h1{font-size:26px;margin:0 0 6px}
+  header p.sub{color:var(--muted);margin:0 0 20px}
+  .card{background:var(--panel);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:18px}
+  textarea{width:100%;min-height:220px;background:var(--panel-2);color:var(--text);border:1px solid var(--border);border-radius:10px;padding:12px;font-size:14px;resize:vertical;font-family:inherit}
+  .btn{display:inline-block;background:var(--accent);color:#fff;border:none;border-radius:10px;padding:11px 18px;font-size:15px;cursor:pointer;font-weight:600}
+  .btn.ghost{background:transparent;border:1px solid var(--border);color:var(--text)}
+  .btn:active{transform:translateY(1px)}
+  .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;margin-top:12px}
+  .hint{color:var(--muted);font-size:12.5px;margin-top:8px}
+  .score-box{text-align:center;padding:10px 0}
+  .ring{--p:0;width:150px;height:150px;border-radius:50%;margin:0 auto 8px;
+    background:conic-gradient(var(--accent) calc(var(--p)*1%), #2a3140 0);
+    display:flex;align-items:center;justify-content:center}
+  .ring .inner{width:120px;height:120px;border-radius:50%;background:var(--panel);display:flex;flex-direction:column;align-items:center;justify-content:center}
+  .ring .num{font-size:38px;font-weight:800}
+  .ring .lbl{font-size:12px;color:var(--muted)}
+  .verdict{font-size:15px;font-weight:600;margin:6px 0 0}
+  ul.check{list-style:none;padding:0;margin:8px 0 0}
+  ul.check li{padding:9px 12px;border:1px solid var(--border);border-radius:9px;margin-bottom:8px;background:var(--panel-2);display:flex;gap:10px;align-items:flex-start}
+  .tag{flex:0 0 auto;font-size:12px;font-weight:700;padding:2px 8px;border-radius:6px;margin-top:2px}
+  .tag.ok{background:rgba(34,197,94,.15);color:var(--accent-2)}
+  .tag.warn{background:rgba(245,158,11,.15);color:var(--warn)}
+  .tag.bad{background:rgba(239,68,68,.15);color:var(--bad)}
+  .hidden{display:none}
+  .cta{background:linear-gradient(135deg,#1b2a4a,#172033);border:1px solid #2c4a7a}
+  .cta h3{margin:0 0 6px}
+  footer{margin-top:30px;padding-top:16px;border-top:1px solid var(--border);color:var(--muted);font-size:13px;text-align:center}
+  footer a{margin:0 6px}
+  .busuanzi{color:var(--muted);font-size:12px;margin-top:8px}
+
+  /* ---------- 顶部导航（全站通用） ---------- */
+  .site-nav{display:flex;flex-wrap:wrap;align-items:center;gap:4px;padding:8px 16px;
+    background:var(--panel,#171a21);border-bottom:1px solid var(--border,#2a3140);font-size:13px}
+  .site-nav a{color:var(--text,#e6e9ef);text-decoration:none;padding:5px 10px;border-radius:7px;
+    white-space:nowrap;transition:.15s}
+  .site-nav a:hover{background:var(--accent,#ff7a45);color:#1a1209}
+  .site-nav a.cur{background:var(--accent,#ff7a45);color:#1a1209;font-weight:700}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>🛡️ ATS 简历检测</h1>
+    <p class="sub">超过 75% 的大公司用 ATS（招聘管理系统）先机筛简历。粘贴你的简历内容，30 秒算出「系统能否看得懂你」并通过初筛。</p>
+  </header>
+<nav class="site-nav">
+  <a href="index.html">简历大师</a>
+  <a href="guide.html">📘 简历指南</a>
+  <a href="verbs.html">动词库</a>
+  <a href="skills.html">技能清单</a>
+  <a href="template.html">模板下载</a>
+  <a href="example.html">简历范文</a>
+  <a href="campus.html">校招简历</a>
+  <a href="developer.html">程序员简历</a>
+  <a href="ats.html">ATS 友好</a>
+  <a href="ats-check.html">ATS 检测</a>
+  <a href="cover-letter.html">求职信</a>
+  <a href="blog.html">简历干货</a>
+</nav>
+
+<!-- 顶部广告位 -->
+<div class="ad-mount ad-top"><div class="ad-label">赞助 · Sponsored</div><iframe data-aa='2455423' src='//acceptable.a-ads.com/2455423/?size=Adaptive' style='border:0;padding:0;width:100%;max-width:728px;height:90px;display:block;margin:auto'></iframe></div>
+
+
+  <div class="card">
+    <label for="resume" style="font-weight:600">① 粘贴你的简历全文</label>
+    <textarea id="resume" placeholder="把简历里的所有文字复制粘贴到这里（姓名/电话/邮箱/教育/工作/项目/技能…）。内容只在你本地浏览器分析，不上传任何服务器。"></textarea>
+    <div class="row">
+      <button class="btn" onclick="runCheck()">② 开始免费检测 →</button>
+      <button class="btn ghost" onclick="document.getElementById('resume').value=''">清空</button>
+    </div>
+    <div class="hint">🔒 全程本地运算，隐私安全。也可用 <a href="index.html">简历大师</a> 直接生成一份 ATS 友好的简历。</div>
+  </div>
+
+  <div id="result" class="hidden">
+    <div class="card score-box">
+      <div class="ring" id="ring"><div class="inner"><div class="num" id="scoreNum">0</div><div class="lbl">ATS 通过分</div></div></div>
+      <div class="verdict" id="verdict"></div>
+    </div>
+    <div class="card">
+      <h3 style="margin-top:0">📋 12 项优化清单</h3>
+      <ul class="check" id="checkList"></ul>
+    </div>
+    <div class="card cta">
+      <h3>想一键拿到「ATS 友好 + 去水印」的成品简历？</h3>
+      <p style="color:var(--muted);margin:4px 0 12px">用 <a href="index.html">简历大师</a> 在线生成，4 套模板专为通过 ATS 设计；会员去水印 + 解锁高级模板，¥9.9/月。</p>
+      <a class="btn" href="index.html">去生成我的简历 →</a>
+    </div>
+  </div>
+
+  <footer>
+    <a href="index.html">简历大师</a> ·
+    <a href="ats.html">ATS 友好指南</a> ·
+    <a href="guide.html">简历写作完全指南</a> ·
+    <a href="campus.html">校招模板</a> ·
+    <a href="developer.html">程序员简历</a>
+    <div class="busuanzi">© 2026 简历大师 · 全部本地处理，隐私安全</div>
+    <div class="ad-mount ad-foot"></div>
+</footer>
+</div>
+
+<script>
+function runCheck(){
+  const text = (document.getElementById('resume').value || '').trim();
+  if(text.length < 40){ alert('请先粘贴至少一段简历内容（不少于 40 字）'); return; }
+  const t = text.toLowerCase();
+  const checks = [];
+  let score = 0;
+
+  // 1. 联系方式
+  const hasEmail = /[\w.+-]+@[\w-]+\.[\w.-]+/.test(text);
+  const hasPhone = /(1[3-9]\d{9})|(0\d{2,3}-?\d{7,8})/.test(text);
+  if(hasEmail && hasPhone){ score+=12; checks.push(['ok','联系方式完整','检测到邮箱与手机号，ATS 可提取你的联络方式。']); }
+  else { score+=0; checks.push(['bad','缺少联系方式', !hasEmail&&!hasPhone?'未检测到邮箱和电话，HR 无法联系你。':'缺少邮箱或电话，建议补全。']); }
+
+  // 2. 核心板块
+  const sections = ['教育','工作','项目','技能','经历','实习','获奖','证书'];
+  const found = sections.filter(s=>text.includes(s));
+  if(found.length>=3){ score+=12; checks.push(['ok','板块齐全',`识别到 ${found.length} 个核心板块（${found.join('、')}）。`]); }
+  else { score+=4; checks.push(['warn','板块偏少',`仅识别到 ${found.length} 个板块，建议补充 教育/工作/项目/技能 等标准模块。`]); }
+
+  // 3. 量化成果（数字+单位）
+  const quant = (text.match(/\d+(\.\d+)?\s*(%|万|人|倍|个|项|年|月|k|w|元|￥|次|篇)/gi)||[]).length;
+  if(quant>=5){ score+=10; checks.push(['ok','成果有量化',`发现 ${quant} 处量化数据，ATS 与 HR 都偏爱「用数字说话」。`]); }
+  else { score+=3; checks.push(['warn','成果缺量化',`仅 ${quant} 处数字成果，建议多用「提升 30%」「服务 5000+ 用户」等表达。`]); }
+
+  // 4. 项目符号
+  const bullets = (text.match(/[•·・\-–—*]\s/g)||[]).length;
+  if(bullets>=5){ score+=8; checks.push(['ok','使用项目符号',`${bullets} 个条目用符号分隔，ATS 易解析、HR 易读。`]); }
+  else { score+=0; checks.push(['bad','缺少项目符号','简历多为大段文字，ATS 难拆分；建议每条成就用「•」独立成行。']); }
+
+  // 5. 避免表格/图片（用文字提示，因纯文本无法含图，这里检测异常字符与「表/图」字样）
+  const tableImg = /(表格|截图|图片|图表见附件|详见附)/.test(text);
+  if(!tableImg){ score+=8; checks.push(['ok','纯文本友好','未检测到表格/图片依赖，ATS 可直接解析全部文字。']); }
+  else { score+=0; checks.push(['bad','含表格/图片提示','ATS 大多读不出表格与图片，关键信息请改为纯文字描述。']); }
+
+  // 6. 长度
+  const words = text.replace(/\s/g,'').length;
+  if(words>=300 && words<=1100){ score+=8; checks.push(['ok','篇幅适中',`约 ${words} 字，1-2 页黄金区间。`]); }
+  else if(words<300){ score+=2; checks.push(['warn','内容偏短',`仅约 ${words} 字，信息量可能不足，建议充实工作成果。`]); }
+  else { score+=2; checks.push(['warn','内容偏长',`约 ${words} 字，ATS 与 HR 偏好精炼，建议控制在 2 页内。`]); }
+
+  // 7. 动作动词开头
+  const actionVerbs=['负责','主导','搭建','设计','优化','提升','带领','实现','推动','完成','开发','管理','协调','分析','撰写','上线','重构','解决'];
+  const avCount = actionVerbs.filter(v=>t.includes(v)).length;
+  if(avCount>=4){ score+=8; checks.push(['ok','用词主动',`使用 ${avCount} 个强动作动词，体现执行力。`]); }
+  else { score+=2; checks.push(['warn','用词偏弱',`仅 ${avCount} 个动作动词，建议用「主导/搭建/提升」替代「参与/协助」。`]); }
+
+  // 8. 日期格式
+  const dates = (text.match(/(19|20)\d{2}[\.\-/年](0?[1-9]|1[0-2])/g)||[]).length;
+  if(dates>=2){ score+=6; checks.push(['ok','日期规范',`检测到 ${dates} 处标准日期，时间线清晰。`]); }
+  else { score+=2; checks.push(['warn','日期不规范',`建议用「2023.06 - 2024.05」统一格式，避免「去年/近期」等模糊表述。`]); }
+
+  // 9. 无特殊符号/表情
+  const emoji = (text.match(/[\u{1F000}-\u{1FAFF}\u{2600}-\u{27BF}]/gu)||[]).length;
+  if(emoji===0){ score+=6; checks.push(['ok','无表情符号','正文未用 emoji，避免部分 ATS 解析乱码。']); }
+  else { score+=0; checks.push(['bad',`含 ${emoji} 个表情符号`,'部分 ATS 会把 emoji 解析成乱码，建议移至页眉装饰或删除。']); }
+
+  // 10. 技能关键词密度
+  const tech=['python','java','sql','excel','ppt','linux','ai','机器学习','数据分析','前端','后端','运营','策划','英语','c++','go','react','vue'];
+  const techCount = tech.filter(k=>t.includes(k)).length;
+  if(techCount>=3){ score+=6; checks.push(['ok','技能关键词丰富',`命中 ${techCount} 类技能词，利于 JD 匹配与搜索。`]); }
+  else { score+=2; checks.push(['warn','技能关键词少',`仅 ${techCount} 类，建议按目标岗位补充硬技能关键词。`]); }
+
+  // 11. 无第一人称口语
+  const firstPerson = (t.match(/我(们)?\s*(觉得|认为|希望|想|的)/g)||[]).length;
+  if(firstPerson===0){ score+=6; checks.push(['ok','无口语化第一人称','简历用陈述式，专业度更高。']); }
+  else { score+=2; checks.push(['warn',`${firstPerson} 处口语化`,'建议删去「我觉得/我希望」，直接用事实陈述。']); }
+
+  // 12. 无全大写堆砌
+  const capsBlocks = (text.match(/[A-Z]{4,}/g)||[]).length;
+  if(capsBlocks<=3){ score+=6; checks.push(['ok','排版克制','无明显全大写堆砌，阅读友好。']); }
+  else { score+=0; checks.push(['bad',`${capsBlocks} 处全大写`,'大段全大写会被部分 ATS 误判为噪声，建议正常大小写。']); }
+
+  score = Math.max(0, Math.min(100, score));
+  showResult(score, checks);
+}
+
+function showResult(score, checks){
+  document.getElementById('result').classList.remove('hidden');
+  const ring = document.getElementById('ring');
+  ring.style.setProperty('--p', score);
+  // 动画
+  let cur=0; const num=document.getElementById('scoreNum');
+  const step=()=>{ if(cur<score){ cur+=2; num.textContent=Math.min(cur,score); setTimeout(step,12);} else num.textContent=score; };
+  step();
+  const v=document.getElementById('verdict');
+  if(score>=80){ v.textContent='✅ 优秀：大概率能通过多数 ATS 初筛'; v.style.color='var(--accent-2)'; }
+  else if(score>=60){ v.textContent='🟡 良好：有小瑕疵，优化后可更稳'; v.style.color='var(--warn)'; }
+  else { v.textContent='🔴 偏危险：容易被 ATS 直接淘汰，建议尽快优化'; v.style.color='var(--bad)'; }
+
+  const ul=document.getElementById('checkList'); ul.innerHTML='';
+  checks.forEach(([cls,title,desc])=>{
+    const li=document.createElement('li');
+    const tag={ok:'通过',warn:'建议',bad:'风险'}[cls];
+    li.innerHTML=`<span class="tag ${cls}">${tag}</span><div><b>${title}</b><br/><span style="color:var(--muted);font-size:13px">${desc}</span></div>`;
+    ul.appendChild(li);
+  });
+  document.getElementById('result').scrollIntoView({behavior:'smooth'});
+}
+</script>
+  <script src="ads.js"></script>
+</body>
+</html>
