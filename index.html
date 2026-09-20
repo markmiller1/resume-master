@@ -193,6 +193,10 @@
   .ai-tip.i { background:rgba(251,191,36,.14); border-left:3px solid #fbbf24; }
   .ai-tip.s { background:rgba(52,211,153,.14); border-left:3px solid #34d399; }
   .ai-tip b { font-weight:800; }
+  .live-score { display:flex; align-items:center; gap:12px; background:var(--panel-2); border:1px solid var(--border); border-radius:12px; padding:12px 14px; margin-bottom:14px; }
+  .live-score .ai-ring { width:62px; height:62px; font-size:22px; background:#2a3140; }
+  .live-score .ls-title { font-weight:700; font-size:13px; }
+  .live-score .ls-sub { font-size:11.5px; color:var(--muted); margin-top:2px; }
 
   .locked-cover { position:absolute; inset:0; background:rgba(255,255,255,.94); display:flex; flex-direction:column;
     align-items:center; justify-content:center; text-align:center; border-radius:4px; padding:24px; }
@@ -416,7 +420,14 @@
         <div class="tpl-chip" onclick="applyPreset('fresh')">🌱 应届生</div>
         <div class="tpl-chip" onclick="applyPreset('sales')">📈 销售</div>
       </div>
-      <button class="btn primary" style="margin-top:12px;width:100%" onclick="runDiagnosis()">🤖 AI 简历诊断（打分+优化建议）</button>
+      <div class="live-score" id="live-score-box">
+        <div class="ai-ring" id="live-ring">--</div>
+        <div>
+          <div class="ls-title">实时简历评分</div>
+          <div class="ls-sub" id="live-label">边写边打分</div>
+        </div>
+      </div>
+      <button class="btn primary" style="width:100%" onclick="runDiagnosis()">🤖 AI 简历诊断（打分+优化建议）</button>
       <button class="btn ghost" style="margin-top:8px;width:100%" onclick="openJdMatch()">🎯 JD 关键词匹配（帮你过机器筛选）</button>
       <button class="btn ghost" style="margin-top:8px;width:100%" onclick="openVault()">📁 我的简历（可存多版本，都在本机）</button>
       <div style="margin-top:8px;font-size:11.5px;color:var(--muted);text-align:center">内容自动保存在本机浏览器，刷新/关闭都不会丢</div>
@@ -778,6 +789,7 @@
     if(IS_PRO){ $("tier-label").textContent="会员版（无水印 · 全部模板）"; $("tier-label").style.color="var(--ok)"; $("pro-badge").style.display="inline"; }
     else { $("tier-label").textContent="免费版（带水印 · 4 模板）"; $("tier-label").style.color="var(--warn)"; }
     if(IS_PRO) $("locked-cover").style.display="none";
+    updateLiveScore();
   }
 
   /* ---------- 行业模板预设 ---------- */
@@ -927,7 +939,7 @@
   }
 
   /* ---------- AI 简历诊断 ---------- */
-  function runDiagnosis(){
+  function computeScore(){
     const tips=[]; let score=100;
     const name=$("f-name").value.trim(), title=$("f-title").value.trim();
     const phone=$("f-phone").value.trim(), email=$("f-email").value.trim();
@@ -950,17 +962,31 @@
     if(skills.length<5){ tips.push(["i","<b>建议：</b>技能偏少，列 6-10 项核心技能更易过 ATS 关键词筛。"]); score-=6; }
     if(works.length>0 && works.every(w=>(w.points||[]).length<2)){ tips.push(["s","<b>提示：</b>每条经历最好写 2-3 个要点，只写一句话显得单薄。"]); score-=4; }
     score=Math.max(0,Math.min(100,score));
-
-    const ring=$("ai-ring"); ring.textContent=score;
     const col = score>=80 ? "#34d399" : score>=60 ? "#fbbf24" : "#f87171";
+    const verdict = score>=80 ? "优秀，已超过 <b>85%</b> 的简历，直接去投递吧！" :
+      score>=60 ? "良好，再补几条量化成果就能冲 80 分。" : "偏薄弱，按下面建议逐项优化后再投。";
+    return {score, tips, col, verdict};
+  }
+  function runDiagnosis(){
+    const {score, tips, col, verdict} = computeScore();
+    const ring=$("ai-ring"); ring.textContent=score;
     ring.style.background=`conic-gradient(${col} ${score*3.6}deg, #2a3140 0)`;
     ring.style.color = score>=80 ? "#052e1a" : "#1a1209";
-    $("ai-verdict").innerHTML = score>=80 ? "优秀，已超过 <b>85%</b> 的简历，直接去投递吧！" :
-      score>=60 ? "良好，再补几条量化成果就能冲 80 分。" : "偏薄弱，按下面建议逐项优化后再投。";
+    $("ai-verdict").innerHTML = verdict;
     const html = tips.length ? tips.map(t=>`<div class="ai-tip ${t[0]}">${t[1]}</div>`).join("") :
       `<div class="ai-tip s">完美！没有发现明显问题，去导出吧 🎉</div>`;
     $("ai-tips").innerHTML=html;
     $("ai-modal").style.display="flex";
+  }
+  function updateLiveScore(){
+    const el=$("live-ring"); if(!el) return;
+    let res; try{ res=computeScore(); }catch(e){ return; }
+    const {score, col} = res;
+    el.textContent=score;
+    el.style.background=`conic-gradient(${col} ${score*3.6}deg, #2a3140 0)`;
+    el.style.color = score>=80 ? "#052e1a" : "#1a1209";
+    const lbl=$("live-label");
+    if(lbl) lbl.innerHTML = score>=80 ? "✅ 已达投递标准" : score>=60 ? "⚠️ 接近达标，再补几条" : "❌ 还需优化";
   }
   function closeAiModal(){ $("ai-modal").style.display="none"; }
 
