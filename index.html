@@ -193,6 +193,12 @@
   .ai-tip.i { background:rgba(251,191,36,.14); border-left:3px solid #fbbf24; }
   .ai-tip.s { background:rgba(52,211,153,.14); border-left:3px solid #34d399; }
   .ai-tip b { font-weight:800; }
+  .pl-item { border:1px solid var(--border); border-radius:10px; padding:10px 12px; margin-bottom:9px; background:#151a24; }
+  .pl-reason { font-size:11.5px; color:var(--muted); margin-bottom:6px; }
+  .pl-before { font-size:12.5px; color:#8b94a5; text-decoration:line-through; margin-bottom:4px; word-break:break-all; }
+  .pl-after { font-size:13px; color:#e8ecf3; font-weight:600; word-break:break-all; }
+  .pl-apply { margin-top:7px; font-size:12px; color:var(--accent); cursor:pointer; font-weight:600; }
+  .pl-empty { color:var(--muted); font-size:13px; text-align:center; padding:18px 0; }
   .live-score { display:flex; align-items:center; gap:12px; background:var(--panel-2); border:1px solid var(--border); border-radius:12px; padding:12px 14px; margin-bottom:14px; }
   .live-score .ai-ring { width:62px; height:62px; font-size:22px; background:#2a3140; }
   .live-score .ls-title { font-weight:700; font-size:13px; }
@@ -288,6 +294,8 @@
     <button class="btn ghost" onclick="openJdMatch()">🎯 JD 匹配</button>
     <button class="btn ghost" onclick="exportDoc()">📝 Word</button>
     <button class="btn ghost" onclick="exportTxt()">📄 TXT</button>
+    <button class="btn ghost" onclick="exportAts()">🤖 ATS文本</button>
+    <button class="btn ghost" onclick="copyAts()">📋 复制</button>
     <button class="btn primary" onclick="exportPDF()">⬇️ 导出 PDF</button>
   </div>
 </header>
@@ -430,6 +438,8 @@
       <button class="btn primary" style="width:100%" onclick="runDiagnosis()">🤖 AI 简历诊断（打分+优化建议）</button>
       <button class="btn ghost" style="margin-top:8px;width:100%" onclick="openJdMatch()">🎯 JD 关键词匹配（帮你过机器筛选）</button>
       <button class="btn ghost" style="margin-top:8px;width:100%" onclick="openVault()">📁 我的简历（可存多版本，都在本机）</button>
+      <button class="btn ghost" style="margin-top:8px;width:100%" onclick="openCompare()">📊 简历版本对比（哪份更易过机筛）</button>
+      <button class="btn ghost" style="margin-top:8px;width:100%" onclick="openPolish()">✨ 一键智能优化（弱表述自动改写）</button>
       <div style="margin-top:8px;font-size:11.5px;color:var(--muted);text-align:center">内容自动保存在本机浏览器，刷新/关闭都不会丢</div>
     </div>
 
@@ -632,6 +642,20 @@
     <div id="ai-tips" style="max-height:300px;overflow-y:auto"></div>
     <button class="btn primary" style="width:100%;margin-top:12px" onclick="copyLink();toast('链接已复制，去晒你的简历分吧 🚀')">🔗 晒一下我的简历分</button>
     <div style="margin-top:10px;font-size:11.5px;color:var(--muted);text-align:center">分数不够高？升级会员换高级模板，简历更好看、更易过筛</div>
+  </div>
+</div>
+
+<!-- SMART POLISH MODAL -->
+<div class="modal-mask" id="polish-modal" style="display:none">
+  <div class="modal" style="width:520px;max-width:94vw">
+    <div class="modal-close" onclick="closePolishModal()">✕</div>
+    <h3 style="margin:0 0 4px">✨ 一键智能优化</h3>
+    <p style="color:var(--muted);font-size:12.5px;margin:0 0 10px">把「参与 / 协助」这类弱表述换成主导感强的动词，并标出缺少量化数据的条目。全部在你浏览器本地完成。</p>
+    <div id="polish-list" style="max-height:340px;overflow-y:auto"></div>
+    <div style="display:flex;gap:8px;margin-top:12px">
+      <button class="btn primary" style="flex:1" onclick="applyPolish(true)">✅ 全部应用</button>
+      <button class="btn ghost" style="flex:1" onclick="closePolishModal()">稍后自己改</button>
+    </div>
   </div>
 </div>
 
@@ -939,15 +963,16 @@
   }
 
   /* ---------- AI 简历诊断 ---------- */
-  function computeScore(){
+  function calcScore(basic, dataObj){
     const tips=[]; let score=100;
-    const name=$("f-name").value.trim(), title=$("f-title").value.trim();
-    const phone=$("f-phone").value.trim(), email=$("f-email").value.trim();
-    const summary=$("f-summary").value.trim();
-    const works=data.work.filter(e=>e.org||e.role);
-    const projs=data.proj.filter(e=>e.org||e.role);
-    const skills=$("f-skills").value.split(/[,，]/).map(s=>s.trim()).filter(Boolean);
-    const allPoints=[...data.work,...data.proj].flatMap(e=>e.points||[]).join(" ");
+    const name=(basic.name||"").trim(), title=(basic.title||"").trim();
+    const phone=(basic.phone||"").trim(), email=(basic.email||"").trim();
+    const summary=(basic.summary||"").trim();
+    const d = dataObj || {};
+    const works=(d.work||[]).filter(e=>e.org||e.role);
+    const projs=(d.proj||[]).filter(e=>e.org||e.role);
+    const skills=(basic.skills||"").split(/[,，]/).map(s=>s.trim()).filter(Boolean);
+    const allPoints=[...(d.work||[]),...(d.proj||[])].flatMap(e=>e.points||[]).join(" ");
     const allText=allPoints+" "+summary;
 
     if(!name||!title){ tips.push(["k","<b>关键：</b>姓名或求职意向缺失，HR 第一眼就会丢。"]); score-=15; }
@@ -966,6 +991,10 @@
     const verdict = score>=80 ? "优秀，已超过 <b>85%</b> 的简历，直接去投递吧！" :
       score>=60 ? "良好，再补几条量化成果就能冲 80 分。" : "偏薄弱，按下面建议逐项优化后再投。";
     return {score, tips, col, verdict};
+  }
+  function computeScore(){
+    return calcScore({ name:$("f-name").value, title:$("f-title").value, phone:$("f-phone").value,
+      email:$("f-email").value, summary:$("f-summary").value, skills:$("f-skills").value }, data);
   }
   function runDiagnosis(){
     const {score, tips, col, verdict} = computeScore();
@@ -989,6 +1018,124 @@
     if(lbl) lbl.innerHTML = score>=80 ? "✅ 已达投递标准" : score>=60 ? "⚠️ 接近达标，再补几条" : "❌ 还需优化";
   }
   function closeAiModal(){ $("ai-modal").style.display="none"; }
+
+  /* ---------- 一键智能优化（纯本地规则改写，不出本机） ---------- */
+  const WEAK_VERBS = [
+    ["参与了","主导推进"],["参与","主导"],["协助","协同推动"],["帮忙","负责"],
+    ["负责了","主导"],["进行了","开展"],["做了","完成"],["有关","围绕"],
+    ["使用","基于"],["用了","基于"],["处理","闭环处理"],["学习","掌握"],
+    ["了解","熟悉"],["接触","实践"],["跟着","配合"],["尝试","推动"]
+  ];
+  function polishSuggestions(){
+    const out=[];
+    ["work","proj"].forEach(type=>{
+      (data[type]||[]).forEach((e,idx)=>{
+        (e.points||[]).forEach((p,pi)=>{
+          const t=(p||"").trim();
+          if(!t) return;
+          let after=null; const reasons=[];
+          for(const [w,s] of WEAK_VERBS){
+            if(t.startsWith(w)){ after = s + t.slice(w.length); reasons.push("「"+w+"」偏弱，换成「"+s+"」更有主导感"); break; }
+          }
+          const noNum = !/\d/.test(t);
+          if(noNum) reasons.push("缺少量化数据，建议补上数字（如：效率提升 40%、覆盖 3 个部门）");
+          if(after===null && !noNum) return;
+          out.push({type,idx,pi,before:t,after,reasons});
+        });
+      });
+    });
+    return out;
+  }
+  function openPolish(){
+    const list=polishSuggestions();
+    window._polish=list;
+    const box=$("polish-list");
+    if(!list.length){
+      box.innerHTML = `<div class="pl-empty">🎉 没发现弱表述，你的简历用语已经很有主导感了</div>`;
+    } else {
+      box.innerHTML = list.map((s,i)=>{
+        const canApply = s.after && s.after!==s.before;
+        return `<div class="pl-item">
+          <div class="pl-reason">${esc(s.reasons.join("；"))}</div>
+          <div class="pl-before">${esc(s.before)}</div>
+          ${canApply ? `<div class="pl-after">→ ${esc(s.after)}</div><div class="pl-apply" onclick="applyPolishOne(${i})">应用这条</div>` : ``}
+        </div>`;
+      }).join("");
+    }
+    $("polish-modal").style.display="flex";
+  }
+  function applyPolishOne(i){
+    const s=(window._polish||[])[i];
+    if(!s || !s.after) return;
+    const arr=(data[s.type]||[])[s.idx] && data[s.type][s.idx].points;
+    if(!arr) return;
+    arr[s.pi]=s.after;
+    renderList(s.type); renderPreview(); saveLocal(true);
+    toast("已应用 1 条优化");
+    openPolish();
+  }
+  function applyPolish(){
+    let n=0;
+    (window._polish||[]).forEach(s=>{
+      const arr=(data[s.type]||[])[s.idx] && data[s.type][s.idx].points;
+      if(s.after && s.after!==s.before && arr){ arr[s.pi]=s.after; n++; }
+    });
+    if(n){ ["work","proj"].forEach(t=>renderList(t)); renderPreview(); saveLocal(true); toast("已应用 "+n+" 条优化，评分已更新"); }
+    else { toast("没有可自动改写的内容，参考建议手动补充数字吧"); }
+    closePolishModal();
+  }
+  function closePolishModal(){ $("polish-modal").style.display="none"; }
+
+  /* ---------- 简历版本对比（复用多简历保险库） ---------- */
+  function scoreOfObj(obj){ return calcScore(obj && obj.basic || {}, obj && obj.data || {}); }
+  function openCompare(){
+    const v=getVault(); const names=Object.keys(v);
+    const opts=[["__current__","（当前编辑中）"]].concat(names.map(function(n){ return [n,n]; }));
+    if(opts.length<2){ toast("至少先另存 1 份简历，才能和当前版本对比"); openVault(); return; }
+    const sel=function(id,def){ return '<select id="'+id+'" style="flex:1;min-width:140px;padding:9px;border-radius:8px;border:1px solid var(--border);background:var(--panel-2);color:var(--text);font-size:13px">' +
+      opts.map(function(o){ return '<option value="'+esc(o[0])+'"'+(o[0]===def?' selected':'')+'>'+esc(o[1])+'</option>'; }).join("") + '</select>'; };
+    const body='<div style="font-size:13px;color:var(--muted);margin-bottom:12px">选两份简历，对比评分与关键指标，找出哪份更可能过机筛。</div>' +
+      '<div style="display:flex;gap:10px;align-items:center;margin-bottom:12px"><span style="color:var(--text)">A</span>'+sel("cmp-a","__current__")+'</div>' +
+      '<div style="display:flex;gap:10px;align-items:center;margin-bottom:14px"><span style="color:var(--text)">B</span>'+sel("cmp-b", names[0]||"__current__")+'</div>' +
+      '<button class="btn primary" data-act="go" style="width:100%">📊 开始对比</button>' +
+      '<div id="cmp-out" style="margin-top:14px"></div>';
+    showModal("简历版本对比", body, function(act, btn, m){
+      if(act!=="go") return;
+      const ka=document.getElementById("cmp-a").value, kb=document.getElementById("cmp-b").value;
+      if(ka===kb){ document.getElementById("cmp-out").innerHTML='<div class="ai-tip k">两份一样，换个选项再比～</div>'; return; }
+      const A = ka==="__current__" ? collectObj() : getVault()[ka];
+      const B = kb==="__current__" ? collectObj() : getVault()[kb];
+      if(!A||!B){ document.getElementById("cmp-out").innerHTML='<div class="ai-tip k">读取失败，请重试。</div>'; return; }
+      const sa=scoreOfObj(A), sb=scoreOfObj(B);
+      const metric=function(o){
+        const b=o.basic||{}, d=o.data||{};
+        const works=(d.work||[]).filter(e=>e.org||e.role).length;
+        const projs=(d.proj||[]).filter(e=>e.org||e.role).length;
+        const sk=(b.skills||"").split(/[,，]/).map(function(s){return s.trim();}).filter(Boolean).length;
+        const q=[...(d.work||[]),...(d.proj||[])].flatMap(function(e){return e.points||[];}).filter(function(p){return /\d/.test(p);}).length;
+        return { score:scoreOfObj(o).score, sk:sk, works:works, projs:projs, q:q, sum:(b.summary||"").length };
+      };
+      const ma=metric(A), mb=metric(B);
+      const row=function(label, va, vb){
+        const aW = va>vb ? "color:var(--ok);font-weight:700" : (va<vb?"color:var(--muted)":"");
+        const bW = vb>va ? "color:var(--ok);font-weight:700" : (vb<va?"color:var(--muted)":"");
+        return '<tr><td style="padding:7px 10px;border-bottom:1px solid var(--border);color:var(--muted)">'+label+'</td>'+
+          '<td style="padding:7px 10px;border-bottom:1px solid var(--border);'+aW+'">'+va+'</td>'+
+          '<td style="padding:7px 10px;border-bottom:1px solid var(--border);'+bW+'">'+vb+'</td></tr>';
+      };
+      const best = ma.score>=mb.score ? "A（左侧）评分更高，建议优先投递这份。" : "B（右侧）评分更高，建议优先投递这份。";
+      document.getElementById("cmp-out").innerHTML =
+        '<div style="display:flex;gap:12px;margin-bottom:12px">' +
+          '<div style="flex:1;text-align:center;padding:12px;border-radius:10px;background:'+sa.col+'22;border:1px solid '+sa.col+'"><div style="font-size:26px;font-weight:800;color:'+sa.col+'">'+sa.score+'</div><div style="font-size:12px;color:var(--muted)">A 评分</div></div>' +
+          '<div style="flex:1;text-align:center;padding:12px;border-radius:10px;background:'+sb.col+'22;border:1px solid '+sb.col+'"><div style="font-size:26px;font-weight:800;color:'+sb.col+'">'+sb.score+'</div><div style="font-size:12px;color:var(--muted)">B 评分</div></div>' +
+        '</div>' +
+        '<table style="width:100%;border-collapse:collapse;font-size:13px"><thead><tr><th style="padding:7px 10px;text-align:left;color:var(--muted)">指标</th><th style="padding:7px 10px;text-align:left;color:var(--muted)">A</th><th style="padding:7px 10px;text-align:left;color:var(--muted)">B</th></tr></thead><tbody>' +
+          row("综合评分", ma.score, mb.score) + row("技能数", ma.sk, mb.sk) + row("工作/实习数", ma.works, mb.works) +
+          row("项目数", ma.projs, mb.projs) + row("量化要点数", ma.q, mb.q) + row("简介字数", ma.sum, mb.sum) +
+        '</tbody></table>' +
+        '<div class="ai-tip s" style="margin-top:12px">'+best+'（绿色=该项更优）</div>';
+    });
+  }
 
   function exportPDF(){
     if(!IS_PRO) toast("免费版已导出（带水印），输入会员码去水印");
@@ -1353,6 +1500,48 @@
       downloadBlob(new Blob(["\ufeff", L.join("\n")], { type:"text/plain;charset=utf-8" }), ((_v("f-name") || "简历") + "-简历.txt"));
       toast("已导出纯文本（适合粘贴到招聘网站表单）");
     }catch(e){ toast("导出失败：" + e.message); }
+  }
+  function _atsLines(){
+    // ATS 友好纯文本：标准分节标题 + 单列 + 无装饰字符 + 无页脚水印，最容易被解析
+    const L = [];
+    L.push((_v("f-name") || "简历").toUpperCase());
+    L.push([_v("f-title"), _v("f-phone"), _v("f-email"), _v("f-loc"), _v("f-link")].filter(Boolean).join(" | "));
+    if(_v("f-summary")) L.push("", "SUMMARY", _v("f-summary"));
+    const sec = { edu:"EDUCATION", work:"EXPERIENCE", proj:"PROJECTS" };
+    ["edu","work","proj"].forEach(function(k){
+      const arr = data[k] || [];
+      if(!arr.length) return;
+      L.push("", sec[k]);
+      arr.forEach(function(x){
+        L.push("- " + [x.org, x.role, x.date].filter(Boolean).join(" / "));
+        if(x.sub) L.push("  " + x.sub);
+        (x.points || []).forEach(function(p){ const s=String(p).trim(); if(s) L.push("  - " + s.replace(/^[·•·\s]+/, "")); });
+      });
+    });
+    if(_v("f-skills")) L.push("", "SKILLS", _v("f-skills"));
+    return L;
+  }
+  function exportAts(){
+    try{
+      downloadBlob(new Blob(["\ufeff", _atsLines().join("\n")], { type:"text/plain;charset=utf-8" }), ((_v("f-name") || "简历") + "-ATS简历.txt"));
+      toast("已导出 ATS 优化文本（机器筛选通过率更高）");
+    }catch(e){ toast("导出失败：" + e.message); }
+  }
+  function copyAts(){
+    try{
+      const txt = _atsLines().join("\n");
+      if(navigator.clipboard && navigator.clipboard.writeText){
+        navigator.clipboard.writeText(txt).then(function(){ toast("已复制 ATS 文本，可直接粘贴到招聘网站"); },
+          function(){ fallbackCopy(txt); });
+      } else { fallbackCopy(txt); }
+    }catch(e){ toast("复制失败：" + e.message); }
+  }
+  function fallbackCopy(txt){
+    try{
+      const ta=document.createElement("textarea"); ta.value=txt; ta.style.position="fixed"; ta.style.opacity="0";
+      document.body.appendChild(ta); ta.select(); document.execCommand("copy"); ta.remove();
+      toast("已复制 ATS 文本，可直接粘贴到招聘网站");
+    }catch(e){ toast("复制失败，请手动导出 TXT"); }
   }
   function toast(msg){ const t=$("toast"); t.textContent=msg; t.classList.add("show"); clearTimeout(t._t); t._t=setTimeout(()=>t.classList.remove("show"),1800); }
 
